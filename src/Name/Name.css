@@ -1,0 +1,9 @@
+.myItemName {
+    border-radius: 5px;
+    border: 1px solid #000;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 5px;
+
+}

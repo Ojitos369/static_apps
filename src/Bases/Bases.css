@@ -1,0 +1,10 @@
+.bases-container {
+    height: 80vh;
+}
+
+.bases-container .row {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
