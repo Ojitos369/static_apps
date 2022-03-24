@@ -21,6 +21,9 @@ function NavBar() {
                         <li className="nav-item">
                             <button className="nav-link" onClick={() => setMostrar('bases')}>Bases Converted</button>
                         </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href='https://github.com/ojitos369/static_apps/' target='_blank' rel='noopener noreferrer'>Repo en Github</a>
+                        </li>
                     </ul>
                 </div>
             </div>
