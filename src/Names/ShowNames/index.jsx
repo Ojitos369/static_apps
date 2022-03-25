@@ -1,10 +1,10 @@
 import React from 'react'
-import { Context } from '../Context'
+import { NamesContext } from '../NamesContext'
 import { Name } from '../Name'
 import './ShowNames.css'
 
 function ShowNames() {
-    const { namesShow } = React.useContext(Context);
+    const { namesShow } = React.useContext(NamesContext);
     return (
         <section className="container">
             <ul className="list-group">

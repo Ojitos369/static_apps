@@ -2,7 +2,7 @@ import React from 'react';
 import { NavBar } from '../Navbar';
 import { Context } from '../Context';
 import { Names } from '../Names';
-import { Bases } from '../Bases';
+import { Bases } from '../Bases/Bases';
 import { Home } from '../Home';
 
 function AppUI() {
