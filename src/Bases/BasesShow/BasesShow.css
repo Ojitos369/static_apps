@@ -1,0 +1,11 @@
+.reset {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.reset:hover {
+    background: #f00;
+    -webkit-box-shadow: 5px 5px 5px 0px #f00;
+    -moz-box-shadow: 5px 5px 5px 0px #f00;
+    box-shadow: 5px 5px 5px 0px #f00;
+} 
