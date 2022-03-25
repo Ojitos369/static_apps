@@ -63,12 +63,19 @@ function BasesProvier(props) {
             if (letters.includes(aux)) {
                 let index = letters.indexOf(aux);
                 aux = numbers_change[index];
-                if (base <= 10 || aux > base) {
+                if (base <= 10) {
                     setError(true);
                     return false;
                 } else {
                     setError(false);
                 }
+            }
+            if (aux > base - 1){
+                setError(true);
+                return false;
+            }
+            else {
+                setError(false);
             }
             resultado += parseInt(aux) * Math.pow(parseInt(base), i);
         }
@@ -142,13 +149,20 @@ function BasesProvier(props) {
         let conversiones = [];
         const myconvertedBases = convertedBases.split(',');
         for (let i = 0; i < myconvertedBases.length; i++) {
-            const decimal = convertToDecimal(originalNumber, base, numDecimales);
-            if (!decimal) { return false; }
-            const res = convertFromDecimal(decimal, myconvertedBases[i], numDecimales);
-            conversiones.push({
-                key: myconvertedBases[i],
-                value: res,
-            });
+            if (originalNumber.toString() === '0') {
+                conversiones.push({
+                    key: myconvertedBases[i],
+                    value: 0,
+                });
+            } else {
+                const decimal = convertToDecimal(originalNumber, base, numDecimales);
+                if (!decimal) { return false; }
+                const res = convertFromDecimal(decimal, myconvertedBases[i], numDecimales);
+                conversiones.push({
+                    key: myconvertedBases[i],
+                    value: res,
+                });
+            }
         }
         setResultados(conversiones);
     }
