@@ -6,7 +6,7 @@ function Provier(props) {
     const {
         item: mostrar,
         saveItems: setMostrar,
-    } = useLocalStorage('mostrar', '');
+    } = useLocalStorage('mostrar', 'home');
     return (
         <Context.Provider value={{
             mostrar,

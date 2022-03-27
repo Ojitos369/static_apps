@@ -7,7 +7,7 @@ function NavBar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
-                <button className="navbar-brand" onClick={() => setMostrar('')}>Home</button>
+                <button className="navbar-brand" onClick={() => setMostrar('home')}>Home</button>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
@@ -20,6 +20,9 @@ function NavBar() {
                         </li>
                         <li className="nav-item">
                             <button className="nav-link" onClick={() => setMostrar('bases')}>Bases Converted</button>
+                        </li>
+                        <li className="nav-item">
+                            <button className="nav-link" onClick={() => setMostrar('super')}>Super List</button>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href='https://github.com/ojitos369/static_apps/' target='_blank' rel='noopener noreferrer'>Repo en Github</a>
