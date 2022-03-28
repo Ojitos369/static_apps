@@ -26,6 +26,11 @@ function SuperProvier(props) {
     } = useLocalStorage('itemPriceInput', '');
 
     const {
+        item: itemCantidadInput,
+        saveItems: setItemCantidadInput
+    } = useLocalStorage('itemCantidadInput', 1);
+
+    const {
         item: totalItemsData,
         saveItems: setTotalItemsData
     } = useLocalStorage('totalItemsData', {
@@ -60,22 +65,25 @@ function SuperProvier(props) {
 
     const addItem = () => {
         const addItemName = itemNameInput;
-        const addItemPrice = itemPriceInput;
+        const addItemPrice = itemPriceInput * itemCantidadInput;
+        const addItemCantidad = itemCantidadInput;
         items.push({
             key: uuid(),
             name: addItemName,
             price: parseFloat(addItemPrice),
-            priceFormat: priceFormat(addItemPrice)
+            priceFormat: priceFormat(addItemPrice),
+            cantidad: addItemCantidad,
         })
         setItems(items);
         setCantidad(cantidad + 1);
         const totalPrice = items.reduce((total, item) => total + item.price, 0);
         setTotalItemsData({
             cantidad: cantidad + 1,
-            totalPrice: priceFormat(totalPrice)
+            totalPrice: priceFormat(totalPrice),
         });
         setItemNameInput('');
         setItemPriceInput('');
+        setItemCantidadInput(1);
         document.getElementById('add-item-name').focus();
     }
 
@@ -87,6 +95,11 @@ function SuperProvier(props) {
     const upgradeItemPrice = () => {
         const addItemPrice = document.getElementById('add-item-price').value;
         setItemPriceInput(addItemPrice);
+    }
+
+    const upgradeItemCantidad = () => {
+        const addItemCantidad = document.getElementById('add-item-cantidad').value;
+        setItemCantidadInput(addItemCantidad);
     }
 
     const removeItem = (key) => {
@@ -120,6 +133,8 @@ function SuperProvier(props) {
             itemPriceInput,
             upgradeItemName,
             upgradeItemPrice,
+            itemCantidadInput,
+            upgradeItemCantidad
         }}>
             {props.children}
         </SuperContext.Provider>

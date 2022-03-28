@@ -10,3 +10,13 @@
     background: #0000;
     border: none;
 }
+
+.navbar .app-item:hover {
+    background: #888;
+}
+
+.navbar .app-item {
+    border: 1px solid #888;
+    border-radius: 15px;
+    margin: 0px 5px;
+}

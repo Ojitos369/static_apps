@@ -12,6 +12,8 @@ function SuperUI() {
         itemPriceInput,
         upgradeItemName,
         upgradeItemPrice,
+        itemCantidadInput,
+        upgradeItemCantidad
     } = React.useContext(SuperContext);
     return (
         <React.Fragment>
@@ -33,15 +35,27 @@ function SuperUI() {
                     <div className='col-12 col-md-3'>
                         <div className='container-fluent'>
                             <div className='row'>
-                                <label className='text-center' htmlFor="add-item-price">Item Price</label>
+                                <label className='text-center' htmlFor="add-item-price">Item Price (Por Unidad)</label>
                             </div>
                             <div className='row'>
                                 <input className='super-input text-center' value={itemPriceInput} onChange={upgradeItemPrice} type="number" id='add-item-price' placeholder='item price' required step="any"/>
                             </div>
                         </div>
                     </div>
-                    <div className='col-10 col-md-2'>
+                    <div className='col-12 col-md-3'>
                         <div className='container-fluent'>
+                            <div className='row'>
+                                <label className='text-center' htmlFor="add-item-cantidad">Cantidad</label>
+                            </div>
+                            <div className='row'>
+                                <input className='super-input text-center' value={itemCantidadInput} onChange={upgradeItemCantidad} type="number" id='add-item-cantidad' placeholder='item price' required step="any"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='row d-flex justify-content-around mt-4'>
+                    <div className='col-10 col-md-7'>
+                        <div className='container'>
                             <div className='row'>
                                 <label className='text-center' htmlFor="add-item-price">Add</label>
                             </div>

@@ -15,13 +15,13 @@ function NavBar() {
                     <div className="navbar-nav me-auto mb-2 mb-lg-0">
                     </div>
                     <ul className="d-flex navbar-nav">
-                        <li className="nav-item">
+                        <li className="nav-item app-item d-flex justify-content-center">
                             <button className="nav-link" aria-current="page" onClick={() => setMostrar('names')}>Names Generator</button>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item app-item d-flex justify-content-center">
                             <button className="nav-link" onClick={() => setMostrar('bases')}>Bases Converted</button>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item app-item d-flex justify-content-center">
                             <button className="nav-link" onClick={() => setMostrar('super')}>Super List</button>
                         </li>
                         <li className="nav-item">
