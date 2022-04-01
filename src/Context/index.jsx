@@ -10,39 +10,39 @@ function Provier(props) {
     const {
         item: classNames,
         saveItems: setClassNames
-    } = useLocalStorage('classNames', 'nav-app');
+    } = useLocalStorage('classNames', 'dropdown-item');
 
     const {
         item: classBases,
         saveItems: setClassBases
-    } = useLocalStorage('classBases', 'nav-app');
+    } = useLocalStorage('classBases', 'dropdown-item');
 
     const {
         item: classSuper,
         saveItems: setClassSuper
-    } = useLocalStorage('classSuper', 'nav-app');
+    } = useLocalStorage('classSuper', 'dropdown-item');
 
     const changeMostrar = text => {
         setMostrar(text);
         if (text === 'names') {
-            setClassNames('nav-app app-active');
-            setClassBases('nav-app');
-            setClassSuper('nav-app');
+            setClassNames('dropdown-item app-active');
+            setClassBases('dropdown-item');
+            setClassSuper('dropdown-item');
         }
         if (text === 'bases') {
-            setClassNames('nav-app');
-            setClassBases('nav-app app-active');
-            setClassSuper('nav-app');
+            setClassNames('dropdown-item');
+            setClassBases('dropdown-item app-active');
+            setClassSuper('dropdown-item');
         }
         if (text === 'super') {
-            setClassNames('nav-app');
-            setClassBases('nav-app');
-            setClassSuper('nav-app app-active');
+            setClassNames('dropdown-item');
+            setClassBases('dropdown-item');
+            setClassSuper('dropdown-item app-active');
         }
         if (text === 'home') {
-            setClassNames('nav-app');
-            setClassBases('nav-app');
-            setClassSuper('nav-app');
+            setClassNames('dropdown-item');
+            setClassBases('dropdown-item');
+            setClassSuper('dropdown-item');
         }
     }
 

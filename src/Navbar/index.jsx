@@ -20,11 +20,16 @@ function NavBar() {
                     <div className="navbar-nav me-auto mb-2 mb-lg-0">
                     </div>
                     <ul className="d-flex navbar-nav">
-                        <div class="dropdown nav-item app-item d-flex justify-content-center">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="navbar-apps" data-bs-toggle="dropdown" aria-expanded="false">
-                                Apps
+                        <li class="nav-item dropdown">
+                            <button 
+                                class="nav-link dropdown-toggle"
+                                id="apps-navbar"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                Some Apps
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="navbar-apps">
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="apps-navbar">
                                 <li className="nav-item app-item d-flex justify-content-center">
                                     <button className={classNames} aria-current="page" onClick={() => changeMostrar('names')}>Names Generator</button>
                                 </li>
@@ -35,7 +40,7 @@ function NavBar() {
                                     <button className={classSuper} onClick={() => changeMostrar('super')}>Super List</button>
                                 </li>
                             </ul>
-                        </div>
+                        </li>
                         <li className="nav-item">
                             <a className="nav-link nav-repo" href='https://github.com/ojitos369/static_apps/' target='_blank' rel='noopener noreferrer'>Repo en Github</a>
                         </li>
