@@ -27,6 +27,11 @@ function Provier(props) {
             classNames: 'nav-link nav-app',
             id: 3,
             render: 'Super'
+        },
+        {
+            name: 'Matrices',
+            classNames: 'nav-link nav-app',
+            id: 4,
         }
     ];
     const {
