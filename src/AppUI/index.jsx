@@ -1,21 +1,20 @@
 import React from 'react';
 import { NavBar } from '../Navbar';
 import { Context } from '../Context';
-import { Names } from '../Names';
-import { Bases } from '../Bases';
-import { Super } from '../Super';
+import { Names } from '../Components/Names';
+import { Bases } from '../Components/Bases';
+import { Super } from '../Components/Super';
 import { Home } from '../Home';
 
 function AppUI() {
     const { mostrar } = React.useContext(Context);
-    console.log(mostrar);
     return (
         <React.Fragment>
             <NavBar />
-            {mostrar === 'names' && <Names />}
-            {mostrar === 'bases' && <Bases />}
-            {mostrar === 'super' && <Super />}
-            {mostrar === 'home' && <Home />}
+            {mostrar === 0 && <Home />}
+            {mostrar === 1 && <Names />}
+            {mostrar === 2 && <Bases />}
+            {mostrar === 3 && <Super />}
         </React.Fragment>
     );
 }

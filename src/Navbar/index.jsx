@@ -1,18 +1,17 @@
 import React from 'react'
 import './Navbar.css'
 import { Context } from '../Context';
+import { ShowAppNav } from './ShowAppNav';
 
 function NavBar() {
     const { 
         changeMostrar,
-        classNames,
-        classBases,
-        classSuper
+        apps,
     } = React.useContext(Context);
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
-                <button className="navbar-brand" onClick={() => changeMostrar('home')}>Home</button>
+                <button className="navbar-brand" onClick={() => changeMostrar(0)}>Home</button>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
@@ -20,25 +19,21 @@ function NavBar() {
                     <div className="navbar-nav me-auto mb-2 mb-lg-0">
                     </div>
                     <ul className="d-flex navbar-nav">
-                        <li class="nav-item dropdown">
+                        <li className="nav-item dropdown">
                             <button 
-                                class="nav-link dropdown-toggle"
+                                className="nav-link dropdown-toggle"
                                 id="apps-navbar"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
                                 Some Apps
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="apps-navbar">
-                                <li className="nav-item app-item d-flex justify-content-center">
-                                    <button className={classNames} aria-current="page" onClick={() => changeMostrar('names')}>Names Generator</button>
-                                </li>
-                                <li className="nav-item app-item d-flex justify-content-center">
-                                    <button className={classBases} onClick={() => changeMostrar('bases')}>Bases Converted</button>
-                                </li>
-                                <li className="nav-item app-item d-flex justify-content-center">
-                                    <button className={classSuper} onClick={() => changeMostrar('super')}>Super List</button>
-                                </li>
+                            <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="apps-navbar">
+                                {apps.map((app, index) => (
+                                    index !== 0 && (
+                                        <ShowAppNav key={index} app={app} />
+                                    )
+                                ))}
                             </ul>
                         </li>
                         <li className="nav-item">

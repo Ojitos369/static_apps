@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocalStorage } from '../../Context/useLocalStorage';
+import { useLocalStorage } from '../../../Context/useLocalStorage';
 const NamesContext = React.createContext();
 
 function NamesProvier(props) {

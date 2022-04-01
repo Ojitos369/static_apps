@@ -3,56 +3,59 @@ import { useLocalStorage } from './useLocalStorage';
 const Context = React.createContext();
 
 function Provier(props) {
+    const appsBase = [
+        {
+            name: 'home',
+            classNames: 'nav-link nav-app app-active',
+            id: 0,
+            render: 'Home'
+        }, 
+        {
+            name: 'Names Generator',
+            classNames: 'nav-link nav-app',
+            id: 1,
+            render: 'Names'
+        }, 
+        {
+            name: 'Bases Converted',
+            classNames: 'nav-link nav-app',
+            id: 2,
+            render: 'Bases'
+        }, 
+        {
+            name: 'Super List',
+            classNames: 'nav-link nav-app',
+            id: 3,
+            render: 'Super'
+        }
+    ];
     const {
         item: mostrar,
         saveItems: setMostrar,
-    } = useLocalStorage('mostrar', 'home');
-    const {
-        item: classNames,
-        saveItems: setClassNames
-    } = useLocalStorage('classNames', 'dropdown-item');
+    } = useLocalStorage('mostrar', 0);
 
     const {
-        item: classBases,
-        saveItems: setClassBases
-    } = useLocalStorage('classBases', 'dropdown-item');
+        item: apps,
+        saveItems: setApps,
+    } = useLocalStorage('apps', appsBase);
 
-    const {
-        item: classSuper,
-        saveItems: setClassSuper
-    } = useLocalStorage('classSuper', 'dropdown-item');
-
-    const changeMostrar = text => {
-        setMostrar(text);
-        if (text === 'names') {
-            setClassNames('dropdown-item app-active');
-            setClassBases('dropdown-item');
-            setClassSuper('dropdown-item');
-        }
-        if (text === 'bases') {
-            setClassNames('dropdown-item');
-            setClassBases('dropdown-item app-active');
-            setClassSuper('dropdown-item');
-        }
-        if (text === 'super') {
-            setClassNames('dropdown-item');
-            setClassBases('dropdown-item');
-            setClassSuper('dropdown-item app-active');
-        }
-        if (text === 'home') {
-            setClassNames('dropdown-item');
-            setClassBases('dropdown-item');
-            setClassSuper('dropdown-item');
-        }
+    const changeMostrar = id => {
+        setMostrar(id);
+        appsBase.forEach(app => {
+            if (app.id === id) {
+                app.classNames = 'nav-link nav-app app-active';
+            } else {
+                app.classNames = 'nav-link nav-app';
+            }
+        });
+        setApps(appsBase);
     }
 
     return (
         <Context.Provider value={{
             mostrar,
-            classNames,
-            classBases,
-            classSuper,
-            changeMostrar
+            apps,
+            changeMostrar,
         }}>
             {props.children}
         </Context.Provider>
