@@ -2,8 +2,8 @@ import React from 'react'
 import { ContextMatrix } from './ContextMatrix'
 
 function ShowMatrix(props) {
-    const rows = parseInt(props.mat.rows)
-    const cols = parseInt(props.mat.cols)
+    const rows = props.mat.rows !== '' ? parseInt(props.mat.rows) : 0; 
+    const cols = props.mat.cols !== '' ? parseInt(props.mat.cols) : 0; 
     const key = props.id
     const { inputMatrixData, upGradeInputMatrixData } = React.useContext(ContextMatrix)
     const matrix = []

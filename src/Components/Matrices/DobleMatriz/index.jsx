@@ -2,7 +2,7 @@ import React from 'react'
 import { ShowMatrix } from '../ShowMatrix'
 import { ContextMatrix } from '../ContextMatrix'
 
-function Suma() {
+function DobleMatriz() {
     const {
         Mat1,
         Mat2,
@@ -16,7 +16,7 @@ function Suma() {
                     event.preventDefault();
                     calcularMatrices();
                 }}
-                className='container-fluent mt-4'
+                className='container-fluent mt-2'
             >
                 <div className='row'>
                     <div className='col-12 col-md mt-3'>
@@ -96,4 +96,4 @@ function Suma() {
     )
 }
 
-export { Suma };
+export { DobleMatriz };
