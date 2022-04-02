@@ -85,10 +85,12 @@ function ProvierMatrix(props) {
     const upgradeMat1 = () => {
         let newMat1Row = document.getElementById('rows-mat-1').value;
         let newMat1Col = document.getElementById('cols-mat-1').value;
-        if (newMat1Row < 1 || newMat1Row === '') {
+        if (newMat1Row === '') { return }
+        if (newMat1Col === '') { return }
+        if (newMat1Row < 1) {
             newMat1Row = 1;
         }
-        if (newMat1Col < 1 || newMat1Col === '') {
+        if (newMat1Col < 1) {
             newMat1Col = 1;
         }
         if (newMat1Row > 5) {
@@ -124,10 +126,12 @@ function ProvierMatrix(props) {
     const upgradeMat2 = () => {
         let newMat2Col = parseInt(document.getElementById('cols-mat-2').value);
         let newMat2Row = parseInt(document.getElementById('rows-mat-2').value);
-        if (newMat2Row < 1 || newMat2Row === '') {
+        if (newMat2Col === '') { return }    
+        if (newMat2Row === '') { return }
+        if (newMat2Row < 1) {
             newMat2Row = 1;
         }
-        if (newMat2Col < 1 || newMat2Col === '') {
+        if (newMat2Col < 1) {
             newMat2Col = 1;
         }
         if (newMat2Row > 5) {
