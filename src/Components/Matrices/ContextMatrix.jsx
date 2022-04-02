@@ -42,14 +42,29 @@ function ProvierMatrix(props) {
         saveItems: setEscalar
     } = useLocalStorage('escalar', 1);
 
+
+    let  inputStartData = [
+        [[1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1]],
+        [[1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1]],
+        [[1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1]],
+        [[1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1]],
+    ]
+    const {
+        item: inputMatrixData,
+        saveItems: setInputMatrixData
+    } = useLocalStorage('inputMatrixData', inputStartData);
+
+    let resultadoData = {
+        rows: 0,
+        cols: 0,
+        matrix: [],
+        cargado: 0
+    }
+
     const {
         item: resultado,
         saveItems: setResultado
-    } = useLocalStorage('resultado', {
-        rows: 0,
-        cols: 0,
-        matrix: []
-    });
+    } = useLocalStorage('resultado', resultadoData);
 
     const {
         item: modos,
@@ -59,6 +74,12 @@ function ProvierMatrix(props) {
     const changeModo = (id) => {
         setModo(id);
         setModos(modosList);
+        setResultado({
+            cols: 0,
+            rows: 0,
+            matrix: [],
+            cargado: 0
+        });
     }
 
     const upgradeMat1 = () => {
@@ -162,16 +183,68 @@ function ProvierMatrix(props) {
         return string;
     }
 
-    const sumaMat = () => {
-        let stringMat1 = stringMatrix(Mat1);
-        let stringMat2 = stringMatrix(Mat2);
-        const linkApiSum = apiHost + 'sum/' + stringMat1 + '/' + stringMat2;
-        return {
-            cols: 1,
-            rows: 1,
-            matrix: linkApiSum
+    const [actualizar, setActualizar] = React.useState(false);
+
+    const [loading, setLoading] = React.useState(false);
+
+    const sumaResMat = async () => {
+        let myObject;
+        try {
+            let stringMat1 = stringMatrix(Mat1);
+            let stringMat2 = stringMatrix(Mat2);
+            let linkApiSum;
+            if ( modo === 0 ) {
+                linkApiSum = apiHost + 'sum/' + stringMat1 + '/' + stringMat2;
+            } else if ( modo === 1 ) {
+                linkApiSum = apiHost + 'sub/' + stringMat1 + '/' + stringMat2;
+            }
+            const response = await fetch(linkApiSum);
+            const data = await response.json();
+            console.log(linkApiSum)
+            console.log(response.status)
+            console.log(data)
+            if (data.status === 'ok') {
+                const matResponse = data.result;
+                myObject = {
+                    cols: matResponse[0].length,
+                    rows: matResponse.length,
+                    matrix: matResponse,
+                    cargado: 1
+                };
+            } else {
+                myObject = {
+                    cols: 0,
+                    rows: 0,
+                    matrix: data.errors[0],
+                    cargado: 2
+                };
+            }
+        } catch (error) {
+            myObject = {
+                cols: 0,
+                rows: 0,
+                matrix: [],
+                cargado: 0
+            };
         }
+        setResultado(myObject);
+        setLoading(false);
     }
+
+    const upGradeInputMatrixData = (key, i, j) => {
+        const dato = document.getElementById(`matrix-${key}-${i}-${j}`).value;
+        let newInputMatrixData = inputMatrixData
+        newInputMatrixData[key][i][j] = parseFloat(dato);
+        console.log(newInputMatrixData[key]);
+        setInputMatrixData(newInputMatrixData);
+        upgradeMatrix();
+    }
+
+    React.useEffect(() => {
+        if (modo === 0 || modo === 1) {
+            sumaResMat();
+        }
+    }, [actualizar])
 
     const calcularMatrices = () => {
         upgradeMatrix();
@@ -179,11 +252,8 @@ function ProvierMatrix(props) {
         if (modo !== 3) {
             upgradeMat2Data();
         }
-        if (modo === 0) {
-            // Suma
-            const newResult = sumaMat();
-            setResultado(newResult);
-        }
+        setLoading(true);
+        setActualizar(!actualizar);
     }
 
     return (
@@ -197,6 +267,9 @@ function ProvierMatrix(props) {
             calcularMatrices,
             escalar,
             resultado,
+            loading,
+            inputMatrixData,
+            upGradeInputMatrixData,
         }}>
             {props.children}
         </ContextMatrix.Provider>

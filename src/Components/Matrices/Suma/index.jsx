@@ -19,11 +19,14 @@ function Suma() {
                 className='container-fluent mt-4'
             >
                 <div className='row'>
-                    <div className='col-12 col-md'>
+                    <div className='col-12 col-md mt-3'>
                         <div className='container-fluent'>
+                            <div className='row d-flex justify-content-center'>
+                                <p className='col-12 text-center h4'>Matriz 1</p>
+                            </div>
                             <div className='row d-flex justify-content-around'>
                                 <input
-                                    className='col-4 text-center'
+                                    className='col-4 text-center matrix-options-input'
                                     type="number"
                                     name="rows-mat-1"
                                     id="rows-mat-1"
@@ -34,7 +37,7 @@ function Suma() {
                                     onChange={upgradeMatrix}
                                 />
                                 <input
-                                    className='col-4 text-center'
+                                    className='col-4 text-center matrix-options-input'
                                     type="number"
                                     name="cols-mat-1"
                                     id="cols-mat-1"
@@ -50,12 +53,14 @@ function Suma() {
                             </div>
                         </div>
                     </div>
-                    <div className='col-12 col-md'>
+                    <div className='col-12 col-md mt-3'>
                         <div className='container-fluent'>
+                            <div className='row d-flex justify-content-center'>
+                                <p className='col-12 text-center h4'>Matriz 2</p>
+                            </div>
                             <div className='row d-flex justify-content-around'>
                                 <input 
-                                    className='col-4
-                                    text-center'
+                                    className='col-4 text-center matrix-options-input'
                                     type="number"
                                     name="rows-mat-2"
                                     id="rows-mat-2"
@@ -66,8 +71,7 @@ function Suma() {
                                     onChange={upgradeMatrix}
                                 />
                                 <input 
-                                    className='col-4
-                                    text-center'
+                                    className='col-4 text-center matrix-options-input'
                                     type="number"
                                     name="cols-mat-2"
                                     id="cols-mat-2"

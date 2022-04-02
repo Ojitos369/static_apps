@@ -1,0 +1,25 @@
+.dropdown-container {
+    border-radius: 20px;
+}
+
+.dropdown-item {
+    background: #333c;
+}
+
+.dropdown-item:hover {
+    color: #000 !important;
+}
+
+.matrix-input,
+.matrix-options-input {
+    margin: 10px;
+    border: none;
+    border-radius: 15px;
+    min-height: 35px;
+    max-height: 40px;
+}
+
+.element-matrix-result {
+    border: #fff 1px solid;
+    margin: 15px
+}

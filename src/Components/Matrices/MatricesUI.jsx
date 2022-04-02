@@ -1,7 +1,6 @@
 import React from 'react'
 import { Modo } from './Modo'
 import { Suma } from './Suma'
-import { Resta } from './Resta'
 import { Resultados } from './Resultados'
 import { ContextMatrix } from './ContextMatrix'
 import './Matrices.css'
@@ -12,7 +11,7 @@ function MatricesUI() {
         <React.Fragment>
             <Modo />
             {modo === 0 && <Suma />}
-            {modo === 1 && <Resta />}
+            {modo === 1 && <Suma />}
             <Resultados />
         </React.Fragment>
     )

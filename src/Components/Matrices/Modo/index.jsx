@@ -8,8 +8,8 @@ function Modo() {
     modos,
   } = React.useContext(ContextMatrix)
   return (
-    <div className="dropdown row d-flex justify-content-center">
-      <button className="col-10 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    <div className="dropdown dropdown-container row d-flex justify-content-center">
+      <button className="dropdown-container col-10 btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         {modos[modo].name}
       </button>
       <ul className="dropdown-menu col-10" aria-labelledby="dropdownMenuButton1">
