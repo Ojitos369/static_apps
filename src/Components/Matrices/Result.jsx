@@ -2,6 +2,7 @@ import React from 'react'
 
 function Result(props) {
     const { matrix } = props
+
     return (
         <React.Fragment>
             {matrix.map((row, i) => {
@@ -10,8 +11,12 @@ function Result(props) {
                         {
                             row.map((col, j) => {
                                 return (
+                                    col.toString().includes('.') ? 
                                     <p className='col-1 element-matrix-result text-center h2' key={j}>
-                                        {col}
+                                        {parseFloat(col).toFixed(2)}
+                                    </p> : 
+                                    <p className='col-1 element-matrix-result text-center h2' key={j}>
+                                        {parseInt(col)}
                                     </p>
                                 )
                             })

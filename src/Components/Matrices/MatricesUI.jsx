@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modo } from './Modo'
 import { DobleMatriz } from './DobleMatriz'
+import { UnaMatriz } from './UnaMatriz'
 import { Resultados } from './Resultados'
 import { ContextMatrix } from './ContextMatrix'
 import './Matrices.css'
@@ -12,11 +13,11 @@ function MatricesUI() {
             <Modo />
             <div className='row'>
                 <p className='col-12 text-center h3 mt-2'>
-                    De momento solo disponible hasta matrices 5x5
+                    De momento solo disponible hasta matrices 10x10
                 </p>
             </div>
-            {modo === 0 && <DobleMatriz />}
-            {modo === 1 && <DobleMatriz />}
+            {modo !== 3 && <DobleMatriz />}
+            {modo === 3 && <UnaMatriz />}
             <Resultados />
         </React.Fragment>
     )

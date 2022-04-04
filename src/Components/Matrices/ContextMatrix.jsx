@@ -12,6 +12,14 @@ function ProvierMatrix(props) {
         {
             name: 'Resta',
             id: 1,
+        },
+        {
+            name: 'Multiplicación por Matriz',
+            id: 2,
+        },
+        {
+            name: 'Multiplicación por escalar',
+            id: 3,
         }
     ]
     const {
@@ -44,10 +52,42 @@ function ProvierMatrix(props) {
 
 
     let  inputStartData = [
-        [[1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1]],
-        [[1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1]],
-        [[1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1]],
-        [[1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1]],
+        [
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+        ],
+        [
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+        ],
+        [
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1],
+        ],
     ]
     const {
         item: inputMatrixData,
@@ -92,11 +132,11 @@ function ProvierMatrix(props) {
         if (newMat1Col < 1 && newMat1Col !== '') {
             newMat1Col = 1;
         }
-        if (newMat1Row > 5) {
-            newMat1Row = 5;
+        if (newMat1Row > 10) {
+            newMat1Row = 10;
         }
-        if (newMat1Col > 5) {
-            newMat1Col = 5;
+        if (newMat1Col > 10) {
+            newMat1Col = 10;
         }
         let newMat1 = {
             rows: newMat1Row,
@@ -131,11 +171,11 @@ function ProvierMatrix(props) {
         if (newMat2Col < 1 && newMat2Col !== '') {
             newMat2Col = 1;
         }
-        if (newMat2Row > 5) {
-            newMat2Row = 5;
+        if (newMat2Row > 10) {
+            newMat2Row = 10;
         }
-        if (newMat2Col > 5) {
-            newMat2Col = 5;
+        if (newMat2Col > 10) {
+            newMat2Col = 10;
         }
 
         let newMat2 = {
@@ -160,6 +200,11 @@ function ProvierMatrix(props) {
             }
         }
         setMat2(newMat2);
+    }
+
+    const upgradeEscalar = () => {
+        let newEscalar = document.getElementById('escalar').value;
+        setEscalar(newEscalar);
     }
 
     const upgradeMatrix = () => {
@@ -188,16 +233,23 @@ function ProvierMatrix(props) {
 
     const [loading, setLoading] = React.useState(false);
 
-    const sumaResMat = async () => {
+    const getMatSolution = async () => {
         let myObject;
         try {
+            let stringMat2;
             let stringMat1 = stringMatrix(Mat1);
-            let stringMat2 = stringMatrix(Mat2);
+            if (modo !== 3) {
+                stringMat2 = stringMatrix(Mat2);
+            }
             let linkApiSum;
             if ( modo === 0 ) {
                 linkApiSum = apiHost + 'sum/' + stringMat1 + '/' + stringMat2;
             } else if ( modo === 1 ) {
                 linkApiSum = apiHost + 'sub/' + stringMat1 + '/' + stringMat2;
+            } else if ( modo === 2 ) {
+                linkApiSum = apiHost + 'mult/matrix/' + stringMat1 + '/' + stringMat2;
+            } else if ( modo === 3 ) {
+                linkApiSum = apiHost + 'mult/escalar/' + escalar + '/' + stringMat1;
             }
             const response = await fetch(linkApiSum);
             const data = await response.json();
@@ -235,16 +287,14 @@ function ProvierMatrix(props) {
     const upGradeInputMatrixData = (key, i, j) => {
         const dato = document.getElementById(`matrix-${key}-${i}-${j}`).value;
         let newInputMatrixData = inputMatrixData
-        newInputMatrixData[key][i][j] = parseFloat(dato);
+        newInputMatrixData[key][i][j] = dato;
         console.log(newInputMatrixData[key]);
         setInputMatrixData(newInputMatrixData);
         upgradeMatrix();
     }
 
     React.useEffect(() => {
-        if (modo === 0 || modo === 1) {
-            sumaResMat();
-        }
+        getMatSolution();
     }, [actualizar])
 
     const calcularMatrices = () => {
@@ -252,6 +302,8 @@ function ProvierMatrix(props) {
         upgradeMat1Data();
         if (modo !== 3) {
             upgradeMat2Data();
+        } else {
+            upgradeEscalar();
         }
         setLoading(true);
         setActualizar(!actualizar);
@@ -267,6 +319,7 @@ function ProvierMatrix(props) {
             upgradeMatrix,
             calcularMatrices,
             escalar,
+            upgradeEscalar,
             resultado,
             loading,
             inputMatrixData,
