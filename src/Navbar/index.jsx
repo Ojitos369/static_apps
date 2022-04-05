@@ -4,10 +4,12 @@ import { Context } from '../Context';
 import { ShowAppNav } from './ShowAppNav';
 
 function NavBar() {
+    const texts = require('../texts.json');
     const { 
         changeMostrar,
         apps,
         color,
+        language,
     } = React.useContext(Context);
     let classNavbar = "navbar navbar-expand-lg navbar-light";
     if (color.color === '#fff') {
@@ -15,10 +17,13 @@ function NavBar() {
     } else {
         classNavbar = "navbar navbar-expand-lg navbar-light";
     }
+    const textos = texts.textos[language.id - 1].navbar;
     return (
         <nav className={classNavbar}>
             <div className="container">
-                <button className="navbar-brand" onClick={() => changeMostrar(0)}>Home</button>
+            <button className="navbar-brand" onClick={() => changeMostrar(0)}>
+                {textos.home}
+            </button>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
@@ -28,7 +33,7 @@ function NavBar() {
                     <ul className="d-flex navbar-nav">
                         <li className="nav-item">
                         <button className='nav-link' aria-current="page" onClick={() => changeMostrar(10)}>
-                            Settings
+                            {textos.settings}
                         </button>
                         </li>
                         <li className="nav-item dropdown">
@@ -38,18 +43,18 @@ function NavBar() {
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                Some Apps
+                                {textos.apps}
                             </button>
                             <ul className="dropdown-menu dropdown-menu-navbar dropdown-menu-dark" aria-labelledby="apps-navbar">
                                 {apps.map((app, index) => (
-                                    index !== 0 && (
+                                    app.id !== 0 && (
                                         <ShowAppNav key={index} app={app} />
                                     )
                                 ))}
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link nav-repo" href='https://github.com/ojitos369/static_apps/' target='_blank' rel='noopener noreferrer'>Repo en Github</a>
+                            <a className="nav-link nav-repo" href='https://github.com/ojitos369/static_apps/' target='_blank' rel='noopener noreferrer'>Github Repo</a>
                         </li>
                     </ul>
                 </div>

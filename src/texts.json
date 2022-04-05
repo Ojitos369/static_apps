@@ -1,0 +1,106 @@
+{
+    "textos": [
+        {
+            "navbar": {
+                "home": "Inicio",
+                "settings": "Ajustes",
+                "apps": "Aplicaciones"
+            },
+            "home": {
+                "title": "Disfruta de las apps disponibles",
+                "addMore": "Estaremos agregando mas constantemente",
+                "suggestions": "Puedes Enviar tus sugerencias y se implementaran pronto",
+                "advise": "*** Si no carga una parte, intentar recargar la pagina, en caso de seguir sin cargar, favor de reportarlo al desarrollador"
+            },
+            "names": {
+                "minLen": "Largo min",
+                "maxLen": "Largo max",
+                "cantidad": [
+                    "Cantidad",
+                    "Cantidad de nombres"
+                ],
+                "fusion": "Fusion de Vocales",
+                "generar": "Generar",
+                "names": "Nombres",
+                "length": "Largo"
+            },
+            "bases": {
+                "title": "Rango de Conversion entre 2 a 36",
+                "indications": "Separar por comas las diferentes bases a convertir",
+                "number": "Numero",
+                "base": "Base",
+                "convert": "Bases a convertir",
+                "decimals": "Numero de Decimales",
+                "calcular": "Calcular",
+                "result": "Resultado"
+            },
+            "super": {
+                "name": "Nombre del Articulo",
+                "price": "Precio (Por Unidad)",
+                "quantity": "Cantidad",
+                "add": "Agregar",
+                "reset": "Resetear",
+                "noItems": "No hay articulos",
+                "cantidad": "Cantidad",
+                "total": "Total"
+            },
+            "matrix": {
+                "limitBase": "De momento solo disponible hasta matrices 10x10",
+                "matrix": "Matriz",
+                "calculate": "Calcular",
+                "apiRef": "Datos obtenidos de la API: https://matricesop.herokuapp.com/operations/swagger/"
+            }
+        },
+        {
+            "navbar": {
+                "home": "Home",
+                "settings": "Settings",
+                "apps": "Apps"
+            },
+            "home": {
+                "title": "Enjoy the available apps",
+                "addMore": "We will add more constantly",
+                "suggestions": "You can send your suggestions and they will be implemented soon",
+                "advise": "*** If it does not load a part, try to reload the page, in case of still not loading, please report it to the developer"
+            },
+            "names": {
+                "minLen": "Min length",
+                "maxLen": "Max length",
+                "cantidad": [
+                    "Quantity",
+                    "Quantity of names"
+                ],
+                "fusion": "Vowel fusion",
+                "generar": "Generate",
+                "name": "Name",
+                "length": "Length"
+            },
+            "bases": {
+                "title": "Conversion between 2 and 36",
+                "indications": "Separate by commas the different bases to convert",
+                "number": "Number",
+                "base": "Base",
+                "convert": "Bases to convert",
+                "decimals": "Number of decimals",
+                "calcular": "Calculate",
+                "result": "Result"
+            },
+            "super": {
+                "name": "Article name",
+                "price": "Price (per unit)",
+                "quantity": "Quantity",
+                "add": "Add",
+                "reset": "Reset",
+                "noItems": "No items",
+                "cantidad": "Quantity",
+                "total": "Total"
+            },
+            "matrix": {
+                "limitBase": "At the moment only available matrices up to 10x10",
+                "matrix": "Matrix",
+                "calculate": "Calculate",
+                "apiRef": "Data obtained from the API: https://matricesop.herokuapp.com/operations/swagger/"
+            }
+        }
+    ]
+}

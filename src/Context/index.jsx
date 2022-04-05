@@ -3,13 +3,8 @@ import { useLocalStorage } from './useLocalStorage';
 const Context = React.createContext();
 
 function Provier(props) {
+
     const appsBase = [
-        {
-            name: 'home',
-            classNames: 'nav-link nav-app app-active',
-            id: 0,
-            render: 'Home'
-        }, 
         {
             name: 'Names Generator',
             classNames: 'nav-link nav-app',
@@ -29,10 +24,16 @@ function Provier(props) {
             render: 'Super'
         },
         {
-            name: 'Matrices',
+            name: 'Matriz',
             classNames: 'nav-link nav-app',
             id: 4,
-        }
+        },
+        {
+            name: 'home',
+            classNames: 'nav-link nav-app app-active',
+            id: 0,
+            render: 'Home'
+        },
     ];
     const [mostrar, setMostrar] = useLocalStorage('mostrar', 0);
 
@@ -78,10 +79,22 @@ function Provier(props) {
 
     const [ color, setColor ] = useLocalStorage('color', colors[0]);
 
-    /* const {
-        item: language,
-        saveItems: setLanguage,
-    } = useLocalStorage('language', 'es'); */
+    const [languages, setLanguages] = useLocalStorage('languages', [
+        {
+            name: 'Español',
+            prefix: 'es',
+            id: 1,
+            active: true,
+        },
+        {
+            name: 'English',
+            prefix: 'en',
+            id: 2,
+            active: false,
+        }
+    ]);
+
+    const [language, setLanguage]  = useLocalStorage('language', languages[0]);
 
     const changeMostrar = id => {
         setMostrar(id);
@@ -97,8 +110,6 @@ function Provier(props) {
 
     const changeColor = id => {
         const newColor = colors.filter(color => color.id === id)[0];
-        const actualButton = document.getElementById(`color-option-${color.id}`);
-        const newButton = document.getElementById(`color-option-${newColor.id}`);
         setColor(newColor);
         const newColors = colors.map(color => {
             if (color.id === id) {
@@ -117,12 +128,48 @@ function Provier(props) {
         for (let i = 0; i < colores.length; i++) {
             colores[i].style.color = `${newColor.color} !important`;
         }
+    }
 
-        actualButton.classList.remove('my-bg');
-        actualButton.classList.remove('my-color');
+    const changeLanguage = id => {
+        const newLanguage = languages.filter(language => language.id === id)[0];
+        setLanguage(newLanguage);
+        const newLanguages = languages.map(language => {
+            if (language.id === id) {
+                language.active = true;
+            } else {
+                language.active = false;
+            }
+            return language;
+        })
+        setLanguages(newLanguages);
+        let colorsNames;
+        let appsNames;
+        switch (id) {
+            case 1: 
+                colorsNames = ['Oscuro', 'Claro', 'Azul', 'Verde', 'Rojo'];
+                appsNames = ['Generar Nombres', 'Convertir Bases', 'Lista Super', 'Matriz'];
+                break;
+            case 2: 
+                colorsNames = ['Dark', 'Light', 'Blue', 'Green', 'Red'];
+                appsNames = ['Names Generator', 'Bases Converted', 'Super List', 'Matrix'];
+                break;
+            default: 
+                colorsNames = ['Dark', 'Light', 'Blue', 'Green', 'Red'];
+                appsNames = ['Names Generator', 'Bases Converted', 'Super List', 'Matrix'];
+        }
 
-        newButton.classList.add('my-bg');
-        newButton.classList.add('my-color');
+        const newColors = colors.map(color => {
+            color.name = colorsNames[color.id - 1];
+            return color;
+        });
+
+        const newApps = apps.map(app => {
+            app.name = appsNames[app.id - 1];
+            return app;
+        })
+
+        setColors(newColors);
+        setApps(newApps);
     }
 
     return (
@@ -133,6 +180,9 @@ function Provier(props) {
             changeColor,
             colors,
             color,
+            changeLanguage,
+            languages,
+            language,
         }}>
             {props.children}
         </Context.Provider>

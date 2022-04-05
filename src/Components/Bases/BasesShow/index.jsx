@@ -3,7 +3,7 @@ import { BasesContext } from '../BasesContext'
 import { Base } from '../Base'
 import './BasesShow.css'
 
-function BasesShow() {
+function BasesShow(props) {
     const { resultados, error, errorBases } = React.useContext(BasesContext);
     return (
         <section className="container">
@@ -12,7 +12,7 @@ function BasesShow() {
             {!(error || errorBases ) && <ul className="list-group">
                 <li className='row d-flex justify-content-around mb-3 text-center header-names-table'>
                     <span className='col-2'>Base</span>
-                    <span className='col-8'>Resultado</span>
+                    <span className='col-8'>{props.res}</span>
                 </li>
                 {resultados.map((base) => (
                     <Base key={base.key} base={base} />

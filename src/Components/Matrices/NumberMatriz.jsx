@@ -1,8 +1,11 @@
 import React from 'react'
 import { ShowMatrix } from './ShowMatrix'
 import { ContextMatrix } from './ContextMatrix'
+import { Context } from '../../Context';
 
 function NumberMatriz() {
+    const texts = require('../../texts.json');
+    const { language } = React.useContext(Context);
     const {
         Mat1,
         escalar,
@@ -10,6 +13,7 @@ function NumberMatriz() {
         upgradeMatrix,
         calcularMatrices,
     } = React.useContext(ContextMatrix);
+    const textos = texts.textos[language.id - 1].matrix;
     return (
         <React.Fragment>
             <form
@@ -44,7 +48,7 @@ function NumberMatriz() {
                     <div className='col-12 col-md mt-3'>
                         <div className='container-fluent'>
                             <div className='row d-flex justify-content-center'>
-                                <p className='col-12 text-center h4'>Matriz 1</p>
+                                <p className='col-12 text-center h4'>{textos.matrix} 1</p>
                             </div>
                             <div className='row d-flex justify-content-around'>
                                 <input
@@ -79,7 +83,7 @@ function NumberMatriz() {
                     </div>
                 </div>
                 <div className='row mt-3 d-flex justify-content-center'>
-                    <input className='btn btn-primary col-10' type="submit" value="Calcular" />
+                    <input className='btn btn-primary col-10' type="submit" value={textos.calculate} />
                 </div>
             </form>
         </React.Fragment>

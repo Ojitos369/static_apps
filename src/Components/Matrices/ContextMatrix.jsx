@@ -1,10 +1,12 @@
 import React from 'react'
+import { Context } from '../../Context';
 import { useLocalStorage } from '../../Context/useLocalStorage';
 const ContextMatrix = React.createContext();
 
 function ProvierMatrix(props) {
+    const { language } = React.useContext(Context);
     const apiHost = 'https://matricesop.herokuapp.com/operations/';
-    const modosList = [
+    const modosListBase = [
         {
             name: 'Suma',
             id: 0,
@@ -26,6 +28,8 @@ function ProvierMatrix(props) {
             id: 4,
         }
     ]
+
+    const [modosList, setModosList] = useLocalStorage('modosList', modosListBase);
     
     const [modo,setModo] = useLocalStorage('modo', 0);
 
@@ -94,6 +98,43 @@ function ProvierMatrix(props) {
     const [resultado,setResultado] = useLocalStorage('resultado', resultadoData);
 
     const [modos,setModos] = useLocalStorage('modos', modosList);
+
+    React.useEffect(() => {
+        const languageId = language.id;
+        let modesNames;
+        switch (languageId) {
+            case 1: modesNames = [
+                'Suma',
+                'Resta',
+                'Multiplicación por Matriz',
+                'Multiplicación por escalar',
+                'Transpuesta',
+            ]
+                break;
+            case 2: modesNames = [
+                'Sum',
+                'Subtraction',
+                'Multiplication by Matrix',
+                'Multiplication by Scalar',
+                'Transpose',
+            ]
+                break;
+            default: modesNames = [
+                'Suma',
+                'Resta',
+                'Multiplicación por Matriz',
+                'Multiplicación por escalar',
+                'Transpuesta',
+            ]
+        }
+
+        const newModosList = modosList.map((modo, index) => {
+            modo.name = modesNames[index]
+            return modo
+        });
+        setModos(newModosList);
+
+    }, [language])
 
     const changeModo = (id) => {
         setModo(id);
@@ -311,6 +352,8 @@ function ProvierMatrix(props) {
             loading,
             inputMatrixData,
             upGradeInputMatrixData,
+            modosList,
+            setModosList,
         }}>
             {props.children}
         </ContextMatrix.Provider>
