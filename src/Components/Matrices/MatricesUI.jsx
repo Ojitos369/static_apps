@@ -2,6 +2,7 @@ import React from 'react'
 import { Modo } from './Modo'
 import { DobleMatriz } from './DobleMatriz'
 import { UnaMatriz } from './UnaMatriz'
+import { NumberMatriz } from './NumberMatriz'
 import { Resultados } from './Resultados'
 import { ContextMatrix } from './ContextMatrix'
 import './Matrices.css'
@@ -16,8 +17,9 @@ function MatricesUI() {
                     De momento solo disponible hasta matrices 10x10
                 </p>
             </div>
-            {modo !== 3 && <DobleMatriz />}
-            {modo === 3 && <UnaMatriz />}
+            {(modo === 0 || modo === 1 || modo === 2 ) && <DobleMatriz />}
+            {modo === 3 && <NumberMatriz />}
+            {modo === 4 && <UnaMatriz />}
             <Resultados />
         </React.Fragment>
     )

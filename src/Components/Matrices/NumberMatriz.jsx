@@ -2,7 +2,7 @@ import React from 'react'
 import { ShowMatrix } from './ShowMatrix'
 import { ContextMatrix } from './ContextMatrix'
 
-function UnaMatriz() {
+function NumberMatriz() {
     const {
         Mat1,
         escalar,
@@ -20,6 +20,27 @@ function UnaMatriz() {
                 className='container-fluent mt-2'
             >
                 <div className='row'>
+                    <div className='col-12 col-md mt-3'>
+                        <div className='container-fluent'>
+                            <div className='row d-flex justify-content-center'>
+                                <p className='col-12 text-center h4'>Escalar</p>
+                            </div>
+                            <div className='row d-flex justify-content-around'>
+                                <input 
+                                    className='col-4 text-center matrix-options-input'
+                                    type="number"
+                                    name="escalar"
+                                    id="escalar"
+                                    placeholder='Escalar'
+                                    min={1}
+                                    max={10}
+                                    step='any'
+                                    value={escalar}
+                                    onChange={upgradeEscalar}
+                                />
+                            </div>
+                        </div>
+                    </div>
                     <div className='col-12 col-md mt-3'>
                         <div className='container-fluent'>
                             <div className='row d-flex justify-content-center'>
@@ -65,4 +86,4 @@ function UnaMatriz() {
     )
 }
 
-export { UnaMatriz };
+export { NumberMatriz };

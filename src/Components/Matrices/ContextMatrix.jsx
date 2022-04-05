@@ -20,6 +20,10 @@ function ProvierMatrix(props) {
         {
             name: 'Multiplicación por escalar',
             id: 3,
+        },
+        {
+            name: 'Transpuesta',
+            id: 4,
         }
     ]
     const {
@@ -209,7 +213,7 @@ function ProvierMatrix(props) {
 
     const upgradeMatrix = () => {
         upgradeMat1();
-        if (modo !== 3) {
+        if (modo === 0 || modo === 1 || modo === 2) {
             upgradeMat2();
         }
     }
@@ -238,18 +242,22 @@ function ProvierMatrix(props) {
         try {
             let stringMat2;
             let stringMat1 = stringMatrix(Mat1);
-            if (modo !== 3) {
+            if (modo === 0 || modo === 1 || modo === 2) {
                 stringMat2 = stringMatrix(Mat2);
             }
             let linkApiSum;
-            if ( modo === 0 ) {
-                linkApiSum = apiHost + 'sum/' + stringMat1 + '/' + stringMat2;
-            } else if ( modo === 1 ) {
-                linkApiSum = apiHost + 'sub/' + stringMat1 + '/' + stringMat2;
-            } else if ( modo === 2 ) {
-                linkApiSum = apiHost + 'mult/matrix/' + stringMat1 + '/' + stringMat2;
-            } else if ( modo === 3 ) {
-                linkApiSum = apiHost + 'mult/escalar/' + escalar + '/' + stringMat1;
+            switch (modo) {
+                case 0: linkApiSum = apiHost + 'sum/' + stringMat1 + '/' + stringMat2;
+                    break;
+                case 1: linkApiSum = apiHost + 'sub/' + stringMat1 + '/' + stringMat2;
+                    break;
+                case 2: linkApiSum = apiHost + 'mult/matrix/' + stringMat1 + '/' + stringMat2;
+                    break;
+                case 3: linkApiSum = apiHost + 'mult/escalar/' + escalar + '/' + stringMat1;
+                    break;
+                case 4: linkApiSum = apiHost + 'trans/' + stringMat1;
+                    break;
+                default: return;
             }
             const response = await fetch(linkApiSum);
             const data = await response.json();
@@ -300,9 +308,9 @@ function ProvierMatrix(props) {
     const calcularMatrices = () => {
         upgradeMatrix();
         upgradeMat1Data();
-        if (modo !== 3) {
+        if (modo === 0 || modo === 1 || modo === 2) {
             upgradeMat2Data();
-        } else {
+        } else if (modo === 3) {
             upgradeEscalar();
         }
         setLoading(true);
