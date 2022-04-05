@@ -3,26 +3,11 @@ import { useLocalStorage } from '../../../Context/useLocalStorage';
 const NamesContext = React.createContext();
 
 function NamesProvier(props) {
-    const {
-        item: namesShow,
-        saveItems: setNamesShow,
-    } = useLocalStorage('namesShow', []);
-    const {
-        item: namesCount,
-        saveItems: setNamesCount,
-    } = useLocalStorage('namesCount', 10);
-    const {
-        item: minLength,
-        saveItems: setMinLength,
-    } = useLocalStorage('minLength', 6);
-    const {
-        item: maxLength,
-        saveItems: setMaxLength,
-    } = useLocalStorage('maxLength', 8);
-    const {
-        item: fusion,
-        saveItems: setFusion,
-    } = useLocalStorage('fusion', 80);
+    const [namesShow, setNamesShow]  = useLocalStorage('namesShow', []);
+    const [namesCount, setNamesCount]  = useLocalStorage('namesCount', 10);
+    const [minLength, setMinLength]  = useLocalStorage('minLength', 6);
+    const [maxLength, setMaxLength]  = useLocalStorage('maxLength', 8);
+    const [fusion, setFusion]  = useLocalStorage('fusion', 80);
 
     const vocals = ['a', 'e', 'i', 'o', 'u'];
     const consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'];
@@ -34,13 +19,9 @@ function NamesProvier(props) {
         const names_count = document.getElementById('names-count').value;
         
         setMinLength(min_length);
-        console.log('min_length: ' + min_length);
         setMaxLength(max_length);
-        console.log('max_length: ' + max_length);
         setNamesCount(names_count);
-        console.log('names_count: ' + names_count);
         setFusion(fusion);
-        console.log('fusion: ' + fusion);
     }
 
     const generateNames = () => {

@@ -7,9 +7,16 @@ function NavBar() {
     const { 
         changeMostrar,
         apps,
+        color,
     } = React.useContext(Context);
+    let classNavbar = "navbar navbar-expand-lg navbar-light";
+    if (color.color === '#fff') {
+        classNavbar = "navbar navbar-expand-lg navbar-dark";
+    } else {
+        classNavbar = "navbar navbar-expand-lg navbar-light";
+    }
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className={classNavbar}>
             <div className="container">
                 <button className="navbar-brand" onClick={() => changeMostrar(0)}>Home</button>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +26,11 @@ function NavBar() {
                     <div className="navbar-nav me-auto mb-2 mb-lg-0">
                     </div>
                     <ul className="d-flex navbar-nav">
+                        <li className="nav-item">
+                        <button className='nav-link' aria-current="page" onClick={() => changeMostrar(10)}>
+                            Settings
+                        </button>
+                        </li>
                         <li className="nav-item dropdown">
                             <button 
                                 className="nav-link dropdown-toggle"
@@ -28,7 +40,7 @@ function NavBar() {
                             >
                                 Some Apps
                             </button>
-                            <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="apps-navbar">
+                            <ul className="dropdown-menu dropdown-menu-navbar dropdown-menu-dark" aria-labelledby="apps-navbar">
                                 {apps.map((app, index) => (
                                     index !== 0 && (
                                         <ShowAppNav key={index} app={app} />

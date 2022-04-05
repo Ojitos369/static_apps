@@ -5,35 +5,17 @@ const SuperContext = React.createContext();
 
 
 function SuperProvier(props) {
-    const {
-        item: items,
-        saveItems: setItems
-    } = useLocalStorage('items', []);
+    const [items, setItems]  = useLocalStorage('items', []);
 
-    const {
-        item: cantidad,
-        saveItems: setCantidad
-    } = useLocalStorage('cantidad', 0);
+    const [cantidad, setCantidad]  = useLocalStorage('cantidad', 0);
 
-    const {
-        item: itemNameInput,
-        saveItems: setItemNameInput
-    } = useLocalStorage('itemNameInput', '');
+    const [itemNameInput, setItemNameInput]  = useLocalStorage('itemNameInput', '');
 
-    const {
-        item: itemPriceInput,
-        saveItems: setItemPriceInput
-    } = useLocalStorage('itemPriceInput', '');
+    const [itemPriceInput, setItemPriceInput]  = useLocalStorage('itemPriceInput', '');
 
-    const {
-        item: itemCantidadInput,
-        saveItems: setItemCantidadInput
-    } = useLocalStorage('itemCantidadInput', 1);
+    const [itemCantidadInput, setItemCantidadInput]  = useLocalStorage('itemCantidadInput', 1);
 
-    const {
-        item: totalItemsData,
-        saveItems: setTotalItemsData
-    } = useLocalStorage('totalItemsData', {
+    const [totalItemsData, setTotalItemsData]  = useLocalStorage('totalItemsData', {
         cantidad: 0,
         totalPrice: 0
     });

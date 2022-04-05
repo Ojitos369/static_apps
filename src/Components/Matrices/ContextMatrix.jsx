@@ -26,33 +26,22 @@ function ProvierMatrix(props) {
             id: 4,
         }
     ]
-    const {
-        item: modo,
-        saveItems: setModo
-    } = useLocalStorage('modo', 0);
+    
+    const [modo,setModo] = useLocalStorage('modo', 0);
 
-    const {
-        item: Mat1,
-        saveItems: setMat1
-    } = useLocalStorage('Mat1', {
+    const [Mat1,setMat1] = useLocalStorage('Mat1', {
         rows: '',
         cols: '',
         matrix: [[], [], [], []]
     });
 
-    const {
-        item: Mat2,
-        saveItems: setMat2
-    } = useLocalStorage('Mat2', {
+    const [Mat2,setMat2] = useLocalStorage('Mat2', {
         rows: '',
         cols: '',
         matrix: [[], [], [], []]
     })
 
-    const {
-        item: escalar,
-        saveItems: setEscalar
-    } = useLocalStorage('escalar', 1);
+    const [escalar,setEscalar] = useLocalStorage('escalar', 1);
 
 
     let  inputStartData = [
@@ -93,10 +82,7 @@ function ProvierMatrix(props) {
             [1,1,1,1,1,1,1,1,1,1],
         ],
     ]
-    const {
-        item: inputMatrixData,
-        saveItems: setInputMatrixData
-    } = useLocalStorage('inputMatrixData', inputStartData);
+    const [inputMatrixData,setInputMatrixData] = useLocalStorage('inputMatrixData', inputStartData);
 
     let resultadoData = {
         rows: 0,
@@ -105,15 +91,9 @@ function ProvierMatrix(props) {
         cargado: 0
     }
 
-    const {
-        item: resultado,
-        saveItems: setResultado
-    } = useLocalStorage('resultado', resultadoData);
+    const [resultado,setResultado] = useLocalStorage('resultado', resultadoData);
 
-    const {
-        item: modos,
-        saveItems: setModos
-    } = useLocalStorage('modos', modosList);
+    const [modos,setModos] = useLocalStorage('modos', modosList);
 
     const changeModo = (id) => {
         setModo(id);
@@ -263,7 +243,6 @@ function ProvierMatrix(props) {
             const data = await response.json();
             console.log(linkApiSum)
             console.log(response.status)
-            console.log(data)
             if (data.status === 'ok') {
                 const matResponse = data.result;
                 myObject = {

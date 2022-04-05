@@ -11,25 +11,26 @@
     border: none;
 }
 
-.dropdown-menu {
+.dropdown-menu-navbar {
     background: #333c;
     border-radius: 15px;
+    width: 20vw;
 }
 
 .navbar .nav-app {
     width: 100%;
-    background: #333c;
+    background: #333c !important;
     border: 1px solid #ccc;
     border-radius: 15px;
     margin: 5px 0;
-    color: #fff;
+    color: #fff !important;
     text-decoration: none;
     height: 45px;
 }
 
 .navbar .nav-app:hover {
     background: #000;
-    color: #888;
+    color: #888 !important;
     border: 1px solid #fff;
 }
 

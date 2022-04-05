@@ -3,40 +3,19 @@ import { useLocalStorage } from '../../../Context/useLocalStorage';
 const BasesContext = React.createContext();
 
 function BasesProvier(props) {
-    const {
-        item: resultados,
-        saveItems: setResultados,
-    } = useLocalStorage('resultados', []);
+    const [resultados, setResultados] = useLocalStorage('resultados', []);
 
-    const {
-        item: base,
-        saveItems: setBase,
-    } = useLocalStorage('base', {});
+    const [base, setBase] = useLocalStorage('base', {});
 
-    const {
-        item: convertedBases,
-        saveItems: setConvertedBases,
-    } = useLocalStorage('convertedBases', []);
+    const [convertedBases, setConvertedBases] = useLocalStorage('convertedBases', []);
 
-    const {
-        item: originalNumber,
-        saveItems: setOriginalNumber,
-    } = useLocalStorage('originalNumber', '');
+    const [originalNumber, setOriginalNumber] = useLocalStorage('originalNumber', '');
 
-    const {
-        item: numDecimales,
-        saveItems: setNumDecimales,
-    } = useLocalStorage('numDecimales', 0);
+    const [numDecimales, setNumDecimales] = useLocalStorage('numDecimales', 0);
 
-    const {
-        item: error,
-        saveItems: setError,
-    } = useLocalStorage('error', false);
+    const [error, setError] = useLocalStorage('error', false);
 
-    const {
-        item: errorBases,
-        saveItems: setErrorBases,
-    } = useLocalStorage('errorBases', false);
+    const [errorBases, setErrorBases] = useLocalStorage('errorBases', false);
 
 
     const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
