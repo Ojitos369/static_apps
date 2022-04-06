@@ -14,7 +14,6 @@ function AppUI() {
         background: color.background,
         color: color.color,
     }
-    console.log(mostrar);
     return (
         <div 
             className='container-fluent' id='main-container'

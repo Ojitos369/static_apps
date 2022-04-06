@@ -12,6 +12,10 @@
                 "suggestions": "Puedes Enviar tus sugerencias y se implementaran pronto",
                 "advise": "*** Si no carga una parte, intentar recargar la pagina, en caso de seguir sin cargar, favor de reportarlo al desarrollador"
             },
+            "settings": {
+                "text": "Texto",
+                "languaje": "Idioma"
+            },
             "names": {
                 "minLen": "Largo min",
                 "maxLen": "Largo max",
@@ -62,6 +66,10 @@
                 "addMore": "We will add more constantly",
                 "suggestions": "You can send your suggestions and they will be implemented soon",
                 "advise": "*** If it does not load a part, try to reload the page, in case of still not loading, please report it to the developer"
+            },
+            "settings": {
+                "text": "Text",
+                "languaje": "Language"
             },
             "names": {
                 "minLen": "Min length",

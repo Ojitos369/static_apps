@@ -37,7 +37,7 @@ function MostrarColor(props) {
     
     return (
         <button 
-            className='col-4 text-center btn btn-outline-secondary color-btn-option btn-option mt-2'
+            className='col-3 text-center btn btn-outline-secondary color-btn-option btn-option mt-2'
             onClick={() => changeColor(this_color.id)}
             id={`color-option-${this_color.id}`}
             /* apply hover */

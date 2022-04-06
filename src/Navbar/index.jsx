@@ -11,17 +11,15 @@ function NavBar() {
         color,
         language,
     } = React.useContext(Context);
-    let classNavbar = "navbar navbar-expand-lg navbar-light";
-    if (color.color === '#fff') {
-        classNavbar = "navbar navbar-expand-lg navbar-dark";
-    } else {
-        classNavbar = "navbar navbar-expand-lg navbar-light";
+    let classNavbar = "navbar navbar-expand-lg";
+    let customStyle = {
+        color: color.color,
     }
     const textos = texts.textos[language.id - 1].navbar;
     return (
         <nav className={classNavbar}>
             <div className="container">
-            <button className="navbar-brand" onClick={() => changeMostrar(0)}>
+            <button className="navbar-brand" onClick={() => changeMostrar(0)} style={customStyle}>
                 {textos.home}
             </button>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +30,7 @@ function NavBar() {
                     </div>
                     <ul className="d-flex navbar-nav">
                         <li className="nav-item">
-                        <button className='nav-link' aria-current="page" onClick={() => changeMostrar(10)}>
+                        <button className='nav-link' aria-current="page" onClick={() => changeMostrar(10)} style={customStyle}>
                             {textos.settings}
                         </button>
                         </li>
@@ -42,6 +40,7 @@ function NavBar() {
                                 id="apps-navbar"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
+                                style={customStyle}
                             >
                                 {textos.apps}
                             </button>
@@ -54,7 +53,7 @@ function NavBar() {
                             </ul>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link nav-repo" href='https://github.com/ojitos369/static_apps/' target='_blank' rel='noopener noreferrer'>Github Repo</a>
+                            <a className="nav-link nav-repo" href='https://github.com/ojitos369/static_apps/' target='_blank' rel='noopener noreferrer' style={customStyle}>Github Repo</a>
                         </li>
                     </ul>
                 </div>
