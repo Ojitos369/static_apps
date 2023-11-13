@@ -12,7 +12,7 @@ class HelloWorld(GetApi):
         }
 
 
-class Ejecutar(PostApi):
+class Ejecutar(PostApi, GetApi):
     def main(self):
         pln("Ejecutar")
         self.response = {
@@ -20,7 +20,7 @@ class Ejecutar(PostApi):
         }
 
 
-class Consulta(PostApi):
+class Consulta(PostApi, GetApi):
     def main(self):
         query = get_d(self.data, "query", default="no se encontro query")
         parametros = get_d(self.data, "parametros", default="no se encontro parametros")
