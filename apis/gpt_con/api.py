@@ -44,3 +44,85 @@ class Consulta(PostApi, GetApi):
             "message": "upps no hay datos..."
         }
 
+"""
+si te dicen consulta, haras una consulta a la tabla tickets
+si te dicen agregar, agregaras los datos
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API de Interacción con GPT",
+    "description": "Permite ejecutar y consultar comandos con GPT.",
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://sa.ojitos369.com"
+    }
+  ],
+  "paths": {
+    "/api/gpt_con/ejecutar/": {
+      "post": {
+        "description": "Ejecuta un comando con GPT.",
+        "operationId": "EjecutarComando",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "body",
+            "description": "El comando a ejecutar.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parametros",
+            "in": "body",
+            "description": "Lista de parámetros adicionales para el comando.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/gpt_con/consulta/": {
+      "post": {
+        "description": "Consulta el estado de un comando previamente ejecutado.",
+        "operationId": "ConsultarComando",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "body",
+            "description": "El comando a consultar.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parametros",
+            "in": "body",
+            "description": "Lista de parámetros adicionales para la consulta.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
+"""
