@@ -53,3 +53,90 @@ class Consulta(PostApi, GetApi):
             "data": r
         }
 
+
+"""
+si te dicen consulta, haras una consulta a la tabla tickets
+si te dicen agregar, agregaras los datos
+para esta prueba inventaras los datos al momento de agregar
+tickets (id_ticket(auto), nombre(opt), usuario(req), correo(req), telefono(opt), asunto(tu_lo_generas), mensaje(tu_lo_generas), status('P'), fecha(now))
+* la db es mariadb
+* se debe pasar el query y los parametros del query, en lo posible procura utilizar los parametros en lugar de valores directos en el query
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "API de Interacción con GPT",
+    "description": "Permite ejecutar y consultar comandos con GPT.",
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://sa.ojitos369.com"
+    }
+  ],
+  "paths": {
+    "/api/gpt_con/ejecutar/": {
+      "post": {
+        "description": "Para ejecutar querys, guardar, actualizar, eliminar",
+        "operationId": "EjecutarComando",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "body",
+            "description": "El comando a ejecutar.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parametros",
+            "in": "body",
+            "description": "Lista de parámetros adicionales para el comando.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "deprecated": false
+      }
+    },
+    "/api/gpt_con/consulta/": {
+      "post": {
+        "description": "Para consulta de informacion con querys, leer, buscar, filtrar",
+        "operationId": "ConsultarComando",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "body",
+            "description": "El comando a consultar.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parametros",
+            "in": "body",
+            "description": "Lista de parámetros adicionales para la consulta.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
+"""
