@@ -26,6 +26,7 @@ class Ejecutar(PostApi, GetApi):
 
 class Consulta(PostApi, GetApi):
     def main(self):
+        pln("Consultar")
         data = {}
         try:
             data = self.data
@@ -47,6 +48,8 @@ class Consulta(PostApi, GetApi):
 """
 si te dicen consulta, haras una consulta a la tabla tickets
 si te dicen agregar, agregaras los datos
+para esta prueba inventaras los datos al momento de agregar
+tickets (id_ticket(auto), nombre(opt), usuario(req), correo(req), telefono(opt), asunto(tu_lo_generas), mensaje(tu_lo_generas), status('P'), fecha(now))
 {
   "openapi": "3.1.0",
   "info": {
@@ -62,7 +65,7 @@ si te dicen agregar, agregaras los datos
   "paths": {
     "/api/gpt_con/ejecutar/": {
       "post": {
-        "description": "Ejecuta un comando con GPT.",
+        "description": "Para ejecutar querys, guardar, actualizar, eliminar",
         "operationId": "EjecutarComando",
         "parameters": [
           {
@@ -78,7 +81,7 @@ si te dicen agregar, agregaras los datos
             "name": "parametros",
             "in": "body",
             "description": "Lista de parámetros adicionales para el comando.",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "array",
               "items": {
@@ -92,7 +95,7 @@ si te dicen agregar, agregaras los datos
     },
     "/api/gpt_con/consulta/": {
       "post": {
-        "description": "Consulta el estado de un comando previamente ejecutado.",
+        "description": "Para consulta de informacion con querys, leer, buscar, filtrar",
         "operationId": "ConsultarComando",
         "parameters": [
           {
@@ -108,7 +111,7 @@ si te dicen agregar, agregaras los datos
             "name": "parametros",
             "in": "body",
             "description": "Lista de parámetros adicionales para la consulta.",
-            "required": false,
+            "required": true,
             "schema": {
               "type": "array",
               "items": {
