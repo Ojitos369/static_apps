@@ -43,7 +43,14 @@ class BaseApi(APIView):
             }
 
     def get_post_data(self):
-        self.data = json.loads(self.request.body.decode('utf-8'))
+        try:
+            self.data = json.loads(self.request.body.decode('utf-8'))
+        except:
+            try:
+                self.data = self.request.data
+            except:
+                self.data = {}
+
     
     def validate_session(self):
         request = self.request

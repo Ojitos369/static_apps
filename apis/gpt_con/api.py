@@ -15,6 +15,10 @@ class HelloWorld(GetApi):
 class Ejecutar(PostApi, GetApi):
     def main(self):
         pln("Ejecutar")
+        data = self.data
+        pln(f"data:")
+        from ojitos369.utils import print_json as pj
+        pj(data)
         self.response = {
             "message": "upps no hay datos..."
         }
@@ -27,6 +31,9 @@ class Consulta(PostApi, GetApi):
             data = self.data
         except:
             pass
+        pln(f"data:")
+        from ojitos369.utils import print_json as pj
+        pj(data)
         query = get_d(data, "query", default="no se encontro query")
         parametros = get_d(data, "parametros", default="no se encontro parametros")
         
@@ -36,3 +43,4 @@ class Consulta(PostApi, GetApi):
         self.response = {
             "message": "upps no hay datos..."
         }
+
