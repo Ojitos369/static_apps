@@ -164,3 +164,11 @@ ce = CE(name_project = 'REANGO BASE', email_settings = email_settings)
 
 class MYE(Exception):
     pass
+
+DB_DATA = {
+    'user': os.environ.get('DB_USER'),
+    'password': os.environ.get('DB_PASSWORD'),
+    'host': os.environ.get('DB_HOST'),
+    'name': os.environ.get('DB_NAME'),
+    'port': int(os.environ.get('DB_PORT', 3306)),
+}

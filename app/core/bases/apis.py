@@ -14,7 +14,7 @@ from ojitos369.utils import get_d, print_line_center, printwln as pln
 from ojitos369_mysql_db.mysql_db import ConexionMySQL
 
 # User
-from app.settings import MYE, prod_mode, ce
+from app.settings import MYE, prod_mode, ce, DB_DATA
 
 class BaseApi(APIView):
     def __init__(self, **kwargs):
@@ -24,7 +24,7 @@ class BaseApi(APIView):
         self.ce = ce
         self.MYE = MYE
         self.response_mode = 'json'
-        self.conexion = ConexionMySQL()
+        self.conexion = ConexionMySQL(DB_DATA)
 
     def errors(self, e):
         try:
