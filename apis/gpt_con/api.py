@@ -59,8 +59,22 @@ si te dicen consulta, haras una consulta a la tabla tickets
 si te dicen agregar, agregaras los datos
 para esta prueba inventaras los datos al momento de agregar
 tickets (id_ticket(auto), nombre(opt), usuario(req), correo(req), telefono(opt), asunto(tu_lo_generas), mensaje(tu_lo_generas), status('P'), fecha(now))
-* la db es mariadb
+* la db es mysql
 * se debe pasar el query y los parametros del query, en lo posible procura utilizar los parametros en lugar de valores directos en el query
+* recuerda que si vas a mandar campos vacios, debes ponerlos nulos o string vacio ya que los parametros son posicionales
+* tambien recuerda que los indicadores de variable en el query debe ser %s para que se pueden leer directo con los parametros
+* los parametros son posicionales asi que las variables del query debe coincidir con las posiciones de los parametros, aunque se tenga que repetir
+
+* haras peticiones post a 
+https://sa.ojitos369.com/api/gpt_con/ejecutar/
+ - Para ejecutar querys, guardar, actualizar, eliminar
+https://sa.ojitos369.com/api/gpt_con/consulta/
+ - Para consulta de informacion con querys, leer, buscar, filtrar
+
+en ambos casos debes de mandar en el body
+  - query: el query a ejecutar (string)
+  - parametros: los parametros del query (array)
+
 {
   "openapi": "3.1.0",
   "info": {
@@ -139,4 +153,53 @@ tickets (id_ticket(auto), nombre(opt), usuario(req), correo(req), telefono(opt),
     "schemas": {}
   }
 }
+
+https://sa.ojitos369.com/api/gpt_con/ejecutar/
+https://sa.ojitos369.com/api/gpt_con/consulta/
+
+
+{
+  "name": "ejecutar_comando",
+  "description": "Realiza una peticion post a 'https://sa.ojitos369.com/api/gpt_con/ejecutar/' Para ejecutar querys, guardar, actualizar, eliminar",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "El comando a ejecutar."
+      },
+      "parametros": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Lista de parámetros adicionales para el comando."
+      }
+    },
+    "required": ["query", "parametros"]
+  }
+}
+
+{
+  "name": "consultar_comando",
+  "description": "Realiza una peticion Post a 'https://sa.ojitos369.com/api/gpt_con/consulta/' Para consulta de informacion con querys, leer, buscar, filtrar",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "El comando a consultar."
+      },
+      "parametros": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Lista de parámetros adicionales para la consulta."
+      }
+    },
+    "required": ["query", "parametros"]
+  }
+}
+
 """
