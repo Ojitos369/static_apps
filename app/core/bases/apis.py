@@ -3,6 +3,7 @@ import os
 import json
 import datetime
 from pathlib import Path
+from inspect import currentframe
 
 # Django
 from django.utils import timezone
@@ -54,7 +55,6 @@ class BaseApi(APIView):
                 self.data = self.request.data
             except:
                 self.data = {}
-
     
     def validate_session(self):
         request = self.request
@@ -64,6 +64,14 @@ class BaseApi(APIView):
 
     def validar_permiso(self, usuarios_validos):
         pass
+
+    def show_me(self):
+        class_name = self.__class__.__name__
+        cf = currentframe()
+        line = cf.f_back.f_lineno
+        file_name = cf.f_back.f_code.co_filename
+        
+        print_line_center(f"{class_name} - {file_name}:{line} ")
 
 
 class PostApi(BaseApi):
@@ -80,6 +88,7 @@ class PostApi(BaseApi):
             return self.response
         elif self.response_mode == 'json':
             return Response(self.response, status=self.status)
+
 
 class GetApi(BaseApi):
     def get(self, request, **kwargs):

@@ -5,8 +5,11 @@ import withReactContent from 'sweetalert2-react-content';
 
 const MySwal = withReactContent(Swal);
 
-let link = '';
-link = 'http://localhost:8000/'
+const link = 'http://localhost:8369/api/';
+axios.defaults.withCredentials = true
+const miAxios = axios.create({
+    baseURL: link,
+});
 
 const actionTypes = {
     levels: {

@@ -1,26 +1,27 @@
-import React, { Fragment, useEffect } from 'react';
-import { MyComponent } from '../Components/MyComponent';
+import { useContext, useEffect } from 'react';
 import { MyContext } from './MyContext';
 import { AllContext } from './MyContext';
 import { cambiarThema } from './core/helper';
 import { Theme } from '../Components/Theme';
-import { Test } from '../Components/Test';
 
+import { Index } from '../Pages/Index';
+import { Test } from '../Pages/Test';
+import { Header } from '../Components/Header';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
 
 const BgTheme = () => {
-    const { ls } = React.useContext(AllContext);
+    const { ls } = useContext(AllContext);
     return (
-        <Fragment>
+        <>
             <div className={`wipeInDown full-page-container bg-my-${ls.theme}`}></div>
             <Theme />
-        </Fragment>
+        </>
     )
 }
 
 function AppUI() {
-    const { ls } = React.useContext(AllContext);
+    const { ls } = useContext(AllContext);
 
     useEffect(() => {
         cambiarThema(ls?.theme);
@@ -28,18 +29,17 @@ function AppUI() {
 
     return (
         <div className={`text-[var(--my-minor)]`}>
+            <Header />
             <BgTheme />
             <Routes>
-                {/* -----------   Home   ----------- */}
+                {/* -----------   Index   ----------- */}
                 <Route
                     path="/"
                     element={
-                        <MyComponent />
+                        <Index />
                     }
                 />
-                {/* -----------   /Home   ----------- */}
-
-
+                {/* -----------   /Index   ----------- */}
                 {/* -----------   Test   ----------- */}
                 <Route
                     path="test"
