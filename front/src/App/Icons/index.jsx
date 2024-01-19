@@ -67,7 +67,46 @@ const Moon = props => {
     )
 }
 
+const CircleXmark = props => {
+    // circle-xmark
+    // circle_xmark
+    // circle_xmark
+    const icon = props.icon || '';
+    const primary = props.primary || props.class1 || '';
+    const secondary = props.secondary || props.class2 || '';
+    const fillPrimary = props.fillPrimary || props.fill1 || '';
+    const fillSecondary = props.fillSecondary || props.fill2 || '';
+    const className = props.className || `icon ${icon || styles.circle_xmark_icon}` || '';
+    const classPrimary = props.classPrimary || primary || (!fillPrimary && styles.circle_xmark_primary) || '';
+    const classSecondary = props.classSecondary || secondary || (!fillSecondary && styles.circle_xmark_secondary) || '';
+    const style = props.style || {};
+    const stylePrimary = props.stylePrimary || props.style1 || {};
+    const styleSecondary = props.styleSecondary || props.style2 || {};
+
+    return (
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className={className}
+            style={style}
+            viewBox="0 0 576 512">
+            <path 
+                className={classPrimary}
+                fill={fillPrimary}
+                style={stylePrimary}
+                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"
+                />
+            <path 
+                className={classSecondary}
+                fill={fillSecondary}
+                style={styleSecondary}
+                d="M209 175c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47z"
+                />
+        </svg>
+    )
+}
+
 export { 
     Sun,
-    Moon
+    Moon,
+    CircleXmark,
  };

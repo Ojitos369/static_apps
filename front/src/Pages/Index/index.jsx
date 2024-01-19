@@ -7,7 +7,7 @@ const Index = props => {
     const { ls, lf, s, f } = useContext(AllContext);
 
     useEffect(() => {
-        f.upgradeLvl1('page', 'title', 'SA')
+        f.upgradeLvl1('page', 'title', 'Simple Apps')
     }, []);
     
     return (

@@ -1,0 +1,69 @@
+@mixin large {
+    @media only screen and (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media only screen and (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media only screen and (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin phone {
+    @media only screen and (max-width: 767px) {
+        @content;
+    }
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid var(--my-minor);
+
+    .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        padding: 5px 10px;
+        @include phone {
+            display: none;
+        }
+        .img {
+            height: 50px;
+            width: 50px;
+        }
+    }
+
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        font-size: 30px;
+        font-weight: bold;
+        @include phone {
+            width: 90%;
+        }
+    }
+
+    .menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        @include phone {
+            width: 10%;
+        }
+    }
+}
+

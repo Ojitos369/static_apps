@@ -31,7 +31,7 @@ const BaseModal = props => {
             close={close}
         />}
         <div
-            className={`${styles.modal_info}`}
+            className={`${styles.modal_info} ${!s.modals?.exampleBase?.example && 'hidden'}`}
             style={{...ztyle}}
             onClick={close}
             >
