@@ -200,6 +200,29 @@ const selectNull = props => {
     props.actualizador(data);
 }
 
+const justNumbers = text => {
+    text = text?.toString() || '';
+    let value = text.replace(/[^0-9.-]+/g, '');
+    if(parseFloat(value) != 0 && value[0] === "0") {
+        value = value.slice(1)
+    }
+    
+    let sep = value.split('.');
+    let integer = sep[0] || '';
+    let decimal = sep[1] || '';
+    try {
+        integer = eval(integer);
+    } catch (error) {
+        
+    }
+
+
+    if (decimal.length > 2) {
+        decimal = decimal.slice(0, 2);
+        value = integer + '.' + decimal;
+    }
+    return value;
+}
 
 export {
     cambiarThema,
@@ -212,4 +235,5 @@ export {
     selectArrowDown,
     selectEnter,
     selectNull,
+    justNumbers,
 };
