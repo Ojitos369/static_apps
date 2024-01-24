@@ -3,19 +3,20 @@ import { AnimateEdit, AnimateRemove } from "../../App/Icons";
 
 const ShowItems = props => {
     const { agregados, styles, deleteAction, editAction } = props;
+    const tx = props.tx?.showItems || {};
 
     const trClass = 'trClass text-[0.8rem] font-bold bg-[var(--my-edilar)] text-[var(--my-white)]';
     const thClass = 'thClass border-solid border-2 m-0 py-2 px-2 border border-[var(--my-minor)]';
 
     const fields = [
-        {label: 'Item', field: 'nombre', type: 'text', show: true},
-        {label: 'Cantidad', field: 'cantidad', type: 'number', show: true},
-        {label: 'Precio', field: 'precio', type: 'currency', show: true},
-        {label: 'Total', field: 'total', type: 'currency', show: true},
-        {label: 'Editar', Icon: AnimateEdit, type: 'icon', show: true,
+        {label: tx.item, field: 'nombre', type: 'text', show: true},
+        {label: tx.cantidad, field: 'cantidad', type: 'number', show: true},
+        {label: tx.precio, field: 'precio', type: 'currency', show: true},
+        {label: tx.total, field: 'total', type: 'currency', show: true},
+        {label: tx.editar, Icon: AnimateEdit, iconProps: {text: tx.edit}, type: 'icon', show: true,
             onClick: editAction
         },
-        {label: 'Eliminar', Icon: AnimateRemove, type: 'icon', show: true,
+        {label: tx.eliminar, Icon: AnimateRemove, iconProps: {text: tx.remove}, type: 'icon', show: true,
             onClick: deleteAction
         },
     ]
@@ -76,7 +77,9 @@ const ShowElement = props => {
                             className={`${styles.span} cursor-pointer`}
                             onClick={() => field.onClick(index)}
                             >
-                            <Icon />
+                            <Icon
+                                {...(field.iconProps || {})}
+                                 />
                         </span>
                         }
                     </td>

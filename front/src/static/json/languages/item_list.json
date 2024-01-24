@@ -1,0 +1,122 @@
+{
+    "es": {
+        "resume": {
+            "cantidad": "Cantidad",
+            "total": "Total",
+            "disponible": "Disponible",
+            "restante": "Restante"
+        },
+        "add": {
+            "nombre": "Nombre",
+            "cantidad": "Cantidad",
+            "precio": "Precio",
+            "submit": "Agregar"
+        },
+        "showItems": {
+            "item": "Item",
+            "cantidad": "Cantidad",
+            "precio": "Precio",
+            "total": "Total",
+            "editar": "Editar",
+            "eliminar": "Eliminar",
+            "edit": "Editar",
+            "remove": "Eliminar"
+        }
+    },
+    "en": {
+        "resume": {
+            "cantidad": "Quantity",
+            "total": "Total",
+            "disponible": "Available",
+            "restante": "Remaining"
+        },
+        "add": {
+            "nombre": "Name",
+            "cantidad": "Quantity",
+            "precio": "Price",
+            "submit": "Add"
+        },
+        "showItems": {
+            "item": "Item",
+            "cantidad": "Quantity",
+            "precio": "Price",
+            "total": "Total",
+            "editar": "Edit",
+            "eliminar": "Delete",
+            "edit": "Edit",
+            "remove": "Delete"
+        }
+    },
+    "fr": {
+        "resume": {
+            "cantidad": "Quantité",
+            "total": "Total",
+            "disponible": "Disponible",
+            "restante": "Restant"
+        },
+        "add": {
+            "nombre": "Nom",
+            "cantidad": "Quantité",
+            "precio": "Prix",
+            "submit": "Ajouter"
+        },
+        "showItems": {
+            "item": "Article",
+            "cantidad": "Quantité",
+            "precio": "Prix",
+            "total": "Total",
+            "editar": "Éditer",
+            "eliminar": "Supprimer",
+            "edit": "Éditer",
+            "remove": "Supprimer"
+        }
+    },
+    "jp": {
+        "resume": {
+            "cantidad": "数量",
+            "total": "合計",
+            "disponible": "利用可能",
+            "restante": "残り"
+        },
+        "add": {
+            "nombre": "名前",
+            "cantidad": "数量",
+            "precio": "価格",
+            "submit": "追加する"
+        },
+        "showItems": {
+            "item": "アイテム",
+            "cantidad": "数量",
+            "precio": "価格",
+            "total": "合計",
+            "editar": "編集",
+            "eliminar": "削除",
+            "edit": "編集",
+            "remove": "削除"
+        }
+    },
+    "kr": {
+        "resume": {
+            "cantidad": "수량",
+            "total": "총계",
+            "disponible": "사용 가능",
+            "restante": "남은"
+        },
+        "add": {
+            "nombre": "이름",
+            "cantidad": "수량",
+            "precio": "가격",
+            "submit": "추가"
+        },
+        "showItems": {
+            "item": "아이템",
+            "cantidad": "수량",
+            "precio": "가격",
+            "total": "총계",
+            "editar": "편집",
+            "eliminar": "삭제",
+            "edit": "편집",
+            "remove": "삭제"
+        }
+    }
+}

@@ -1,21 +1,22 @@
 
 const Resumen = props => {
     const { cantidad, total, disponible, changeDisponible, restante, styles } = props;
+    const tx = props.tx?.resume || {};
 
     return (
         <div
             className={`${styles.resumen}`}
             >
             <div className={`${styles.cantidadContainer} ${styles.infoContainer}`}>
-                <h4>Cantidad</h4>
+                <h4>{tx.cantidad}</h4>
                 <p>{cantidad}</p>
             </div>
             <div className={`${styles.totalContainer} ${styles.infoContainer}`}>
-                <h4>Total</h4>
+                <h4>{tx.total}</h4>
                 <p>{total}</p>
             </div>
             <div className={`${styles.disponibleContainer} ${styles.infoContainer}`}>
-                <label>Disponible</label>
+                <label>{tx.disponible}</label>
                 <input 
                     type="text"
                     value={disponible}
@@ -23,7 +24,7 @@ const Resumen = props => {
                      />
             </div>
             <div className={`${styles.restanteContainer} ${styles.infoContainer}`}>
-                <h4>Restante</h4>
+                <h4>{tx.restante}</h4>
                 <p>{restante}</p>
             </div>
         </div>

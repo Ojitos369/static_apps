@@ -9,3 +9,6 @@ urlpatterns = [
     path('consulta/', Consulta.as_view(), name=f'{app_name}_consulta'),
 ]
 # https://sa.ojitos369.com/api/gpt_con/ejecutar/
+""" 
+./ddp.sh --name "sa" --repo "git@github.com:Ojitos369/static_apps.git" --py "python3.12" --url "sa.ojitos369.com"
+"""

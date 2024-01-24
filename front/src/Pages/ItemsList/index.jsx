@@ -10,8 +10,13 @@ import { Resumen } from './Resumen';
 import { AddItem } from './AddItem';
 import { ShowItems } from './ShowItems';
 
+import texts from '../../static/json/languages/item_list.json';
+
 const ItemsList = props => {
     const { s, f } = useContext(AllContext);
+    const tx = useMemo(() => {
+        return texts[s.settings?.configuraciones?.idioma || 'kr'] || {};
+    }, [s.settings?.configuraciones?.idioma]);
 
     const [agregados, cantidad, total, disponible, restante] = useMemo(() => {
         const agregados = s.itemsList?.agregados || [];
@@ -61,19 +66,24 @@ const ItemsList = props => {
                 changeDisponible={changeDisponible}
                 restante={restante}
                 styles={styles}
+                tx={tx}
             />
             <AddItem 
                 styles={styles}
+                tx={tx}
             />
             {cantidad > 0 &&
             <ShowItems 
                 agregados={agregados}
                 styles={styles}
+                tx={tx}
                 deleteAction={deleteAction}
                 editAction={editAction}
             />}
             {!!s.modals?.itemsList?.editItem &&
-            <EditItem />}
+            <EditItem
+                tx={tx}
+                />}
         </section>
     )
 }

@@ -79,12 +79,13 @@
     }
     &.edit_button {
         &::before {
-            content: "Edit";
+            content: var(--animate-edit-text);
+            // content: "Edit";
         }
     }
     &.remove_button {
         &::before {
-            content: "Remove";
+            content: var(--animate-remove-text);
         }
     }
 }

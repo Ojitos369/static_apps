@@ -5,6 +5,7 @@ import { justNumbers } from "../../App/core/helper";
 const AddItem = props => {
     const { s, f } = useContext(AllContext);
     const { styles } = props;
+    const tx = props.tx?.add || {};
 
     const item = useMemo(() => {
         return s.itemsList?.itemToAdd || {};
@@ -34,7 +35,7 @@ const AddItem = props => {
             onSubmit={submit}
             >
             <div className={`${styles.inputContainer}`}>
-                <label>Nombre</label>
+                <label>{tx.nombre}</label>
                 <input 
                     type="text"
                     name="nombre"
@@ -43,7 +44,7 @@ const AddItem = props => {
                     />
             </div>
             <div className={`${styles.inputContainer}`}>
-                <label>Cantidad</label>
+                <label>{tx.cantidad}</label>
                 <input 
                     type="text"
                     name="cantidad"
@@ -52,7 +53,7 @@ const AddItem = props => {
                     />
             </div>
             <div className={`${styles.inputContainer}`}>
-                <label>Precio</label>
+                <label>{tx.precio}</label>
                 <input 
                     type="text"
                     name="precio"
@@ -61,7 +62,7 @@ const AddItem = props => {
                     />
             </div>
             <div className={`${styles.inputContainer} ${styles.submit}`}>
-                <input type="submit" value="Agregar" />
+                <input type="submit" value={tx.submit} />
             </div>
         </form>
     )
