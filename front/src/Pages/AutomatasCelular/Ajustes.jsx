@@ -132,7 +132,7 @@ const Ajustes = props => {
                         return null;
                     }
                     return (
-                        <div key={i} className="flex flex-col w-1/3 mt-3 px-5">
+                        <div key={i} className="flex flex-col w-10/12 md:w-1/3 mt-3 px-5">
                             <label className="w-full text-start px-2">
                                 {field.title}
                             </label>
