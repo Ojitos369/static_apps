@@ -1,0 +1,130 @@
+.reg_container {
+    // background-color: var(--my-major);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    .reg_row {
+        display: flex;
+        flex-direction: row;
+        width: fit-content;
+        .reg_col {
+            width: var(--cell-size);
+            height: var(--cell-size);
+            border: 1px solid #aaa5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            p {
+                font-size: 10px;
+                color: #aaa5;
+                pointer-events: none;
+                user-select: none;
+            }
+            &.fill_0 {
+                background-color: #000;
+            }
+            &.filled {
+                p {
+                    color: #fff;
+                }
+            }
+        }
+        &.game_1 {
+            .reg_col {
+                &.fill_-1 {
+                    background-color: #888;
+                }
+                &.fill_1 {
+                    background-color: #003;
+                }
+                &.fill_2 {
+                    background-color: #005;
+                }
+                &.fill_3 {
+                    background-color: #007;
+                }
+                &.fill_4 {
+                    background-color: #009;
+                }
+                &.fill_5 {
+                    background-color: #00b;
+                }
+                &.fill_6 {
+                    background-color: #00d;
+                }
+                &.fill_7 {
+                    background-color: #00f;
+                }
+                &.fill_8 {
+                    background-color: #20f;
+                }
+                &.fill_9 {
+                    background-color: #40f;
+                }
+                &.fill_10 {
+                    background-color: #60f;
+                }
+                &.fill_11 {
+                    background-color: #80f;
+                }
+                &.fill_12 {
+                    background-color: #a0f;
+                }
+                &.fill_13 {
+                    background-color: #c0f;
+                }
+                &.fill_14 {
+                    background-color: #e0f;
+                }
+                &.fill_15 {
+                    background-color: #f1f;
+                }
+            }
+        }
+        &.game_2 {
+            .reg_col {
+                &.fill_1 {
+                    background-color: #0a0;
+                }
+            }
+        }
+    }
+}
+.toogleButon {
+    align-items: center;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 100;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .toggle_icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+.ajustes_icon {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 130px;
+    right: 50px;
+    z-index: 50;
+    border-radius: 50%;
+    span {
+        cursor: pointer;
+        svg {
+            width: 40px;
+            height: 40px;
+        }
+    }
+}

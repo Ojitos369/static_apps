@@ -23,6 +23,7 @@ const Menu = props => {
     const apps = [
         {name: "Home", path: "/"},
         {name: "Items List", path: "/items_list"},
+        {name: "Automatas Celular", path: "/ac"},
     ]
 
     const close = () => {

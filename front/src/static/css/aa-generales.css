@@ -171,3 +171,9 @@ body::-webkit-scrollbar {
     background: var(--my-white);
     color: var(--my-dark);
 }
+
+.bg-my-general {
+    transition: all 0.5s;
+    background: var(--my-major);
+    color: var(--my-minor);
+}

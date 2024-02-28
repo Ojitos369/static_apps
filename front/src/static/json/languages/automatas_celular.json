@@ -1,0 +1,34 @@
+{
+    "es": {
+        "seconds": "seg",
+        "ajustes_title": "Ajustes",
+        "ciclo": "Ciclo",
+        "ajustes_options": {
+            "speed": "Velocidad (ms)",
+            "speedSize": "Saltos en velocidad (ms)",
+            "ysize": "Tamaño en Y",
+            "xSize": "Tamaño en X",
+            "circular": "Circular",
+            "yes": "Si",
+            "no": "No",
+            "limitPerCell": "Limite por Celda",
+            "maxPerCell": "Maximo por Celda",
+            "addPerTouch": "Agregar por toque",
+            "autoAddBlocks": "Agregar bloques",
+            "perZoom": "Tamaño Zoom",
+            "gamemode": "Modo de Simulacion",
+            "save": "Guardar",
+            "cancel": "Cancelar"
+        },
+        "modes": {
+            "ws": {
+                "value": 1,
+                "name": "Simulacion de Agua"
+            },
+            "gol": {
+                "value": 2,
+                "name": "Juego de la Vida"
+            }
+        }
+    }
+}

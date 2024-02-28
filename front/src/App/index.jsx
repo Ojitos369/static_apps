@@ -8,6 +8,7 @@ import { Index } from '../Pages/Index';
 import { Test } from '../Pages/Test';
 
 import { ItemsList } from '../Pages/ItemsList';
+import { AutomatasCelular } from '../Pages/AutomatasCelular';
 
 import { Menu } from '../Components/Modals/Menu';
 
@@ -19,18 +20,22 @@ const BgTheme = () => {
     const { ls } = useContext(AllContext);
     return (
         <>
-            <div className={`wipeInDown full-page-container bg-my-${ls.theme}`}></div>
+            <div className={`wipeInDown full-page-container bg-my-general`}></div>
             <Theme />
         </>
     )
 }
 
 function AppUI() {
-    const { ls, s } = useContext(AllContext);
+    const { ls, s, f } = useContext(AllContext);
 
     useEffect(() => {
         cambiarThema(ls?.theme);
     }, [ls?.theme]);
+
+    useEffect(() => {
+        f.upgradeLvl2('settings', 'configuraciones', 'idioma', ls?.settings?.idioma || 'es');
+    }, [ls?.settings]);
 
     return (
         <div className={`text-[var(--my-minor)]`}>
@@ -45,6 +50,10 @@ function AppUI() {
                 {/* -----------   ItemsList   ----------- */}
                 <Route path="items_list" element={<ItemsList />} />
                 {/* -----------   /ItemsList   ----------- */}
+
+                {/* -----------   AutomatasCelular   ----------- */}
+                <Route path="ac" element={<AutomatasCelular />} />
+                {/* -----------   /AutomatasCelular   ----------- */}
 
                 {/* -----------   Test   ----------- */}
                 <Route path="test" element={<Test />} />

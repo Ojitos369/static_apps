@@ -1,4 +1,4 @@
-import { useEffect, useContext, useRef } from 'react';
+import { useEffect, useContext, useRef, useMemo } from 'react';
 import { AllContext } from '../../App/MyContext';
 import { useKeyDown, useKeyUp, useLocalTab } from '../../App/myHooks';
 import styles from './styles/index.module.scss';
@@ -14,17 +14,20 @@ const ListenKeys = props => {
     return null;
 }
 
-const BaseModal = props => {
+const Ajustes = props => {
     const { s, f } = useContext(AllContext);
-    const keyExec = !!s.modals?.exampleBase?.example;
+    const keyExec = !!s.modals?.ac?.ajustes;
     const ztyle = props.zindex ? {zIndex: props.zindex} : {};
+    const { tx } = props;
+
+    const ajustes = useMemo(() => s.ac?.ajustes || {}, [s.ac?.ajustes]);
 
     const close = () => {
-        f.upgradeLvl2('modals', 'exampleBase', 'example', false);
+        f.upgradeLvl2('modals', 'ac', 'ajustes', false);
     }
 
     const modalRef = useRef(null);
-    useLocalTab(s.modals?.exampleBase?.example, modalRef);
+    useLocalTab(s.modals?.ac?.ajustes, modalRef);
 
     return (
         <>
@@ -37,7 +40,7 @@ const BaseModal = props => {
             className={`${styles.modal_info}`}
             style={{...ztyle}}
             onClick={close}
-            id="modal-baseModal"
+            id="modal-ac_ajustes"
             ref={modalRef}
             >
             <div 
@@ -54,4 +57,4 @@ const BaseModal = props => {
     )
 }
 
-export { BaseModal };
+export { Ajustes };

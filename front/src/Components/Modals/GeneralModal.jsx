@@ -14,17 +14,21 @@ const ListenKeys = props => {
     return null;
 }
 
-const BaseModal = props => {
+const GeneralModal = props => {
     const { s, f } = useContext(AllContext);
-    const keyExec = !!s.modals?.exampleBase?.example;
+    const { Component, lvl1, lvl2 } = props;
+    const keyExec = !!s.modals?.[lvl1]?.[lvl2];
     const ztyle = props.zindex ? {zIndex: props.zindex} : {};
 
     const close = () => {
-        f.upgradeLvl2('modals', 'exampleBase', 'example', false);
+        if (s.extra_modals?.[lvl1]?.[lvl2]?.close) {
+            s.extra_modals[lvl1][lvl2].close();
+        }
+        f.upgradeLvl2('modals', lvl1, lvl2, false);
     }
 
     const modalRef = useRef(null);
-    useLocalTab(s.modals?.exampleBase?.example, modalRef);
+    useLocalTab(s.modals?.[lvl1]?.[lvl2], modalRef);
 
     return (
         <>
@@ -37,21 +41,20 @@ const BaseModal = props => {
             className={`${styles.modal_info}`}
             style={{...ztyle}}
             onClick={close}
-            id="modal-baseModal"
+            id={`modal-${lvl1}_${lvl2}`}
             ref={modalRef}
             >
             <div 
-                className={`flex ${styles.modal_container} ${styles.modal_container_50} pb-5 pt-5 ${styles.my_modal}`}
+                className={`flex ${styles.modal_container} ${styles[props?.modal_container_w || "modal_container_50"]} pb-5 pt-5 ${styles.my_modal}`}
                 onClick={e => e.stopPropagation()}
                 >
-                Content Here
-                <div className="flex flex-row flex-wrap justify-around">
-                    And Here :3
-                </div>
+                <Component 
+                    {...props}
+                />
             </div>
         </div>
         </>
     )
 }
 
-export { BaseModal };
+export { GeneralModal };

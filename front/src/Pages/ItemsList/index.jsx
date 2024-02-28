@@ -15,7 +15,7 @@ import texts from '../../static/json/languages/item_list.json';
 const ItemsList = props => {
     const { s, f } = useContext(AllContext);
     const tx = useMemo(() => {
-        return texts[s.settings?.configuraciones?.idioma || 'kr'] || {};
+        return texts[s.settings?.configuraciones?.idioma] || {};
     }, [s.settings?.configuraciones?.idioma]);
 
     const [agregados, cantidad, total, disponible, restante] = useMemo(() => {
