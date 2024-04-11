@@ -1,13 +1,13 @@
-import { useContext, useMemo, useEffect } from 'react';
-import { AllContext } from '../../App/MyContext';
+import { useMemo, useEffect } from 'react';
+import {useStates } from '../../App/useStates';
 
 import './styles/index.module.css';
 
 const Index = props => {
-    const { ls, lf, s, f } = useContext(AllContext);
+    const { ls, lf, s, f } = useStates();
 
     useEffect(() => {
-        f.upgradeLvl1('page', 'title', 'Simple Apps')
+        f.u1('page', 'title', 'Simple Apps')
     }, []);
     
     return (

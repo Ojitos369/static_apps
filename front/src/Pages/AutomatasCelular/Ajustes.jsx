@@ -1,9 +1,9 @@
-import { useEffect, useState, useMemo, useContext } from 'react';
-import { AllContext } from '../../App/MyContext';
+import { useEffect, useState, useMemo } from 'react';
+import {useStates } from '../../App/useStates';
 import { justNumbers } from '../../App/core/helper';
 
 const Ajustes = props => {
-    const { s, f } = useContext(AllContext);
+    const { s, f } = useStates();
     const { tx } = props;
     const ajustes = useMemo(() => {
         return s.ac?.ajustes || {}
@@ -67,11 +67,11 @@ const Ajustes = props => {
     ]
 
     const changeAjuste = (field, value) => {
-        f.upgradeLvl2('ac', 'ajustes_temps', field, value);
+        f.u2('ac', 'ajustes_temps', field, value);
     }
 
     const guardar = () => {
-        let settings = localSettings;
+        let settings = JSON.parse(JSON.stringify(localSettings));;
         fields.forEach(field => {
             switch (field.parse) {
                 case "int":
@@ -84,12 +84,12 @@ const Ajustes = props => {
                     break;
             }
         });
-        f.upgradeLvl1('ac', 'ajustes', {...settings, reset: true});
-        f.upgradeLvl2('modals', 'ac', 'ajustes', false);
+        f.u1('ac', 'ajustes', {...settings, reset: true});
+        f.u2('modals', 'ac', 'ajustes', false);
     }
 
     const cancelar = () => {
-        f.upgradeLvl2('modals', 'ac', 'ajustes', false);
+        f.u2('modals', 'ac', 'ajustes', false);
     }
 
     useEffect(() => {
@@ -101,7 +101,7 @@ const Ajustes = props => {
                 addPerTouch: 1,
             }
             Object.keys(update).forEach(key => {
-                f.upgradeLvl2('ac', 'ajustes_temps', key, update[key]);
+                f.u2('ac', 'ajustes_temps', key, update[key]);
             });
         }
         if (["1", 1].includes(localSettings.gamemode)) {
@@ -111,13 +111,13 @@ const Ajustes = props => {
                 addPerTouch: 1,
             }
             Object.keys(update).forEach(key => {
-                f.upgradeLvl2('ac', 'ajustes_temps', key, update[key]);
+                f.u2('ac', 'ajustes_temps', key, update[key]);
             });
         }
     }, [localSettings.gamemode]);
 
     useEffect(() => {
-        f.upgradeLvl1('ac', 'ajustes_temps', ajustes);
+        f.u1('ac', 'ajustes_temps', ajustes);
     }, [s.modals]);
 
     return (

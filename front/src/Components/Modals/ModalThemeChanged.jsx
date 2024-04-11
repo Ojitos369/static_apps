@@ -1,5 +1,5 @@
 import React from 'react';
-import { AllContext } from '../../App/MyContext';
+import {useStates } from '../../App/useStates';
 import { useKeyDown, useKeyUp } from '../../App/myHooks';
 import styles from '/src/Components/Modals/styles/index.module.scss';
 // console.log(styles);
@@ -14,13 +14,13 @@ const ListenKeys = props => {
     return null;
 }
 
-function ModalThemeChanged(props) {
-    const { ls, s, f } = React.useContext(AllContext);
+const ModalThemeChanged = props => {
+    const { ls, s, f } = useStates();
     const keyExec = !!s.modals?.themes?.changed;
     const ztyle = props.zindex ? {zIndex: props.zindex} : {};
 
     const close = () => {
-        f.upgradeLvl2('modals', 'themes', 'changed', false);
+        f.u2('modals', 'themes', 'changed', false);
     }
 
     return (

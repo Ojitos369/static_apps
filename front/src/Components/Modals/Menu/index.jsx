@@ -1,5 +1,5 @@
-import React, { useEffect, useContext, Fragment } from 'react';
-import { AllContext } from '../../../App/MyContext';
+import React, { useEffect, Fragment } from 'react';
+import {useStates } from '../../../App/useStates';
 import { useKeyDown, useKeyUp } from '../../../App/myHooks';
 import styles from './styles/index.module.scss';
 
@@ -16,7 +16,7 @@ const ListenKeys = props => {
 }
 
 const Menu = props => {
-    const { s, f, Link } = useContext(AllContext);
+    const { s, f, Link } = useStates();
     const keyExec = !!s.modals?.menu?.index;
     const ztyle = props.zindex ? {zIndex: props.zindex} : {};
 
@@ -27,7 +27,7 @@ const Menu = props => {
     ]
 
     const close = () => {
-        f.upgradeLvl2('modals', 'menu', 'index', false);
+        f.u2('modals', 'menu', 'index', false);
     }
 
     return (

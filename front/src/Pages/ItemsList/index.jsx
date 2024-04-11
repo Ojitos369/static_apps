@@ -1,5 +1,5 @@
-import { useContext, useEffect, useMemo } from 'react';
-import { AllContext } from '../../App/MyContext';
+import { useEffect, useMemo } from 'react';
+import {useStates } from '../../App/useStates';
 
 import styles from './styles/index.module.scss';
 import { justNumbers } from "../../App/core/helper";
@@ -13,7 +13,7 @@ import { ShowItems } from './ShowItems';
 import texts from '../../static/json/languages/item_list.json';
 
 const ItemsList = props => {
-    const { s, f } = useContext(AllContext);
+    const { s, f } = useStates();
     const tx = useMemo(() => {
         return texts[s.settings?.configuraciones?.idioma] || {};
     }, [s.settings?.configuraciones?.idioma]);
@@ -38,13 +38,13 @@ const ItemsList = props => {
         if ((value ?? '-') !== '-') {
             value = justNumbers(value);
         }
-        f.upgradeLvl1('itemsList', 'disponible', value);
+        f.u1('itemsList', 'disponible', value);
     }
 
     const deleteAction = index => {
         let new_list = [...agregados];
         new_list.splice(index, 1);
-        f.upgradeLvl1('itemsList', 'agregados', new_list);
+        f.u1('itemsList', 'agregados', new_list);
     }
 
     const editAction = index => {
@@ -52,7 +52,7 @@ const ItemsList = props => {
     }
 
     useEffect(() => {
-        f.upgradeLvl1('page', 'title', 'Items List')
+        f.u1('page', 'title', 'Items List')
     }, []);
 
     return (

@@ -1,5 +1,5 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
-import { AllContext } from '../../App/MyContext';
+import { useEffect, useMemo, useState } from 'react';
+import {useStates } from '../../App/useStates';
 import { useKeyDown, useKeyUp } from '../../App/myHooks';
 
 import { Play, Pause, Gears } from '../../App/Icons';
@@ -27,7 +27,7 @@ const ListenKeys = props => {
 }
 
 const AutomatasCelular = props =>{
-    const { s, f } = useContext(AllContext);
+    const { s, f } = useStates();
 
     const tx = useMemo(() => {
         return texts[s.settings?.configuraciones?.idioma] || {};
@@ -44,12 +44,12 @@ const AutomatasCelular = props =>{
     const keyExec = true;
 
     const upgradeAjustes = (key, value) => {
-        f.upgradeLvl2('ac', 'ajustes', key, value);
+        f.u2('ac', 'ajustes', key, value);
     }
 
     const toogleRun = e => {
         if (!!e) {e.stopPropagation(); e.preventDefault();}
-        f.upgradeLvl1('ac', 'run', !run);
+        f.u1('ac', 'run', !run);
     }
 
     const toogleCircular = e => {
@@ -99,7 +99,7 @@ const AutomatasCelular = props =>{
     }
 
     const addOne = (i, j) => {
-        let newReg = [...reg];
+        let newReg = JSON.parse(JSON.stringify(reg));
         let value = newReg[i][j];
         if (!(value >= -1)) return;
         const originValue = value;
@@ -109,14 +109,15 @@ const AutomatasCelular = props =>{
         }
 
         const diff = value - originValue;
+        // console.log('newReg', newReg, i, j, value);
         newReg[i][j] = value;
         // setExiste(existe + diff);
         upgradeAjustes('existe', ajustes?.existe + diff);
-        f.upgradeLvl1('ac', 'reg', newReg);
+        f.u1('ac', 'reg', newReg);
     }
 
     const removeOne = (i, j) => {
-        let newReg = [...reg];
+        let newReg = JSON.parse(JSON.stringify(reg));
         let value = newReg[i][j];
         const originValue = value;
         value -= ajustes?.addPerTouch;
@@ -128,7 +129,7 @@ const AutomatasCelular = props =>{
         newReg[i][j] = value;
         // setExiste(existe + diff);
         upgradeAjustes('existe', ajustes?.existe + diff);
-        f.upgradeLvl1('ac', 'reg', newReg);
+        f.u1('ac', 'reg', newReg);
     }
 
     const createClean = () => {
@@ -152,7 +153,7 @@ const AutomatasCelular = props =>{
         // setCiclo(0);
         upgradeAjustes('existe', 0);
         upgradeAjustes('ciclo', 0);
-        f.upgradeLvl1('ac', 'reg', newReg);
+        f.u1('ac', 'reg', newReg);
     }
 
     const randomBlock = reg => {
@@ -337,7 +338,7 @@ const AutomatasCelular = props =>{
         }
         // setExiste(totals);
         upgradeAjustes('existe', totals);
-        f.upgradeLvl1('ac', 'reg', newCop);
+        f.u1('ac', 'reg', newCop);
     }
 
     useEffect(() => {
@@ -357,7 +358,7 @@ const AutomatasCelular = props =>{
         if (!ajustes?.loaded) return;
         if (!run || ajustes?.existe === 0) {
             if (run) {
-                f.upgradeLvl1('ac', 'run', false);
+                f.u1('ac', 'run', false);
             }
             return;
         };
@@ -371,7 +372,7 @@ const AutomatasCelular = props =>{
     }, [reg, run, ctrl, ajustes]);
 
     useEffect(() => {
-        // f.upgradeLvl1('ac', 'ajustes_temps', ajustes);
+        // f.u1('ac', 'ajustes_temps', ajustes);
         if (!(ajustes?.loaded ?? true)) {
             upgradeAjustes('loaded', true);
             reset();
@@ -396,10 +397,10 @@ const AutomatasCelular = props =>{
             perZoom: 1,
             gamemode: 1,
         }
-        f.upgradeLvl1('ac', 'ajustes', ajustes);
+        f.u1('ac', 'ajustes', ajustes);
         document.documentElement.style.setProperty('--cell-size', '15px');
 
-        f.upgradeLvl1('page', 'title', 'Automatas Celular');
+        f.u1('page', 'title', 'Automatas Celular');
     }, []);
 
     useEffect(() => {
@@ -427,7 +428,7 @@ const AutomatasCelular = props =>{
 
             <div className={`${styles.ajustes_icon}`}>
                 <span 
-                    onClick={() => f.upgradeLvl2('modals', 'ac', 'ajustes', true)}>
+                    onClick={() => f.u2('modals', 'ac', 'ajustes', true)}>
                     <Gears />
                 </span>
             </div>

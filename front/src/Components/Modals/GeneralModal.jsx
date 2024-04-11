@@ -1,5 +1,5 @@
-import { useEffect, useContext, useRef } from 'react';
-import { AllContext } from '../../App/MyContext';
+import { useEffect, useRef } from 'react';
+import {useStates } from '../../App/useStates';
 import { useKeyDown, useKeyUp, useLocalTab } from '../../App/myHooks';
 import styles from './styles/index.module.scss';
 
@@ -15,7 +15,7 @@ const ListenKeys = props => {
 }
 
 const GeneralModal = props => {
-    const { s, f } = useContext(AllContext);
+    const { s, f } = useStates();
     const { Component, lvl1, lvl2 } = props;
     const keyExec = !!s.modals?.[lvl1]?.[lvl2];
     const ztyle = props.zindex ? {zIndex: props.zindex} : {};
@@ -24,7 +24,7 @@ const GeneralModal = props => {
         if (s.extra_modals?.[lvl1]?.[lvl2]?.close) {
             s.extra_modals[lvl1][lvl2].close();
         }
-        f.upgradeLvl2('modals', lvl1, lvl2, false);
+        f.u2('modals', lvl1, lvl2, false);
     }
 
     const modalRef = useRef(null);

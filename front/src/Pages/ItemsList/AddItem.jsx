@@ -1,9 +1,9 @@
-import { useContext, useEffect, useMemo } from 'react';
-import { AllContext } from '../../App/MyContext';
+import { useEffect, useMemo } from 'react';
+import {useStates } from '../../App/useStates';
 import { justNumbers } from "../../App/core/helper";
 
 const AddItem = props => {
-    const { s, f } = useContext(AllContext);
+    const { s, f } = useStates();
     const { styles } = props;
     const tx = props.tx?.add || {};
 
@@ -16,8 +16,9 @@ const AddItem = props => {
         if (!!e) {e.preventDefault();}
         // s.itemsList?.agregados
         let itemFull = {...item, total: (item.cantidad || 0) * (item.precio || 0)}
-        f.upgradeLvl1('itemsList', 'agregados', [...(s.itemsList?.agregados || []), itemFull]);
-        f.upgradeLvl1('itemsList', 'itemToAdd', null);
+        f.u1('itemsList', 'agregados', [...(s.itemsList?.agregados || []), itemFull]);
+        f.u1('itemsList', 'itemToAdd', null);
+        document.getElementById('nombre_input').focus();
     }
 
     const upgrade = e => {
@@ -26,7 +27,7 @@ const AddItem = props => {
             value = justNumbers(value);
         }
 
-        f.upgradeLvl1('itemsList', 'itemToAdd', { ...item, [name]: value });
+        f.u1('itemsList', 'itemToAdd', { ...item, [name]: value });
     }
 
     return (
@@ -39,6 +40,7 @@ const AddItem = props => {
                 <input 
                     type="text"
                     name="nombre"
+                    id="nombre_input"
                     value={item.nombre || ''}
                     onChange={upgrade}
                     />
@@ -62,7 +64,7 @@ const AddItem = props => {
                     />
             </div>
             <div className={`${styles.inputContainer} ${styles.submit}`}>
-                <input type="submit" value={tx.submit} />
+                <input type="submit" value={tx.submit ?? ''} />
             </div>
         </form>
     )

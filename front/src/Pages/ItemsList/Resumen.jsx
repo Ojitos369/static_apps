@@ -19,7 +19,7 @@ const Resumen = props => {
                 <label>{tx.disponible}</label>
                 <input 
                     type="text"
-                    value={disponible}
+                    value={disponible ?? ''}
                     onChange={changeDisponible}
                      />
             </div>

@@ -1,6 +1,9 @@
-import { useContext, useEffect } from 'react';
-import { MyContext } from './MyContext';
-import { AllContext } from './MyContext';
+import { useEffect } from 'react';
+
+import { store } from './store';
+import { Provider } from "react-redux";
+import { useStates } from './useStates';
+
 import { cambiarThema } from './core/helper';
 import { Theme } from '../Components/Theme';
 
@@ -17,7 +20,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 
 
 const BgTheme = () => {
-    const { ls } = useContext(AllContext);
+    const { ls } = useStates();
     return (
         <>
             <div className={`wipeInDown full-page-container bg-my-general`}></div>
@@ -27,14 +30,14 @@ const BgTheme = () => {
 }
 
 function AppUI() {
-    const { ls, s, f } = useContext(AllContext);
+    const { ls, s, f } = useStates();
 
     useEffect(() => {
         cambiarThema(ls?.theme);
     }, [ls?.theme]);
 
     useEffect(() => {
-        f.upgradeLvl2('settings', 'configuraciones', 'idioma', ls?.settings?.idioma || 'es');
+        f.u2('settings', 'configuraciones', 'idioma', ls?.settings?.idioma || 'es');
     }, [ls?.settings]);
 
     return (
@@ -70,9 +73,9 @@ function AppUI() {
 
 function App(props) {
     return (
-        <MyContext>
+        <Provider store={store}>
             <AppUI />
-        </MyContext>
+        </Provider>
     );
 }
 

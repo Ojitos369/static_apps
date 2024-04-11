@@ -1,5 +1,5 @@
-import { useEffect, useContext, useRef, useMemo } from 'react';
-import { AllContext } from '../../App/MyContext';
+import { useEffect, useRef, useMemo } from 'react';
+import {useStates } from '../../App/useStates';
 import { useKeyDown, useKeyUp, useLocalTab } from '../../App/myHooks';
 import styles from './styles/index.module.scss';
 
@@ -15,7 +15,7 @@ const ListenKeys = props => {
 }
 
 const Ajustes = props => {
-    const { s, f } = useContext(AllContext);
+    const { s, f } = useStates();
     const keyExec = !!s.modals?.ac?.ajustes;
     const ztyle = props.zindex ? {zIndex: props.zindex} : {};
     const { tx } = props;
@@ -23,7 +23,7 @@ const Ajustes = props => {
     const ajustes = useMemo(() => s.ac?.ajustes || {}, [s.ac?.ajustes]);
 
     const close = () => {
-        f.upgradeLvl2('modals', 'ac', 'ajustes', false);
+        f.u2('modals', 'ac', 'ajustes', false);
     }
 
     const modalRef = useRef(null);
