@@ -1,5 +1,6 @@
 import { useMemo, useEffect } from 'react';
 import {useStates } from '../../Hooks/useStates';
+import { GreatBat98 } from '../../Components/Cards/GreatBat98';
 
 import './styles/index.module.css';
 
@@ -13,6 +14,7 @@ const Index = props => {
     return (
         <>
             Pages
+            <GreatBat98 />
         </>
     )
 }
