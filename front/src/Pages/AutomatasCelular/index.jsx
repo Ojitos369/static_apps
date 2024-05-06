@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import {useStates } from '../../App/useStates';
-import { useKeyDown, useKeyUp } from '../../App/myHooks';
+import {useStates } from '../../Hooks/useStates';
+import { useKeyDown, useKeyUp } from '../../Hooks';
 
-import { Play, Pause, Gears } from '../../App/Icons';
+import { Play, Pause, Gears } from '../../Components/Icons';
 
 import { Ajustes } from './Ajustes';
 import { GeneralModal } from '../../Components/Modals/GeneralModal';

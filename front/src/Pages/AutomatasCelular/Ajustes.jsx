@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
-import {useStates } from '../../App/useStates';
-import { justNumbers } from '../../App/core/helper';
+import {useStates } from '../../Hooks/useStates';
+import { justNumbers } from '../../Core/helper';
 
 const Ajustes = props => {
     const { s, f } = useStates();

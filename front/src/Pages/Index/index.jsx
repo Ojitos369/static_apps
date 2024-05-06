@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from 'react';
-import {useStates } from '../../App/useStates';
+import {useStates } from '../../Hooks/useStates';
 
 import './styles/index.module.css';
 

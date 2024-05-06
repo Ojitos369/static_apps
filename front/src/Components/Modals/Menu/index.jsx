@@ -1,9 +1,9 @@
 import React, { useEffect, Fragment } from 'react';
-import {useStates } from '../../../App/useStates';
-import { useKeyDown, useKeyUp } from '../../../App/myHooks';
+import {useStates } from '../../../Hooks/useStates';
+import { useKeyDown, useKeyUp } from '../../../Hooks';
 import styles from './styles/index.module.scss';
 
-import  { CircleXmark } from '../../../App/Icons';
+import  { CircleXmark } from '../../Icons';
 
 const ListenKeys = props => {
     const { keyExec } = props;

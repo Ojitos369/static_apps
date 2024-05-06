@@ -1,5 +1,5 @@
-import { showCurrency } from "../../App/core/helper";
-import { AnimateEdit, AnimateRemove } from "../../App/Icons";
+import { showCurrency } from "../../Core/helper";
+import { AnimateEdit, AnimateRemove } from "../../Components/Icons";
 
 const ShowItems = props => {
     const { agregados, styles, deleteAction, editAction } = props;

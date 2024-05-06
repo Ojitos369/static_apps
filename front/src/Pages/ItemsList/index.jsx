@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from 'react';
-import {useStates } from '../../App/useStates';
+import {useStates } from '../../Hooks/useStates';
 
 import styles from './styles/index.module.scss';
-import { justNumbers } from "../../App/core/helper";
+import { justNumbers } from "../../Core/helper";
 
 import { EditItem } from '../../Components/Modals/ItemsList/EditItem';
 
