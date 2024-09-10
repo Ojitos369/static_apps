@@ -1,4 +1,6 @@
 .vscode
+.vscode/*
+.vscode*
 env
 venv
 */migrations
