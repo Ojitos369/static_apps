@@ -135,10 +135,11 @@ class Test(GetApi):
         
         PIXEL_ID = os.environ.get('FACEBOOK_PIXEL_ID')
         CLIENT_KEY = os.environ.get('FACEBOOK_CLIENT_KEY')
-        
+        TOKEN_KEY = os.environ.get('FACEBOOK_TOKEN_KEY')
+        time = int(datetime.datetime.now().timestamp())
         purchase_event = {
             "event_name": "Purchase",
-            "event_time": datetime.datetime.now().timestamp(),
+            "event_time": time,
             "user_data": {
                 'client_ip_address': None,
                 'client_user_agent': None,
@@ -199,9 +200,9 @@ class Test(GetApi):
         }
         
         events = [
-            add_to_cart_event,
             purchase_event,
-            page_view_event,
+            # add_to_cart_event,
+            # page_view_event,
         ]
         
         data = {
@@ -209,7 +210,8 @@ class Test(GetApi):
             'test_event_code': 'TEST3244',
         }
         
-        url = f'https://graph.facebook.com/v16.0/{PIXEL_ID}/events?access_token={CLIENT_KEY}'
+        url = f'https://graph.facebook.com/v20.0/{PIXEL_ID}/events?access_token={TOKEN_KEY}'
+        print(url)
         
         self.response = {
             'data': data,
@@ -218,7 +220,8 @@ class Test(GetApi):
         
         payload = json.dumps(data)
         headers = {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {TOKEN_KEY}',
         }
         
         response = requests.post(url, data=payload, headers=headers)
