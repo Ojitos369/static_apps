@@ -232,7 +232,7 @@ class Test(GetApi):
 
 
     def generate_unique_event_id(self):
-      return uuid.uuid4()
+      return str(uuid.uuid4())
 
     def get_event_source_url(self):
       return 'https://sa.ojitos369.com'
