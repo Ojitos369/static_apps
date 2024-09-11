@@ -5,9 +5,17 @@ import styles from './styles/index.module.scss';
 
 const Test = props => {
     const { ls, lf, s, f } = useStates();
-    return (
-        <div className={`${styles.test}`}>
 
+    const sendLlamada = e => {
+        if (!!e) e.preventDefault();
+        f.test.test();
+    }
+
+    return (
+        <div className={`flex w-full justify-center`}>
+            <button 
+                className='bg-blue-400 hover:bg-blue-500 text-white px-3 py-1 rounded mt-5'
+                onClick={sendLlamada}>Send Llamada</button>
         </div>
     )
 }
