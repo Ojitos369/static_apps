@@ -207,7 +207,7 @@ class Test(GetApi):
         
         data = {
             'data': events,
-            'test_event_code': 'TEST3244',
+            'test_event_code': 'TEST11495',
         }
         
         url = f'https://graph.facebook.com/v20.0/{PIXEL_ID}/events?access_token={TOKEN_KEY}'
