@@ -13,11 +13,11 @@ class Llama(GetApi):
         pln("user:", msg)
         messages = [
             SystemMessage(content="Eres un agente serio. Eres directo y tus respuestas son concisas y breves."),
-            HumanMessage(content="Mi nombre es Juan")
+            HumanMessage(content=msg)
         ]
         response = chat.invoke(messages)
+        respuesta = response.content
         
-        respuesta = response["msg"][0][0][1]
         pln("llama:", respuesta)
 
         self.response = {
