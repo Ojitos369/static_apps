@@ -10,12 +10,16 @@ class Llama(GetApi):
     def main(self):
         chat = ChatOllama(model="llama3.1")
         msg = self.data["msg"]
+        pln("user:", msg)
         messages = [
             SystemMessage(content="Eres un agente serio. Eres directo y tus respuestas son concisas y breves."),
             HumanMessage(content="Mi nombre es Juan")
         ]
         response = chat.invoke(messages)
+        
+        respuesta = response["msg"][0][0][1]
+        pln("llama:", respuesta)
 
         self.response = {
-            "msg": response
+            "msg": respuesta
         }
