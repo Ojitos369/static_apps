@@ -133,11 +133,11 @@ class JS:
 class Test(GetApi):
     def main(self):
         self.show_me()
-
+        
         PIXEL_ID = os.environ.get("FACEBOOK_PIXEL_ID")
-        CLIENT_KEY = os.environ.get("FACEBOOK_CLIENT_KEY")
         TOKEN_KEY = os.environ.get("FACEBOOK_TOKEN_KEY")
         time = int(datetime.datetime.now().timestamp())
+
         purchase_event = {
             "event_name": "Purchase",
             "event_time": time,
@@ -160,6 +160,7 @@ class Test(GetApi):
             "data_processing_options_state": 0,
         }
 
+        
         add_to_cart_event = {
             "event_name": "AddToCart",
             "event_time": datetime.datetime.now().timestamp(),
