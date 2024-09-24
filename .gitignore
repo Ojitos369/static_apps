@@ -38,3 +38,4 @@ front/pnpm-lock.yaml
 *bun.lockb
 *pnpm-lock.yaml
 *package-lock.json
+/media/json/*.*
