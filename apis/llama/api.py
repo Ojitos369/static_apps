@@ -10,9 +10,8 @@ from app.settings import MEDIA_DIR
 
 
 class Chat(GetApi):
-    # http://localhost:8369/api/llama/chat/?cid=550341&msg=hola%20que%20tal
     # http://localhost:8369/api/llama/chat/?msg=<tu_mensaje>
-
+    # https://sa.ojitos369.com/api/llama/chat/?msg=<tu_mensaje>
     def main(self):
         msg = self.data["msg"]
         cid = get_d(self.data, "cid", default=None)
@@ -28,6 +27,8 @@ class Chat(GetApi):
             self.save_chat_data()
         else:
             self.file_name = f"cid_{cid}.json"
+        
+        self.cid = cid
         
         self.load_chat_data()
         
@@ -71,11 +72,16 @@ class Chat(GetApi):
             json.dump(self.c_data, f, indent=4)
     
     def load_chat_data(self):
+        if not os.path.exists(f"{self.path}/{self.file_name}"):
+            raise self.MYE(f"Chat {self.cid} no encontrado")
+
         with open(f"{self.path}/{self.file_name}", "r") as f:
             self.c_data = json.load(f)
 
+
 class DelChat(DeleteApi, GetApi):
-    # http://localhost:8369/api/llama/del_chat/?cid=550341
+    # http://localhost:8369/api/llama/del_chat/?cid=<cid>
+    # https://sa.ojitos369.com/api/llama/del_chat/?cid=<cid>
 
     def main(self):
         cid = self.data["cid"]
