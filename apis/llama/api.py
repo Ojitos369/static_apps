@@ -5,16 +5,18 @@ import json
 import requests
 
 # User
-from app.core.bases.apis import PostApi, GetApi, get_d, pln, prod_mode
+from app.core.bases.apis import PostApi, GetApi, DeleteApi, get_d, pln, prod_mode
 from app.settings import MEDIA_DIR
 
 
-class Llama(GetApi):
+class Chat(GetApi):
+    # http://localhost:8369/api/llama/chat/?cid=550341&msg=hola%20que%20tal
+    # http://localhost:8369/api/llama/chat/?msg=<tu_mensaje>
+
     def main(self):
         msg = self.data["msg"]
         cid = get_d(self.data, "cid", default=None)
         self.path = f"{MEDIA_DIR}/json"
-        # http://localhost:8369/api/llama/llama/?cid=550341&msg=hola%20que%20tal
 
         if not cid:
             cid = uuid.uuid4().hex[:6]
@@ -71,6 +73,19 @@ class Llama(GetApi):
     def load_chat_data(self):
         with open(f"{self.path}/{self.file_name}", "r") as f:
             self.c_data = json.load(f)
+
+class DelChat(DeleteApi, GetApi):
+    # http://localhost:8369/api/llama/del_chat/?cid=550341
+
+    def main(self):
+        cid = self.data["cid"]
+        self.file_name = f"cid_{cid}.json"
+        self.path = f"{MEDIA_DIR}/json"
+        if os.path.exists(f"{self.path}/{self.file_name}"):
+            os.remove(f"{self.path}/{self.file_name}")
+            self.response = {"msg": "Chat eliminado"}
+        else:
+            self.response = {"msg": "Chat no encontrado"}
 
 
 """ 
