@@ -58,9 +58,10 @@ class Llama(GetApi):
         self.save_chat_data()
         
         self.response = {
+            "msg": message["content"],
             "cid": cid,
             "nota": "Pasar el cid en los parametros para conservar el historial",
-            "msg": message["content"],
+            "cid_e": f"cid={cid}"
         }
 
     def save_chat_data(self):
