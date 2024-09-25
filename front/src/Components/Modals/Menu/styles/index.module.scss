@@ -92,6 +92,7 @@
         border: 1px var(--my-minor) solid;
         border-radius: 15px;
         margin: 10px 0;
+        color: var(--my-minor);
         &:hover {
             background: var(--my-minor);
             color: var(--my-major);
