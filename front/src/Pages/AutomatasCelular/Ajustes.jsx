@@ -139,14 +139,14 @@ const Ajustes = props => {
                             {field.type === "text" && 
                             <input 
                                 type="text"
-                                className='text-black px-3 py-[5px] rounded-md'
+                                className='text-black px-3 py-[5px] rounded-md border border-[var(--my-minor)]'
                                 value={field.value}
                                 onChange={e => changeAjuste(field.field, e.target.value)}
                             />}
                             {field.type === "number" && 
                             <input 
                                 type="text"
-                                className='text-black px-3 py-[5px] rounded-md'
+                                className='text-black px-3 py-[5px] rounded-md border border-[var(--my-minor)]'
                                 value={field.value}
                                 onChange={e => {
                                     let value = e.target.value;
@@ -156,7 +156,7 @@ const Ajustes = props => {
                             />}
                             {field.type === "option" && 
                             <select 
-                                className='text-black px-3 py-[5px] rounded-md'
+                                className='text-black px-3 py-[5px] rounded-md border border-[var(--my-minor)]'
                                 value={field.value}
                                 onChange={e => changeAjuste(field.field, e.target.value)}
                             >

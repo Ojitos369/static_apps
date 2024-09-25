@@ -25,11 +25,11 @@
                 user-select: none;
             }
             &.fill_0 {
-                background-color: #000;
+                background-color: var(--my-major);
             }
             &.filled {
                 p {
-                    color: #fff;
+                    color: var(--my-minor);
                 }
             }
         }

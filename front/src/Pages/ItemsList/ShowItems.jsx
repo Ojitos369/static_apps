@@ -5,7 +5,7 @@ const ShowItems = props => {
     const { agregados, styles, deleteAction, editAction } = props;
     const tx = props.tx?.showItems || {};
 
-    const trClass = 'trClass text-[0.8rem] font-bold bg-[var(--my-edilar)] text-[var(--my-white)]';
+    const trClass = 'trClass text-[0.8rem] font-bold bg-[var(--my-success)] text-[var(--my-white)]';
     const thClass = 'thClass border-solid border-2 m-0 py-2 px-2 border border-[var(--my-minor)]';
 
     const fields = [
