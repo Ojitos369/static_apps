@@ -40,6 +40,50 @@ const useF = props => {
         }
     }
 
+    const llama = {
+        chat: (message, cid) => {
+            if (!message) return;
+            if (!!s.loadings?.llama?.chat) return;
+            u2('loadings', 'llama', 'chat', true);
+
+            let link = `llama/chat/?`;
+            if (!!cid) link += `cid=${cid}&`;
+            link += `message=${message}`;
+
+            // timeout 10 mins
+            const timeout = 10 * 60 * 1000;
+
+            miAxios.get(link, {timeout})
+            .then(res => {
+                const { msg, cid } = res.data;
+                let hist = [...s.llama?.chat?.hist || []];
+                hist.push({rol: "machine", msg});
+                u2('llama', 'chat', 'hist', hist);
+                u2('llama', 'chat', 'cid', cid);
+            }).catch(err => {
+                console.log(err);
+            }).finally(() => {
+                u3('loadings', 'llama', 'chat', false);
+            });
+        },
+        deleteChat: cid => {
+            if (!cid) return;
+            if (!!s.loadings?.llama?.deleteChat) return;
+            u2('loadings', 'llama', 'deleteChat', true);
+            const link = `llama/del_chat/?cid=${cid}`;
+
+            miAxios.get(link)
+            .then(res => {
+                u2('llama', 'chat', 'hist', []);
+                u2('llama', 'chat', 'cid', '');
+            }).catch(err => {
+                console.log(err);
+            }).finally(() => {
+                u3('loadings', 'llama', 'deleteChat', false);
+            });
+        }
+    }
+
     // u[0-9]
     const u0 = (f0, value) => {
         d(ff.u0({f0, value}));
@@ -73,7 +117,7 @@ const useF = props => {
     }
 
     return { u0, u1, u2, u3, u4, u5, u6, u7, u8, u9,
-        test,
+        test, llama, 
      };
 }
 

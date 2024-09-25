@@ -13,6 +13,10 @@ import { Test } from '../Pages/Test';
 import { ItemsList } from '../Pages/ItemsList';
 import { AutomatasCelular } from '../Pages/AutomatasCelular';
 
+import { Llama } from '../Pages/Llama';
+import { Index as LlamaIndex } from '../Pages/Llama/Index';
+import { Chat as LlamaChat } from '../Pages/Llama/Chat';
+
 import { Menu } from '../Components/Modals/Menu';
 
 import { Header } from '../Components/Header';
@@ -47,7 +51,7 @@ function AppUI() {
             {!!s.modals?.menu?.index && <Menu />}
             <Routes>
                 {/* -----------   Index   ----------- */}
-                <Route path="/" element={<Index />} />
+                <Route path="" element={<Index />} />
                 {/* -----------   /Index   ----------- */}
 
                 {/* -----------   ItemsList   ----------- */}
@@ -57,6 +61,13 @@ function AppUI() {
                 {/* -----------   AutomatasCelular   ----------- */}
                 <Route path="ac" element={<AutomatasCelular />} />
                 {/* -----------   /AutomatasCelular   ----------- */}
+
+                {/* -----------   Llama   ----------- */}
+                <Route path="llama" element={<Llama />}>
+                    <Route path="" element={<LlamaIndex />} />
+                    <Route path="chat" element={<LlamaChat />} />
+                </Route>
+                {/* -----------   /Llama   ----------- */}
 
                 {/* -----------   Test   ----------- */}
                 <Route path="test" element={<Test />} />

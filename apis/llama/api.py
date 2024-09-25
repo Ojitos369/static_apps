@@ -97,4 +97,7 @@ class DelChat(DeleteApi, GetApi):
 """ 
 Aprendizaje automático con Python de Aurélien Géron
 Machine Learning de Tom Mitchell
+
+esim pago 3:01
+
 """
