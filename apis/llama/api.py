@@ -3,6 +3,7 @@ import os
 import uuid
 import json
 import requests
+import datetime
 
 # User
 from app.core.bases.apis import PostApi, GetApi, DeleteApi, get_d, pln, prod_mode
@@ -32,7 +33,9 @@ class Chat(GetApi):
         
         self.load_chat_data()
         
-        self.c_data["hist"].append({"role": "user", "content": msg})
+        # dd/mm/YYYY H:M:S
+        hora = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        self.c_data["hist"].append({"role": "user", "content": msg, "hora": hora})
         self.save_chat_data()
 
         respuesta = None
@@ -57,6 +60,8 @@ class Chat(GetApi):
         pln(respuesta)
         
         message = respuesta["message"]
+        hora = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        message["hora"] = hora
         self.c_data["hist"].append(message)
         self.save_chat_data()
         
@@ -105,7 +110,7 @@ class LoadChat(GetApi):
             with open(f"{self.path}/{self.file_name}", "r") as f:
                 self.response = json.load(f)
         else:
-            self.response = {"msg": "Chat no encontrado"}
+            raise self.MYE(f"Chat {cid} no encontrado")
 
 
 """ 

@@ -3,7 +3,8 @@ import { useStates } from '../../../Hooks/useStates';
 import { useMemo, useEffect } from 'react';
 
 const useVars = props => {
-    const { s, f } = useStates();
+    const { s, f, useNavigate } = useStates();
+    const navigate = useNavigate();
 
     const cid = useMemo(() => s.llama?.chat?.cid || '', [s.llama?.chat?.cid]);
 
@@ -13,7 +14,7 @@ const useVars = props => {
     }
 
     const loadChat = () => {
-        f.llama.loadChat(cid);
+        f.llama.loadChat(cid, navigate);
     }
 
     const upgradeCid = value => {

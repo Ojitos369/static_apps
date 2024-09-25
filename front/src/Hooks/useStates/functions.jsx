@@ -23,6 +23,15 @@ const useF = props => {
         cloneO: obj => {
             const clon = JSON.parse(JSON.stringify(obj));
             return clon
+        },
+        getUtcm6: () => {
+            // utc -6 dd/mm/yyyy hh:mm:ss
+            const utcDate = new Date();
+            let date = new Date(utcDate.getTime() - (utcDate.getTimezoneOffset() * 60000));
+            date.setHours(date.getHours() - 6);
+            date = `${date.toISOString().split('T')[0]} ${date.toTimeString().split(' ')[0]}`;
+
+            return date;
         }
     }
 
@@ -32,9 +41,8 @@ const useF = props => {
             if (!!s.loadings?.llama?.chat) return;
             u2('loadings', 'llama', 'chat', true);
             let hist = general.cloneO([...s.llama?.chat?.hist || []]);
-            console.log('hist', hist);
 
-            hist = [...hist, {role: "user", content: message}];
+            hist = [...hist, {role: "user", content: message, hora: general.getUtcm6()}];
             u2('llama', 'chat', 'hist', hist);
 
             let link = `llama/chat/?`;
@@ -47,7 +55,7 @@ const useF = props => {
             miAxios.get(link, {timeout})
             .then(res => {
                 const { msg, cid } = res.data;
-                hist = [...hist, {role: "assistant", content: msg}];
+                hist = [...hist, {role: "assistant", content: msg, hora: general.getUtcm6()}];
                 u2('llama', 'chat', 'actualMessage', '');
                 u2('llama', 'chat', 'hist', hist);
                 u2('llama', 'chat', 'cid', cid);
@@ -55,6 +63,13 @@ const useF = props => {
                 if (!!element) element.focus();
             }).catch(err => {
                 console.log(err);
+                const message = err.response?.data?.message || 'Error';
+                MySwal.fire({
+                    title: 'Error',
+                    text: message,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
             }).finally(() => {
                 u2('loadings', 'llama', 'chat', false);
             });
@@ -69,6 +84,16 @@ const useF = props => {
             .then(res => {
                 u2('llama', 'chat', 'hist', []);
                 u2('llama', 'chat', 'cid', '');
+
+                const message = res.data.message || `Chat ${cid} eliminado`;
+
+                MySwal.fire({
+                    title: 'Success',
+                    text: message,
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                });
+
                 navigate('/llama');
             }).catch(err => {
                 console.log(err);
@@ -76,7 +101,7 @@ const useF = props => {
                 u2('loadings', 'llama', 'deleteChat', false);
             });
         },
-        loadChat: cid => {
+        loadChat: (cid, navigate) => {
             if (!cid) return;
             if (!!s.loadings?.llama?.loadChat) return;
             u2('loadings', 'llama', 'loadChat', true);
@@ -91,6 +116,14 @@ const useF = props => {
                 if (!!element) element.focus();
             }).catch(err => {
                 console.log(err);
+                const message = err.response?.data?.message || 'Error';
+                MySwal.fire({
+                    title: 'Error',
+                    text: message,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+                navigate('/llama');
             }).finally(() => {
                 u2('loadings', 'llama', 'loadChat', false);
             });

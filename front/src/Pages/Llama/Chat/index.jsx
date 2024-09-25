@@ -1,5 +1,6 @@
 import { useVars, useEffects } from "./useLocals";
 import { marked } from "marked";
+import { showDate } from "../../../Core/helper";
 
 const Chat = props => {
     const { styles,
@@ -31,10 +32,19 @@ const Chat = props => {
 
             <div className={`${styles.chatContainer}`}>
                 {hist.map((msg, i) => {
-                    const { role, content } = msg;
+                    const { role, content, hora } = msg;
+                    let fcontent = content;
+                    if (!!hora) {
+                        fcontent = `${content}
+                                    <br/>
+                                    <small class="${styles.hora}">
+                                        ${showDate(hora, true)}
+                                    </small>
+                                `;
+                    }
                     return (
                         <div key={i} className={`${styles.messageContainer} ${role === 'user' ? styles.user : styles.assistant}`}>
-                            <div className={styles.messageText} dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
+                            <div className={styles.messageText} dangerouslySetInnerHTML={{ __html: marked(fcontent) }}></div>
                         </div>
                     )
                 })}
