@@ -19,24 +19,10 @@ const useF = props => {
     const s = useSelector(state => state.fs.s);
     const d = useDispatch();
 
-    const test = {
-        test: () => {
-            const end = "test/test/";
-            miAxios.get(end).then(res => {
-                console.log(res.data);
-                const message = res.data.message || "Done Test";
-                MySwal.fire({
-                    title: message,
-                    icon: 'success',
-                });
-            }).catch(err => {
-                console.log(err);
-                const message = err.response.data.message || "Error";
-                MySwal.fire({
-                    title: message,
-                    icon: 'error',
-                });
-            });
+    const general = {
+        cloneO: obj => {
+            const clon = JSON.parse(JSON.stringify(obj));
+            return clon
         }
     }
 
@@ -45,10 +31,15 @@ const useF = props => {
             if (!message) return;
             if (!!s.loadings?.llama?.chat) return;
             u2('loadings', 'llama', 'chat', true);
+            let hist = general.cloneO([...s.llama?.chat?.hist || []]);
+            console.log('hist', hist);
+
+            hist = [...hist, {role: "user", content: message}];
+            u2('llama', 'chat', 'hist', hist);
 
             let link = `llama/chat/?`;
             if (!!cid) link += `cid=${cid}&`;
-            link += `message=${message}`;
+            link += `msg=${message}`;
 
             // timeout 10 mins
             const timeout = 10 * 60 * 1000;
@@ -56,17 +47,19 @@ const useF = props => {
             miAxios.get(link, {timeout})
             .then(res => {
                 const { msg, cid } = res.data;
-                let hist = [...s.llama?.chat?.hist || []];
-                hist.push({rol: "machine", msg});
+                hist = [...hist, {role: "assistant", content: msg}];
+                u2('llama', 'chat', 'actualMessage', '');
                 u2('llama', 'chat', 'hist', hist);
                 u2('llama', 'chat', 'cid', cid);
+                const element = document.getElementById('messageInput');
+                if (!!element) element.focus();
             }).catch(err => {
                 console.log(err);
             }).finally(() => {
-                u3('loadings', 'llama', 'chat', false);
+                u2('loadings', 'llama', 'chat', false);
             });
         },
-        deleteChat: cid => {
+        deleteChat: (cid, navigate) => {
             if (!cid) return;
             if (!!s.loadings?.llama?.deleteChat) return;
             u2('loadings', 'llama', 'deleteChat', true);
@@ -76,10 +69,30 @@ const useF = props => {
             .then(res => {
                 u2('llama', 'chat', 'hist', []);
                 u2('llama', 'chat', 'cid', '');
+                navigate('/llama');
             }).catch(err => {
                 console.log(err);
             }).finally(() => {
-                u3('loadings', 'llama', 'deleteChat', false);
+                u2('loadings', 'llama', 'deleteChat', false);
+            });
+        },
+        loadChat: cid => {
+            if (!cid) return;
+            if (!!s.loadings?.llama?.loadChat) return;
+            u2('loadings', 'llama', 'loadChat', true);
+            const link = `llama/load_chat/?cid=${cid}`;
+
+            miAxios.get(link)
+            .then(res => {
+                const { hist } = res.data;
+                u2('llama', 'chat', 'hist', hist);
+                u2('llama', 'chat', 'cid', cid);
+                const element = document.getElementById('messageInput');
+                if (!!element) element.focus();
+            }).catch(err => {
+                console.log(err);
+            }).finally(() => {
+                u2('loadings', 'llama', 'loadChat', false);
             });
         }
     }
@@ -117,7 +130,7 @@ const useF = props => {
     }
 
     return { u0, u1, u2, u3, u4, u5, u6, u7, u8, u9,
-        test, llama, 
+        general, llama, 
      };
 }
 

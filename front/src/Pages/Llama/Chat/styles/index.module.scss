@@ -1,0 +1,104 @@
+// chatPageContainer, title, chatContainer, msgContainer, msgText, formContainer, messageInput, enviarButton
+.chatPageContainer {
+    .title {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-bottom: 1px solid var(--my-minor);
+
+        .deleteButton {
+            padding: 3px 10px;
+            margin-left: 20px;
+            background: #f00;
+            color: black;
+            border-radius: 10px;
+            &:hover {
+                background: #f22;
+                color: black;
+            }
+        }
+    }
+    .chatContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: start;
+        // height: 65vh;
+        overflow-y: scroll;
+        margin-bottom: 100px;
+
+        .messageContainer {
+            display: flex;
+            width: 80%;
+            justify-content: center;
+            padding: 10px 40px;
+
+            .messageText {
+                width: 60%;
+                text-align: left;
+                padding: 10px;
+                border-radius: 10px;
+                border: 1px solid var(--my-minor);
+            }
+
+            &.user {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                align-items: end;
+            }
+            &.assistant {
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
+                
+            }
+            
+        }
+    }
+    .endContainer {
+        position: fixed;
+        bottom: 0;
+        z-index: 10;
+        display: flex;
+        width: 100%;
+        margin-top: 10px;
+        border-top: 1px solid var(--my-minor);
+        padding: 10px;
+        background-color: var(--my-major);
+        overflow-y: scroll;
+        height: 100px;
+
+        .preguntandoText {
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .formContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            .messageInput {
+                color: black;
+                padding: 10px;
+                border-radius: 10px;
+                flex-grow: 1;
+                margin: 0 20px;
+            }
+            .enviarButton {
+                width: 150px;
+                padding: 10px;
+                background: #295;
+                color: black;
+                border-radius: 10px;
+                &:hover {
+                    background: #2a5;
+                    color: black;
+                }
+            }
+        }
+    }
+}

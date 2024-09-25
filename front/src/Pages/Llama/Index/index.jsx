@@ -1,7 +1,8 @@
 import { useVars, useEffects } from "./useLocals";
+import { Link } from "react-router-dom";
 
 const Index = (props) => {
-    const { styles } = useVars();
+    const { styles, loadChat, cid, upgradeCid } = useVars();
 
     useEffects();
 
@@ -12,14 +13,25 @@ const Index = (props) => {
             <div className={`${styles.topSection}`}>
                 <div className={`${styles.cidContainer}`}>
                     <label htmlFor="cid" className={`${styles.cidLabel}`}>CID</label>
-                    <input type="text" id="cid" placeholder="cid" className={`${styles.cidInput}`} />
+                    <input 
+                        type="text" id="cid" placeholder="cid" className={`${styles.cidInput}`}
+                        value={cid}
+                        onChange={e => upgradeCid(e.target.value)}
+                         />
                 </div>
-                <button id="cargarButton" className={`${styles.cargarButton}`}>Cargar</button>
+                <div className={`${styles.loadContainer}`}>
+                    <Link 
+                        onClick={loadChat}
+                        to="chat"
+                        id="cargarButton" className={`${styles.cargarButton}`}>Cargar</Link>
+                </div>
             </div>
 
+            <p className={`${styles.orText}`}>or</p>
             <div className={`${styles.bottomSection}`}>
-                <p className={`${styles.orText}`}>or</p>
-                <button id="nuevoButton" className={`${styles.nuevoButton}`}>Nuevo</button>
+                <Link 
+                    to="chat"
+                    id="nuevoButton" className={`${styles.nuevoButton}`}>Nuevo</Link>
             </div>
         </div>
     );

@@ -94,10 +94,24 @@ class DelChat(DeleteApi, GetApi):
             self.response = {"msg": "Chat no encontrado"}
 
 
+class LoadChat(GetApi):
+    def main(self):
+        self.show_me()
+        
+        cid = self.data["cid"]
+        self.file_name = f"cid_{cid}.json"
+        self.path = f"{MEDIA_DIR}/json"
+        if os.path.exists(f"{self.path}/{self.file_name}"):
+            with open(f"{self.path}/{self.file_name}", "r") as f:
+                self.response = json.load(f)
+        else:
+            self.response = {"msg": "Chat no encontrado"}
+
+
 """ 
 Aprendizaje automático con Python de Aurélien Géron
 Machine Learning de Tom Mitchell
 
 esim pago 3:01
-
+162d69
 """

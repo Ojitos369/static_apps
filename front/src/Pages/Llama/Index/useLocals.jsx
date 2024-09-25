@@ -5,15 +5,26 @@ import { useMemo, useEffect } from 'react';
 const useVars = props => {
     const { s, f } = useStates();
 
+    const cid = useMemo(() => s.llama?.chat?.cid || '', [s.llama?.chat?.cid]);
 
 
     const init = () => {
         f.u0('llama', null);
     }
 
+    const loadChat = () => {
+        f.llama.loadChat(cid);
+    }
+
+    const upgradeCid = value => {
+        f.u2('llama', 'chat', 'cid', value);
+    }
+
     return {
         styles,
         init, 
+        loadChat,
+        cid, upgradeCid, 
     }
 }
 

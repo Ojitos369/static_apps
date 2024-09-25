@@ -1,6 +1,7 @@
 .indexContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     background-color: transparent;
@@ -10,49 +11,72 @@
         font-size: 2rem;
         font-weight: bold;
         margin-bottom: 20px;
+        width: 100%;
+        text-align: center;
     }
 
 
     .topSection {
+        width: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        width: 50%;
+        height: 80px;
 
         .cidContainer {
-            width: 66%;
+            width: 50%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: space-between;
+            align-items: end;
+            padding-right: 10px;
 
             .cidLabel {
                 font-size: 1rem;
                 margin-bottom: 5px;
+                width: 30%;
             }
 
             .cidInput {
-                width: 100%;
-                padding: 10px;
+                width: 30%;
+                padding: 10px 20px;
                 border: 1px solid #ccc;
+                color: black;
+            }
+        }
+
+        .loadContainer {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: start;
+            padding-left: 10px;
+            height: 80px;
+
+            .cargarButton {
+                width: 30%;
+                padding: 12px 20px;
+                background-color: #4caf50;
+                border: none;
                 border-radius: 5px;
+                cursor: pointer;
                 font-size: 1rem;
+                text-align: center;
+    
+                &:hover {
+                    background-color: #45a049;
+                }
             }
         }
+    }
 
-        .cargarButton {
-            width: 33%;
-            padding: 10px 20px;
-            background-color: #4caf50;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
 
-            &:hover {
-                background-color: #45a049;
-            }
-        }
+    .orText {
+        width: 100%;
+        text-align: center;
+        font-size: 2rem;
+        margin: 20px 0;
     }
 
 
@@ -61,23 +85,16 @@
         justify-content: center;
         align-items: center;
         width: 50%;
-        margin-top: 20px;
-
-        .orText {
-            width: 33%;
-            text-align: center;
-            font-size: 1rem;
-            margin-right: 10px;
-        }
 
         .nuevoButton {
-            width: 66%;
+            width: calc(60% + 20px);
             padding: 10px 20px;
             background-color: #2196f3;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
+            text-align: center;
 
             &:hover {
                 background-color: #1976d2;
