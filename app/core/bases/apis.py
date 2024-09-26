@@ -48,7 +48,6 @@ class BaseApi(APIView):
                 'error': str(e)
             }
 
-    
     def get_post_data(self):
         data = {}
         try:

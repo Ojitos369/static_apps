@@ -36,6 +36,8 @@ const BgTheme = () => {
 function AppUI() {
     const { ls, s, f } = useStates();
 
+    const testMode = true;
+
     useEffect(() => {
         cambiarThema(ls?.theme);
     }, [ls?.theme]);
@@ -44,12 +46,27 @@ function AppUI() {
         f.u2('settings', 'configuraciones', 'idioma', ls?.settings?.idioma || 'es');
     }, [ls?.settings]);
 
+    if (testMode) {
+        return (
+            <div className={`text-[var(--my-minor)]`}>
+            <BgTheme />
+            {!!s.modals?.menu?.index && <Menu />}
+            <Routes>
+                {/* -----------   Test   ----------- */}
+                <Route path="test" element={<Test />} />
+                {/* -----------   /Test   ----------- */}
+            </Routes>
+        </div>
+        )
+    }
+
     return (
         <div className={`text-[var(--my-minor)]`}>
             <Header />
             <BgTheme />
             {!!s.modals?.menu?.index && <Menu />}
             <Routes>
+
                 {/* -----------   Index   ----------- */}
                 <Route path="" element={<Index />} />
                 {/* -----------   /Index   ----------- */}
@@ -68,10 +85,6 @@ function AppUI() {
                     <Route path="chat" element={<LlamaChat />} />
                 </Route>
                 {/* -----------   /Llama   ----------- */}
-
-                {/* -----------   Test   ----------- */}
-                <Route path="test" element={<Test />} />
-                {/* -----------   /Test   ----------- */}
 
                 {/* -----------   404   ----------- */}
                 <Route path="*/" element={<div className='text-danger h1 text-center mt-5'>404 Not Found</div>} />

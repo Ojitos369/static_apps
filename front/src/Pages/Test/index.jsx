@@ -1,14 +1,23 @@
 import { useContext } from 'react';
 import {useStates } from '../../Hooks/useStates';
-
 import styles from './styles/index.module.scss';
 
+
 const Test = props => {
+    
+    return (
+        <div className={`${styles.container}`}>
+            Test
+        </div>
+    )
+}
+
+const FbEvent = props => {
     const { ls, lf, s, f } = useStates();
 
     const sendLlamada = e => {
         if (!!e) e.preventDefault();
-        f.test.test();
+        f.fbTest.test();
     }
 
     return (

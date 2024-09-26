@@ -130,6 +130,12 @@ const useF = props => {
         }
     }
 
+    const fbTest = {
+        test: () => {
+            return
+        }
+    }
+
     // u[0-9]
     const u0 = (f0, value) => {
         d(ff.u0({f0, value}));
@@ -164,6 +170,7 @@ const useF = props => {
 
     return { u0, u1, u2, u3, u4, u5, u6, u7, u8, u9,
         general, llama, 
+        fbTest, 
      };
 }
 
