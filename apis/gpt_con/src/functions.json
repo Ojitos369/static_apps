@@ -1,0 +1,20 @@
+{
+    "functions": [
+        {
+            "name": "saluda",
+            "description": "Esta funcion saluda a la persona que se le pasa",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "nombre": {
+                        "type": "string",
+                        "description": "nombre de la persona a saludar"
+                    }
+                },
+                "required": [
+                    "nombre"
+                ]
+            }
+        }
+    ]
+}
