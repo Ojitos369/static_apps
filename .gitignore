@@ -40,3 +40,9 @@ front/pnpm-lock.yaml
 *pnpm-lock.yaml
 *package-lock.json
 /media/json/*.*
+
+apis/gpt_con/src/.vlaid_hist.json
+apis/gpt_con/src/functions.json
+apis/gpt_con/src/functions.py
+apis/gpt_con/src/logs.txt
+
