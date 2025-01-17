@@ -12,10 +12,9 @@ from rest_framework.response import Response
 
 # Ojitos369
 from ojitos369.utils import get_d, print_line_center, printwln as pln
-from ojitos369_mysql_db.mysql_db import ConexionMySQL
 
 # User
-from app.settings import MYE, prod_mode, ce, DB_DATA
+from app.settings import MYE, prod_mode, ce
 
 class BaseApi(APIView):
     def __init__(self, **kwargs):
@@ -26,7 +25,6 @@ class BaseApi(APIView):
         self.data = {}
         self.MYE = MYE
         self.response_mode = 'json'
-        self.conexion = ConexionMySQL(DB_DATA)
 
     def errors(self, e):
         try:

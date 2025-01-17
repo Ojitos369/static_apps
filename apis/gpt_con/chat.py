@@ -159,7 +159,10 @@ class Chat:
         file_info = {}
         with open(hist_file, "r") as f:
             file_info = f.read()
-            file_info = json.loads(file_info)
+            try:
+                file_info = json.loads(file_info)
+            except:
+                file_info = {}
             file_info[self.origen] = {"historial": self.historial}
         with open(hist_file, "w") as f:
             f.write(json.dumps(file_info, indent=4))

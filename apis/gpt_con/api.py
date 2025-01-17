@@ -30,7 +30,7 @@ class Chat(PostApi):
 			raise self.MYE("Mensaje vacio")
 
 		chat = ChatGPT(origen=origen)
-		message = chat.run_chat(message, origen)
+		message = chat.run_chat(message)
 		
 		self.response = {
 			"message": message,
