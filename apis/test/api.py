@@ -15,6 +15,10 @@ class Test(GetApi, PostApi):
         self.show_me()
         from ojitos369.utils import print_json as pj
         pj(self.data)
+        self.response = {
+            'message': 'Test',
+            'data': self.data
+        }
         
 """ 
 """
