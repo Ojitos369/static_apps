@@ -75,7 +75,14 @@ class Decodificar(GetApi, PostApi):
                 cods = letra.split("-")
                 lc = ""
                 for cod in cods:
-                    lc += chr(int(cod, 16))
+                    if len(cod) > 2:
+                        sep = []
+                        for i in range(0, len(cod), 2):
+                            sep.append(cod[i:i+2])
+                        for s in sep:
+                            lc += chr(int(s, 16))
+                    else:
+                        lc += chr(int(cod, 16))
                 char = ""
                 try:
                     char = chr(int(lc, 16))
@@ -95,6 +102,6 @@ class Decodificar(GetApi, PostApi):
         return not all((c in valids) for c in text)
 
 
-""" 
+"""
 
 """
