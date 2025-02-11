@@ -1,0 +1,76 @@
+@import '../../../static/css/response.scss';
+.codPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+
+    .element {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100vw;
+        .ask {
+            width: 50%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            .textField {
+                width: 80%;
+                margin-bottom: 20px;
+                border-radius: 8px;
+                min-height: 50px;
+                padding: 10px;
+                background: #fff;
+                color: #000;
+            }
+            .button {
+                width: 80%;
+                margin-bottom: 20px;
+                padding: 10px;
+                border-radius: 8px;
+                background-color: #2256e4;
+                &:hover {
+                    background-color: #1d4ed8;
+                }
+            }
+        }
+        .response {
+            width: 50%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            .responseDiv {
+                width: 80%;
+                padding: 10px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+
+                .buttonCopy {
+                    display: inline-block;
+                    padding: 5px 10px;
+                    border-radius: 12px;
+                    margin-top: 10px;
+                    background-color: #2ee43d;
+                    color: #000;
+                    font-size: 12px;
+                    text-align: center;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: #32b63d;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -130,6 +130,29 @@ const useF = props => {
         }
     }
 
+    const cod = {
+        codificar: text => {
+            const link = `codec/codificar/?text=${text}`;
+            miAxios.get(link)
+            .then(res => {
+                const { text } = res.data;
+                u1('cod', 'textoCodificado', text);
+            }).catch(err => {
+                console.log(err);
+            });
+        },
+        decodificar: text => {
+            const link = `codec/decodificar/?text=${text}`;
+            miAxios.get(link)
+            .then(res => {
+                const { text } = res.data;
+                u1('cod', 'textoDecodificado', text);
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+    }
+
     // u[0-9]
     const u0 = (f0, value) => {
         d(ff.u0({f0, value}));
@@ -163,7 +186,7 @@ const useF = props => {
     }
 
     return { u0, u1, u2, u3, u4, u5, u6, u7, u8, u9,
-        general, llama, 
+        general, llama, cod, 
      };
 }
 

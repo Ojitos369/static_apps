@@ -21,10 +21,11 @@ const Menu = props => {
     const ztyle = props.zindex ? {zIndex: props.zindex} : {};
 
     const apps = [
-        {name: "Home", path: "/"},
-        {name: "Items List", path: "/items_list"},
-        {name: "Automatas Celular", path: "/ac"},
-        {name: "Chat", path: "/llama"},
+        {name: "Home", path: ""},
+        {name: "Items List", path: "items_list"},
+        {name: "Automatas Celular", path: "ac"},
+        {name: "Cod", path: "cod"},
+        {name: "Chat", path: "llama"},
     ]
 
     const close = () => {

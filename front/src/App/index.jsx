@@ -10,6 +10,8 @@ import { Theme } from '../Components/Theme';
 import { Index } from '../Pages/Index';
 import { Test } from '../Pages/Test';
 
+import { Cod } from '../Pages/Cod';
+
 import { ItemsList } from '../Pages/ItemsList';
 import { AutomatasCelular } from '../Pages/AutomatasCelular';
 
@@ -50,28 +52,15 @@ function AppUI() {
             <BgTheme />
             {!!s.modals?.menu?.index && <Menu />}
             <Routes>
-                {/* -----------   Index   ----------- */}
                 <Route path="" element={<Index />} />
-                {/* -----------   /Index   ----------- */}
-
-                {/* -----------   ItemsList   ----------- */}
                 <Route path="items_list" element={<ItemsList />} />
-                {/* -----------   /ItemsList   ----------- */}
-
-                {/* -----------   AutomatasCelular   ----------- */}
                 <Route path="ac" element={<AutomatasCelular />} />
-                {/* -----------   /AutomatasCelular   ----------- */}
-
-                {/* -----------   Llama   ----------- */}
+                <Route path="test" element={<Test />} />
+                <Route path="cod" element={<Cod />} />
                 <Route path="llama" element={<Llama />}>
                     <Route path="" element={<LlamaIndex />} />
                     <Route path="chat" element={<LlamaChat />} />
                 </Route>
-                {/* -----------   /Llama   ----------- */}
-
-                {/* -----------   Test   ----------- */}
-                <Route path="test" element={<Test />} />
-                {/* -----------   /Test   ----------- */}
 
                 {/* -----------   404   ----------- */}
                 <Route path="*/" element={<div className='text-danger h1 text-center mt-5'>404 Not Found</div>} />
