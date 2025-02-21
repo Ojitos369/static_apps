@@ -74,6 +74,7 @@ class Decodificar(GetApi, PostApi):
             for letra in letras:
                 cods = letra.split("-")
                 lc = ""
+
                 for cod in cods:
                     if len(cod) > 2:
                         sep = []
