@@ -175,6 +175,9 @@ const useF = props => {
                 const {codigos, mensaje} = res.data;
                 u2("app", "test", "codigo", codigos?.[0] || '-');
                 u2("app", "test", "mensaje", mensaje);
+                if (!!codigos?.[0]) {
+                    alert(codigos?.[0]);
+                }
             })
             .catch(err => {
                 console.log(err);
