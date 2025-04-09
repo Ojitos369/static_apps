@@ -29,7 +29,7 @@ const Test = props => {
                             if (video.videoWidth > 0 && video.videoHeight > 0) {
                                 capturarYEnviarImagen();
                             }
-                        }, 3000);
+                        }, 1000);
                     };
                 }
             } catch (err) {
