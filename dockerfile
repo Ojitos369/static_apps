@@ -1,6 +1,6 @@
 FROM python:3.11
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y default-libmysqlclient-dev build-essential gcc libmysqlclient-dev
+RUN apt-get install -y default-libmysqlclient-dev build-essential gcc
 
 ENV APPHOME=/usr/src/app/
 WORKDIR $APPHOME
