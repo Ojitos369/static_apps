@@ -1,6 +1,6 @@
 FROM python:3.12
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y default-libmysqlclient-dev build-essential gcc libgl1
+RUN apt-get install -y default-libmysqlclient-dev build-essential gcc libgl1 libzbar0
 
 ENV APPHOME=/usr/src/app/
 WORKDIR $APPHOME
