@@ -153,6 +153,35 @@ const useF = props => {
         }
     }
 
+    const app = {
+        helloWorld: () => {
+            const end = 'app/hello_world/';
+            miAxios.get(end)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }, 
+        enviarArchivo: file => {
+            const end = 'app/test/';
+            const data = {
+                image_bs4: file
+            }
+            miAxios.post(end, data)
+            .then(res => {
+                console.log(res.data);
+                const {codigos, mensaje} = res.data;
+                u2("app", "test", "codigo", codigos?.[0] || '-');
+                u2("app", "test", "mensaje", mensaje);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
+    }
+
     // u[0-9]
     const u0 = (f0, value) => {
         d(ff.u0({f0, value}));
@@ -186,7 +215,7 @@ const useF = props => {
     }
 
     return { u0, u1, u2, u3, u4, u5, u6, u7, u8, u9,
-        general, llama, cod, 
+        general, llama, cod, app, 
      };
 }
 
