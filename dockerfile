@@ -10,4 +10,7 @@ COPY . $APPHOME
 RUN pip install wheel
 RUN pip install -r requirements.txt
 
-# docker rm -f sa-py && docker image rm sa-web && docker compose up -d
+# docker rm -f sa-py && docker image rm sa-web && drcu -d
+# drc build --no-cache
+# drcu -d
+
