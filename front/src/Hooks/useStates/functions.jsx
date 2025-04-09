@@ -165,7 +165,7 @@ const useF = props => {
             });
         }, 
         enviarArchivo: file => {
-            const end = 'app/test_image/';
+            const end = 'test/test_image/';
             const data = {
                 image_bs4: file
             }
