@@ -145,13 +145,16 @@ class Command(MyBaseCommand):
 
             if replace_localhost:
                 js = open(
-                    f'{static_dir}{name}/static/js/{file_name}', 'r').read()
+                    f'{static_dir}{name}/assets/{file_name}', 'r').read()
                 structure = '''https?://localhost(:\d+)?'''
-                for match in re.finditer(structure, js):
+                matches = re.finditer(structure, js)
+                # order by len from big to small
+                matches = sorted(matches, key=lambda x: len(x.group(0)), reverse=True)
+                for match in matches:
                     pln(match.group(0))
                     js = js.replace(match.group(0), '')
 
-                open(f'{static_dir}{name}/static/js/{file_name}', 'w').write(js)
+                open(f'{static_dir}{name}/assets/{file_name}', 'w').write(js)
 
         # ---------------------------------   FOR DIST (like build with Vite)   --------------------------------- #
         elif react_build.endswith('dist') or react_build.endswith('dist/'):
@@ -184,7 +187,10 @@ class Command(MyBaseCommand):
                     js = open(
                         f'{static_dir}{name}/assets/{file_name}', 'r').read()
                     structure = '''https?://localhost(:\d+)?'''
-                    for match in re.finditer(structure, js):
+                    matches = re.finditer(structure, js)
+                    # order by len from big to small
+                    matches = sorted(matches, key=lambda x: len(x.group(0)), reverse=True)
+                    for match in matches:
                         pln(match.group(0))
                         js = js.replace(match.group(0), '')
 
