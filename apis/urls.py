@@ -10,4 +10,5 @@ urlpatterns = [
     path('base/', include('apis.base.urls'), name=f'{app_name}_base'),
     path('test/', include('apis.test.urls'), name=f'{app_name}_test'),
     path('llama/', include('apis.llama.urls'), name=f'{app_name}_llama'),
+    path('im2aci/', include('apis.im2aci.urls'), name=f'{app_name}_im2aci'),
 ]

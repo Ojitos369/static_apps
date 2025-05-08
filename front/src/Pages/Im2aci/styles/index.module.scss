@@ -1,0 +1,174 @@
+.im2aciPage {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: sans-serif;
+    color: var(--my-dark);
+    background-color: var(--my-light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropZone {
+    border: 2px dashed var(--my-primary);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+        background-color: #f0f8ff; // Un azulito claro
+    }
+
+    p {
+        margin: 0;
+        color: var(--my-secondary);
+    }
+}
+
+.fileInput {
+    display: block; // Ocultar si prefieres manejar el click en el div
+    width: 100%; // O hacerlo pequeño y transparente encima del div
+    margin-top: 10px;
+}
+
+.loadingMessage {
+    color: var(--my-primary);
+    font-style: italic;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+
+    label {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    input[type="number"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 80px;
+    }
+
+    .checkboxLabel {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-weight: normal; // Sobrescribir el bold general de label si se desea
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+            width: 18px; /* Tamaño del checkbox */
+            height: 18px; /* Tamaño del checkbox */
+            cursor: pointer;
+        }
+    }
+}
+
+.previewSection {
+    margin-bottom: 20px;
+    text-align: center;
+
+    h3 {
+        color: var(--my-primary);
+        margin-bottom: 10px;
+    }
+}
+
+.imagePreview {
+    max-width: 100%;
+    max-height: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    object-fit: contain;
+    background-color: #fff;
+}
+
+.generateButton {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--my-white);
+    background-color: var(--my-success);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-bottom: 20px;
+
+    &:hover {
+        // background-color: darken(var(--my-success), 10%);
+        filter: brightness(90%);
+    }
+
+    &:disabled {
+        background-color: var(--my-secondary);
+        cursor: not-allowed;
+    }
+}
+
+.asciiArtSection {
+    h3 {
+        color: var(--my-primary);
+        margin-bottom: 10px;
+    }
+}
+
+.asciiArtOutput {
+    background-color: var(--my-black);
+    color: var(--my-light); // O un verde tipo terminal si prefieres
+    padding: 15px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre; // Mantiene los espacios y saltos de línea
+    overflow-x: auto; // Scroll horizontal si el ASCII es muy ancho
+    font-size: 0.8em; // Ajusta para mejor visualización
+    line-height: 1;   // Reduce el espaciado entre líneas para arte ASCII
+}
+
+.copyButton {
+    display: block;
+    width: auto; // O un ancho específico si prefieres
+    padding: 8px 15px;
+    font-size: 0.9em;
+    color: var(--my-white);
+    background-color: var(--my-primary); // Un color diferente al de generar
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, filter 0.2s ease-in-out;
+    margin-top: 10px; // Espacio sobre el botón
+    float: right; // Para alinearlo a la derecha debajo del pre
+
+    &:hover {
+        filter: brightness(90%);
+    }
+
+    &:disabled {
+        background-color: var(--my-secondary);
+        cursor: not-allowed;
+        filter: none; // Quitar el filtro de hover cuando está deshabilitado
+    }
+}
+
+// Para asegurar que el contenedor del arte ASCII se limpie después del float
+.asciiArtSection::after {
+    content: "";
+    clear: both;
+    display: table;
+}

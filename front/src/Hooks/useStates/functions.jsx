@@ -153,6 +153,40 @@ const useF = props => {
         }
     }
 
+    const im2aci = {
+        saveImage: img_b64 => {
+            const link = `im2aci/save_image`;
+            const data = {img_b64};
+            miAxios.post(link, data)
+            .then(res => {
+                const { file_name } = res.data;
+                u1('im2aci', 'image_url', file_name);
+            }).catch(err => {
+                const message = err.response?.data?.message || 'Error';
+                MySwal.fire({
+                    text: message,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+            });
+        },
+        img2ascii: (imageUrl, localAncho, localRmbg) => {
+            const link = `im2aci/img2ascii?file_name=${imageUrl}&ancho=${localAncho}&rmbg=${localRmbg}`;
+            miAxios.get(link)
+            .then(res => {
+                const { arte_ascii } = res.data;
+                u1('im2aci', 'arte_ascii', arte_ascii);
+            }).catch(err => {
+                const message = err.response?.data?.message || 'Error';
+                MySwal.fire({
+                    text: message,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+            });
+        }
+    }
+
     const app = {
         helloWorld: () => {
             const end = 'app/hello_world/';
@@ -218,7 +252,7 @@ const useF = props => {
     }
 
     return { u0, u1, u2, u3, u4, u5, u6, u7, u8, u9,
-        general, llama, cod, app, 
+        general, llama, cod, im2aci, app, 
      };
 }
 

@@ -9,6 +9,7 @@ import { Theme } from '../Components/Theme';
 
 import { Index } from '../Pages/Index';
 import { Test } from '../Pages/Test';
+import { Im2aci } from '../Pages/Im2aci';
 
 import { Cod } from '../Pages/Cod';
 
@@ -61,7 +62,7 @@ function AppUI() {
                     <Route path="" element={<LlamaIndex />} />
                     <Route path="chat" element={<LlamaChat />} />
                 </Route>
-
+                <Route path="im2aci" element={<Im2aci />} />
                 {/* -----------   404   ----------- */}
                 <Route path="*/" element={<div className='text-danger h1 text-center mt-5'>404 Not Found</div>} />
                 {/* -----------   /404   ----------- */}

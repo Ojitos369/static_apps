@@ -43,4 +43,5 @@ front/pnpm-lock.yaml
 
 apis/gpt_con/src/.vlaid_hist.json
 apis/gpt_con/src/logs.txt
-
+/media/image_temp/*.*
+/static/image_temp/*.*
