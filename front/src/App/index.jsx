@@ -20,6 +20,10 @@ import { Llama } from '../Pages/Llama';
 import { Index as LlamaIndex } from '../Pages/Llama/Index';
 import { Chat as LlamaChat } from '../Pages/Llama/Chat';
 
+import { GamesPage } from '../Pages/Games';
+import { TicTacToe } from '../Pages/Games/TicTacToe';
+import { Snake } from '../Pages/Games/Snake';
+
 import { Menu } from '../Components/Modals/Menu';
 
 import { Header } from '../Components/Header';
@@ -63,6 +67,9 @@ function AppUI() {
                     <Route path="chat" element={<LlamaChat />} />
                 </Route>
                 <Route path="im2aci" element={<Im2aci />} />
+                <Route path="games" element={<GamesPage />} />
+                <Route path="games/tic-tac-toe" element={<TicTacToe />} />
+                <Route path="games/snake" element={<Snake />} />
                 {/* -----------   404   ----------- */}
                 <Route path="*/" element={<div className='text-danger h1 text-center mt-5'>404 Not Found</div>} />
                 {/* -----------   /404   ----------- */}
