@@ -1,76 +1,192 @@
-@import '../../../static/css/response.scss';
+/* --- Variables para un tema limpio y moderno --- */
+$primary-color: #007bff;
+$primary-hover: #0056b3;
+$copy-color: #28a745;
+$copy-hover: #1e7e34;
+$download-color: #ffc107;
+$download-hover: #d39e00;
+$text-light: #fff;
+$text-dark: #212529;
+$border-color: #ced4da;
+$input-bg: #ffffff;
+$breakpoint-mobile: 800px;
+
+
+/* --- Contenedor Principal de la Página --- */
 .codPage {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    background: transparent; // Requisito: Fondo transparente
+}
 
-    .element {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100vw;
-        .ask {
-            width: 50%;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            .textField {
-                width: 80%;
-                margin-bottom: 20px;
-                border-radius: 8px;
-                min-height: 50px;
-                padding: 10px;
-                background: #fff;
-                color: #000;
-            }
-            .button {
-                width: 80%;
-                margin-bottom: 20px;
-                padding: 10px;
-                border-radius: 8px;
-                background-color: #2256e4;
-                &:hover {
-                    background-color: #1d4ed8;
-                }
-            }
+/* --- Pestañas para cambiar de vista (Texto/Archivo) --- */
+.tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    background: rgba($input-bg, 0.7);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tabBtn {
+    padding: 10px 25px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: lighten($text-dark, 30%);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &.active {
+        background: $primary-color;
+        color: $text-light;
+        box-shadow: 0 2px 6px rgba($primary-color, 0.4);
+    }
+    &.tabBtnClear {
+        background: var(--my-danger);
+        color: $text-light;
+    }
+}
+
+/* --- Contenedor de los elementos de codificación --- */
+.element {
+    display: flex;
+    flex-wrap: wrap; // ¡Clave! Permite que los bloques se reorganicen
+    justify-content: center;
+    gap: 20px; // Espacio entre los bloques .ask y .response
+    width: 100%;
+    max-width: 1400px;
+    background: transparent; // Requisito: Fondo transparente
+}
+
+/* --- Bloques de "Pregunta" (Inputs) y "Respuesta" (Resultados) --- */
+.ask, .response {
+    flex: 1 1 480px; // Crecen, decrecen, pero su base es de 480px
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 25px;
+    background: rgba($input-bg, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+
+// El bloque de respuesta debe tener una altura mínima para no colapsar
+.response {
+    min-height: 150px;
+    justify-content: center;
+    word-break: break-all; // Para que el texto largo no se desborde
+}
+
+/* --- Controles: TextFields, Inputs y Botones --- */
+.textField {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    background: $input-bg; // Requisito: Fondo visible
+    color: $text-dark;
+    font-size: 1rem;
+    resize: vertical;
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.25);
+    }
+}
+
+.fileInput {
+    width: 100%;
+    &::file-selector-button {
+        margin-right: 15px;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        background-color: $input-bg;
+        color: $primary-color;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid $primary-color;
+        transition: all 0.2s;
+        &:hover {
+            background-color: $primary-color;
+            color: $text-light;
         }
-        .response {
-            width: 50%;
-            margin-top: 20px;
-            margin-bottom: 20px;
+    }
+}
 
-            justify-content: center;
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            .responseDiv {
-                width: 80%;
-                padding: 10px;
-                border-radius: 8px;
-                margin-bottom: 20px;
+.button, .buttonCopy {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    color: $text-light;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
 
-                .buttonCopy {
-                    display: inline-block;
-                    padding: 5px 10px;
-                    border-radius: 12px;
-                    margin-top: 10px;
-                    background-color: #2ee43d;
-                    color: #000;
-                    font-size: 12px;
-                    text-align: center;
-                    cursor: pointer;
-                    &:hover {
-                        background-color: #32b63d;
-                    }
-                }
-            }
-        }
+.button {
+    background-color: $primary-color;
+    &:hover { background-color: $primary-hover; }
+}
+
+.buttonCopy {
+    background-color: $copy-color;
+    // Si se aplica a un botón de descarga, le damos otro color
+    &[onClick*="download"] {
+      background-color: $download-color;
+      color: $text-dark;
+      &:hover {
+        background-color: $download-hover;
+      }
+    }
+    &:not([onClick*="download"]):hover {
+      background-color: $copy-hover;
+    }
+}
+
+/* --- Estilos para la previsualización de archivos --- */
+.media {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.fileName {
+    font-weight: 500;
+    font-style: italic;
+    color: $text-dark;
+    text-align: center;
+}
+
+/* --- ESTILOS RESPONSIVOS --- */
+@media (max-width: $breakpoint-mobile) {
+    .codPage {
+        padding: 10px;
+    }
+
+    .tabs {
+        width: 100%;
+    }
+
+    // Hacemos que los bloques ocupen todo el ancho y se apilen
+    .ask, .response {
+        flex-basis: 100%; // Cada bloque ocupa el 100% del ancho
     }
 }

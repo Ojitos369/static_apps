@@ -24,6 +24,12 @@ export const useVars = () => {
         f.u1('cod', 'textoDecodificar', e.target.value);
         // decodificar(e.target.value);
     }
+    const resetValues = () => {
+        f.u1('cod', 'textoCodificar', "");
+        f.u1('cod', 'textoDecodificar', "");
+        f.u1('cod', 'textoCodificado', "");
+        f.u1('cod', 'textoDecodificado', "");
+    }
     return {
         styles,
         textoCodificar,
@@ -34,6 +40,7 @@ export const useVars = () => {
         actualizarTextoDecodificar,
         codificar,
         decodificar, 
+        resetValues,
     }
 }
 
