@@ -262,7 +262,7 @@ export const Cod = () => {
                     <div className={styles.ask}>
                         <textarea
                             className={styles.textField}
-                            placeholder="Pega aquí el texto codificado nombre.ext:base64…"
+                            placeholder="Pega aquí el texto codificado"
                             value={textoDecodificar}
                             onChange={actualizarTextoDecodificar}
                             disabled={decodificando}
