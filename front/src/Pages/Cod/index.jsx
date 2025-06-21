@@ -111,7 +111,7 @@ export const Cod = () => {
                 <img
                     src={src}
                     alt={name}
-                    className={styles.media}
+                    className={`${styles.media} ${styles.mediaLink}`}
                     style={{ cursor: "zoom-in" }}
                     onClick={() => openImageWindow(b64, mime, name)}
                 />
