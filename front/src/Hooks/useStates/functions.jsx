@@ -149,6 +149,12 @@ const useF = props => {
                 u1('cod', 'textoDecodificado', text);
             }).catch(err => {
                 console.log(err);
+                const message = err.response?.data?.message || 'Error';
+                MySwal.fire({
+                    text: message,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
             });
         }
     }
