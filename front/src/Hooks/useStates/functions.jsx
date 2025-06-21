@@ -132,6 +132,16 @@ const useF = props => {
 
     const cod = {
         codificar: text => {
+            if (!text) {
+                MySwal.fire({
+                    text: 'No hay texto para codificar',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+                return;
+            };
+            if (!!s.loadings?.cod?.codificar) return;
+            u2('loadings', 'cod', 'codificar', true);
             const link = `codec/codificar/`;
             const data = {
                 text
@@ -142,9 +152,21 @@ const useF = props => {
                 u1('cod', 'textoCodificado', text);
             }).catch(err => {
                 console.log(err);
+            }).finally(() => {
+                u2('loadings', 'cod', 'codificar', false);
             });
         },
         decodificar: text => {
+            if (!text) {
+                MySwal.fire({
+                    text: 'No hay texto para decodificar',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+                return;
+            };
+            if (!!s.loadings?.cod?.decodificar) return;
+            u2('loadings', 'cod', 'decodificar', true);
             const link = `codec/decodificar/?text=${text}`;
             miAxios.get(link)
             .then(res => {
@@ -158,6 +180,8 @@ const useF = props => {
                     icon: 'error',
                     confirmButtonText: 'Ok'
                 });
+            }).finally(() => {
+                u2('loadings', 'cod', 'decodificar', false);
             });
         }
     }

@@ -1,4 +1,4 @@
-import { useVars } from "./myUse";
+import { useVars, useMyEffects } from "./myUse";
 import { useState, useRef } from "react";
 
 export const Cod = () => {
@@ -8,6 +8,8 @@ export const Cod = () => {
         textoDecodificar,
         textoCodificado,
         textoDecodificado,
+        codificando,
+        decodificando,
         actualizarTextoCodificar,
         actualizarTextoDecodificar,
         codificar,
@@ -84,12 +86,6 @@ export const Cod = () => {
         URL.revokeObjectURL(url);
     };
 
-    const openNewTab = (url) => {
-        const a = document.createElement("a");
-        a.href = url;
-        a.target = "_blank";
-    }
-
     const renderDecodedPreview = () => {
         if (!isBase64File(textoDecodificado)) return null;
 
@@ -98,7 +94,20 @@ export const Cod = () => {
         const src = `data:${mime};base64,${b64}`;
 
         if (mime.startsWith("image/")) {
-            return <img src={src} alt={name} className={`${styles.media} manita`} onClick={() => openNewTab(src)} />;
+            return (
+                <a
+                    href={src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.mediaLink}
+                >
+                    <img
+                        src={src}
+                        alt={name}
+                        className={styles.media}
+                    />
+                </a>
+            );
         }
         if (mime.startsWith("video/")) {
             return <video src={src} controls className={styles.media} />;
@@ -109,23 +118,31 @@ export const Cod = () => {
         return <p className={styles.fileName}>{name}</p>;
     };
 
+    useMyEffects();
+
     return (
         <div className={styles.codPage}>
             {/* --------- Cabecera de pestañas --------- */}
             <div className={styles.tabs}>
                 <button
                     className={`${styles.tabBtn} ${tab === "text" ? styles.active : ""}`}
-                    onClick={() => cambiarVista("text")}>
+                    onClick={() => cambiarVista("text")}
+                    disabled={codificando || decodificando}
+                >
                     Texto
                 </button>
                 <button
                     className={`${styles.tabBtn} ${tab === "file" ? styles.active : ""}`}
-                    onClick={() => cambiarVista("file")}>
+                    onClick={() => cambiarVista("file")}
+                    disabled={codificando || decodificando}
+                >
                     Archivo
                 </button>
                 <button
                     className={`${styles.tabBtn} ${styles.tabBtnClear}`}
-                    onClick={resetValues}>
+                    onClick={resetValues}
+                    disabled={codificando || decodificando}
+                >
                     Clear
                 </button>
             </div>
@@ -139,9 +156,14 @@ export const Cod = () => {
                             placeholder="Ingresa texto…"
                             value={textoCodificar}
                             onChange={actualizarTextoCodificar}
+                            disabled={codificando}
                         />
-                        <button onClick={codificar} className={styles.button}>
-                            Codificar
+                        <button
+                            onClick={codificar}
+                            className={styles.button}
+                            disabled={codificando || !textoCodificar.trim()}
+                        >
+                            {codificando ? "Codificando…" : "Codificar"}
                         </button>
                     </div>
                     {!!textoCodificado && (
@@ -165,9 +187,14 @@ export const Cod = () => {
                             placeholder="Texto para decodificar…"
                             value={textoDecodificar}
                             onChange={actualizarTextoDecodificar}
+                            disabled={decodificando}
                         />
-                        <button onClick={decodificar} className={styles.button}>
-                            Decodificar
+                        <button
+                            onClick={decodificar}
+                            className={styles.button}
+                            disabled={decodificando || !textoDecodificar.trim()}
+                        >
+                            {decodificando ? "Decodificando…" : "Decodificar"}
                         </button>
                     </div>
                     {!!textoDecodificado && (
@@ -197,9 +224,14 @@ export const Cod = () => {
                             type="file"
                             className={styles.fileInput}
                             onChange={handleFileChange}
+                            disabled={codificando}
                         />
-                        <button onClick={codificar} className={styles.button}>
-                            Codificar
+                        <button
+                            onClick={codificar}
+                            className={styles.button}
+                            disabled={codificando || !textoCodificar}
+                        >
+                            {codificando ? "Codificando…" : "Codificar"}
                         </button>
                     </div>
 
@@ -225,9 +257,14 @@ export const Cod = () => {
                             placeholder="Pega aquí el texto codificado nombre.ext:base64…"
                             value={textoDecodificar}
                             onChange={actualizarTextoDecodificar}
+                            disabled={decodificando}
                         />
-                        <button onClick={decodificar} className={styles.button}>
-                            Decodificar
+                        <button
+                            onClick={decodificar}
+                            className={styles.button}
+                            disabled={decodificando || !textoDecodificar.trim()}
+                        >
+                            {decodificando ? "Decodificando…" : "Decodificar"}
                         </button>
                     </div>
 

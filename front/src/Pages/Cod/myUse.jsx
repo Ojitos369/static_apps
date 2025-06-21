@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import {useStates } from '../../Hooks/useStates';
 import styles from './styles/index.module.scss';
 
@@ -7,7 +7,9 @@ export const useVars = () => {
     const textoCodificar = useMemo(() => s.cod?.textoCodificar ?? '', [s.cod?.textoCodificar]);
     const textoDecodificar = useMemo(() => s.cod?.textoDecodificar ?? '', [s.cod?.textoDecodificar]);
     const textoCodificado = useMemo(() => s.cod?.textoCodificado ?? '', [s.cod?.textoCodificado]);
-    console.log('textoCodificado', textoCodificado);
+    const codificando = useMemo(() => s.loadings?.cod?.codificar ?? false, [s.loadings?.cod?.codificar]);
+    const decodificando = useMemo(() => s.loadings?.cod?.decodificar ?? false, [s.loadings?.cod?.decodificar]);
+
     const textoDecodificado = useMemo(() => s.cod?.textoDecodificado ?? '', [s.cod?.textoDecodificado]);
 
     const codificar = () => {
@@ -36,14 +38,23 @@ export const useVars = () => {
         textoDecodificar,
         textoCodificado,
         textoDecodificado,
+        codificando, 
+        decodificando, 
         actualizarTextoCodificar,
         actualizarTextoDecodificar,
         codificar,
         decodificar, 
         resetValues,
+        f,
     }
 }
 
 export const useMyEffects = () => {
+    const { resetValues, f } = useVars();
+    
+    useEffect(() => {
+        f.u1('page', 'title', 'Codificador');
+        resetValues();
+    }, []);
 
 }
