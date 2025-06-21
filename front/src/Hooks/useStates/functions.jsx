@@ -132,8 +132,11 @@ const useF = props => {
 
     const cod = {
         codificar: text => {
-            const link = `codec/codificar/?text=${text}`;
-            miAxios.get(link)
+            const link = `codec/codificar/`;
+            const data = {
+                text
+            }
+            miAxios.post(link, data)
             .then(res => {
                 const { text } = res.data;
                 u1('cod', 'textoCodificado', text);
