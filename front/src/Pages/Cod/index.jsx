@@ -84,6 +84,12 @@ export const Cod = () => {
         URL.revokeObjectURL(url);
     };
 
+    const openNewTab = (url) => {
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+    }
+
     const renderDecodedPreview = () => {
         if (!isBase64File(textoDecodificado)) return null;
 
@@ -92,7 +98,7 @@ export const Cod = () => {
         const src = `data:${mime};base64,${b64}`;
 
         if (mime.startsWith("image/")) {
-            return <img src={src} alt={name} className={styles.media} />;
+            return <img src={src} alt={name} className={`${styles.media} manita`} onClick={() => openNewTab(src)} />;
         }
         if (mime.startsWith("video/")) {
             return <video src={src} controls className={styles.media} />;
@@ -202,7 +208,7 @@ export const Cod = () => {
                             <p className={styles.fileName}>
                                 <span>Codificado</span>
                                 <br />
-                                {textoCodificado.slice(0, 80)}…{/* preview */}
+                                {textoCodificado}{/* preview */}
                             </p>
                             <button
                                 onClick={() => navigator.clipboard.writeText(textoCodificado)}
