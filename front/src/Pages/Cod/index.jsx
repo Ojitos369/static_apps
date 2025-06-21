@@ -86,6 +86,19 @@ export const Cod = () => {
         URL.revokeObjectURL(url);
     };
 
+    const openImageWindow = (b64, mime, name) => {
+        const binary = atob(b64);
+        const bytes  = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+
+        const blob = new Blob([bytes], { type: mime });
+        const url  = URL.createObjectURL(blob);
+
+        const win  = window.open(url, "_blank");
+        // Liberamos memoria cuando la pestaña cargue
+        win.onload = () => URL.revokeObjectURL(url);
+    };
+
     const renderDecodedPreview = () => {
         if (!isBase64File(textoDecodificado)) return null;
 
@@ -95,18 +108,13 @@ export const Cod = () => {
 
         if (mime.startsWith("image/")) {
             return (
-                <a
-                    href={src}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.mediaLink}
-                >
-                    <img
-                        src={src}
-                        alt={name}
-                        className={styles.media}
-                    />
-                </a>
+                <img
+                    src={src}
+                    alt={name}
+                    className={styles.media}
+                    style={{ cursor: "zoom-in" }}
+                    onClick={() => openImageWindow(b64, mime, name)}
+                />
             );
         }
         if (mime.startsWith("video/")) {
