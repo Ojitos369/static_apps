@@ -24,7 +24,7 @@ class Decodificar(GetApi, PostApi):
         self.text = self.data["text"]
         comp = Compresor()
         text = comp.descomprimir(self.text)
-        print("text:", text)
+        # print("text:", text)
         if not text:
             raise self.MYE("No se pudo recuperar el texto")
         self.response = {
@@ -32,5 +32,4 @@ class Decodificar(GetApi, PostApi):
         }
 
 """
-
 """
