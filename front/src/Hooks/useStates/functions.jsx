@@ -131,7 +131,7 @@ const useF = props => {
     }
 
     const cod = {
-        codificar: text => {
+        codificar: (text, mode) => {
             if (!text) {
                 MySwal.fire({
                     text: 'No hay texto para codificar',
@@ -144,7 +144,7 @@ const useF = props => {
             u2('loadings', 'cod', 'codificar', true);
             const link = `codec/codificar/`;
             const data = {
-                text
+                text, mode
             }
             miAxios.post(link, data)
             .then(res => {
@@ -156,7 +156,7 @@ const useF = props => {
                 u2('loadings', 'cod', 'codificar', false);
             });
         },
-        decodificar: text => {
+        decodificar: (text, mode) => {
             if (!text) {
                 MySwal.fire({
                     text: 'No hay texto para decodificar',
@@ -167,7 +167,7 @@ const useF = props => {
             };
             if (!!s.loadings?.cod?.decodificar) return;
             u2('loadings', 'cod', 'decodificar', true);
-            const link = `codec/decodificar/?text=${text}`;
+            const link = `codec/decodificar/?text=${text}&mode=${mode}`;
             miAxios.get(link)
             .then(res => {
                 const { text } = res.data;

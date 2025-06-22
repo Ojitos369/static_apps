@@ -12,11 +12,11 @@ export const useVars = () => {
 
     const textoDecodificado = useMemo(() => s.cod?.textoDecodificado ?? '', [s.cod?.textoDecodificado]);
 
-    const codificar = () => {
-        f.cod.codificar(textoCodificar);
+    const codificar = (mode) => {
+        f.cod.codificar(textoCodificar, mode);
     }
-    const decodificar = () => {
-        f.cod.decodificar(textoDecodificar);
+    const decodificar = (mode) => {
+        f.cod.decodificar(textoDecodificar, mode);
     }
     const actualizarTextoCodificar = e => {
         f.u1('cod', 'textoCodificar', e.target.value);
@@ -42,8 +42,8 @@ export const useVars = () => {
         decodificando, 
         actualizarTextoCodificar,
         actualizarTextoDecodificar,
-        codificar,
-        decodificar, 
+        codif: codificar,
+        decodif: decodificar, 
         resetValues,
         f,
     }

@@ -12,73 +12,63 @@ export const Cod = () => {
         decodificando,
         actualizarTextoCodificar,
         actualizarTextoDecodificar,
-        codificar,
-        decodificar,
-        resetValues, 
+        codif,
+        decodif,
+        resetValues,
     } = useVars();
 
-    /* ------------------------------------------------------------
-     *  Nuevo estado: pestaña activa  ('text' | 'file')
-     * ---------------------------------------------------------- */
+    /* --------------------------- pestaña activa --------------------------- */
     const [tab, setTab] = useState("text");
 
-    /* ------------------------------------------------------------
-     *  Manejador de archivos
-     * ---------------------------------------------------------- */
+    /* --------------------------- meta del último archivo ------------------ */
+    const [fileMeta, setFileMeta] = useState(null); // { name, mime }
+
     const fileInputRef = useRef(null);
+
+    /* --------------------------- helpers ---------------------------------- */
+    const limpiarTodo = () => {
+        resetValues();
+        setFileMeta(null);
+    };
 
     const cambiarVista = (view) => {
         setTab(view);
-        resetValues();
-    }
+        limpiarTodo();
+    };
 
+    const codificar = () => codif(tab);   // le pasas el modo actual a tu store
+    const decodificar = () => decodif(tab);   // le pasas el modo actual a tu store
+
+    /* --------------------------- subida de archivo ------------------------ */
     const handleFileChange = (e) => {
         const file = e.target.files?.[0];
         if (!file) return;
 
         const reader = new FileReader();
         reader.onload = (ev) => {
-            /*   data:<mime>;base64,<cadena> -> sólo <cadena>   */
-            const base64 = ev.target.result.split(",")[1];
-            /*   Formato solicitado:  nombre.ext:base64   */
-            const composed = `${file.name}:${base64}`;
-
-            /*  Usamos el “evento sintético” para reutilizar actualizarTexto  */
-            actualizarTextoCodificar({ target: { value: composed } });
+            const base64 = ev.target.result.split(",")[1]; // quitamos data:mime;
+            setFileMeta({ name: file.name, mime: file.type || "application/octet-stream" });
+            actualizarTextoCodificar({ target: { value: base64 } });
         };
         reader.readAsDataURL(file);
     };
 
-    /* ------------------------------------------------------------
-     *  Utilidades para decodificar y descargar archivos
-     * ---------------------------------------------------------- */
-    const isBase64File = (txt) => txt.includes(":") && txt.split(":")[1].length > 0;
-
-    const mimeFromName = (name) => {
-        const ext = name.split(".").pop().toLowerCase();
-        const dict = {
-            png: "image/png",
-            jpg: "image/jpeg",
-            jpeg: "image/jpeg",
-            gif: "image/gif",
-            mp4: "video/mp4",
-            webm: "video/webm",
-            mp3: "audio/mpeg",
-            wav: "audio/wav",
-            txt: "text/plain",
-            pdf: "application/pdf",
-        };
-        return dict[ext] || "application/octet-stream";
-    };
+    /* --------------------------- utilidades Base-64 ----------------------- */
+    const isPureBase64 = (txt) =>
+        /^[A-Za-z0-9+/]+\={0,2}$/.test(txt.trim()) && txt.trim().length % 4 === 0;
 
     const downloadDecoded = () => {
-        if (!isBase64File(textoDecodificado)) return;
-        const [name, b64] = textoDecodificado.split(":");
-        const binary = atob(b64);
-        const bytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-        const blob = new Blob([bytes], { type: mimeFromName(name) });
-        const url = URL.createObjectURL(blob);
+        if (!isPureBase64(textoDecodificado)) return;
+
+        const b64  = textoDecodificado.trim();
+        const mime = fileMeta?.mime || "application/octet-stream";
+        const name = fileMeta?.name || "archivo.bin";
+
+        const bin  = atob(b64);
+        const buf  = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+        const blob = new Blob([buf], { type: mime });
+        const url  = URL.createObjectURL(blob);
+
         const a = document.createElement("a");
         a.href = url;
         a.download = name;
@@ -86,25 +76,21 @@ export const Cod = () => {
         URL.revokeObjectURL(url);
     };
 
-    const openImageWindow = (b64, mime, name) => {
-        const binary = atob(b64);
-        const bytes  = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-
-        const blob = new Blob([bytes], { type: mime });
+    const openImageWindow = (b64, mime) => {
+        const bin  = atob(b64);
+        const buf  = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+        const blob = new Blob([buf], { type: mime });
         const url  = URL.createObjectURL(blob);
-
         const win  = window.open(url, "_blank");
-        // Liberamos memoria cuando la pestaña cargue
         win.onload = () => URL.revokeObjectURL(url);
     };
 
     const renderDecodedPreview = () => {
-        if (!isBase64File(textoDecodificado)) return null;
+        if (!isPureBase64(textoDecodificado)) return null;
+        if (!fileMeta) return <p className={styles.fileName}>Archivo listo para descargar</p>;
 
-        const [name, b64] = textoDecodificado.split(":");
-        const mime = mimeFromName(name);
-        const src = `data:${mime};base64,${b64}`;
+        const { mime, name } = fileMeta;
+        const src = `data:${mime};base64,${textoDecodificado.trim()}`;
 
         if (mime.startsWith("image/")) {
             return (
@@ -112,8 +98,8 @@ export const Cod = () => {
                     src={src}
                     alt={name}
                     className={`${styles.media} ${styles.mediaLink}`}
+                    onClick={() => openImageWindow(textoDecodificado.trim(), mime)}
                     style={{ cursor: "zoom-in" }}
-                    onClick={() => openImageWindow(b64, mime, name)}
                 />
             );
         }
@@ -130,32 +116,26 @@ export const Cod = () => {
 
     return (
         <div className={styles.codPage}>
-            {/* --------- Cabecera de pestañas --------- */}
+            {/* -------- Tabs -------- */}
             <div className={styles.tabs}>
                 <button
                     className={`${styles.tabBtn} ${tab === "text" ? styles.active : ""}`}
                     onClick={() => cambiarVista("text")}
                     disabled={codificando || decodificando}
-                >
-                    Texto
-                </button>
+                >Texto</button>
                 <button
                     className={`${styles.tabBtn} ${tab === "file" ? styles.active : ""}`}
                     onClick={() => cambiarVista("file")}
                     disabled={codificando || decodificando}
-                >
-                    Archivo
-                </button>
+                >Archivo</button>
                 <button
                     className={`${styles.tabBtn} ${styles.tabBtnClear}`}
-                    onClick={resetValues}
+                    onClick={limpiarTodo}
                     disabled={codificando || decodificando}
-                >
-                    Clear
-                </button>
+                >Clear</button>
             </div>
 
-            {/* --------- Contenido de la pestaña “Texto” --------- */}
+            {/* -------- Pestaña TEXTO -------- */}
             {tab === "text" && (
                 <div className={`${styles.element} ${styles.codificar}`}>
                     <div className={styles.ask}>
@@ -174,18 +154,14 @@ export const Cod = () => {
                             {codificando ? "Codificando…" : "Codificar"}
                         </button>
                     </div>
+
                     {!!textoCodificado && (
                         <div className={styles.response}>
-                            <p>
-                                <span>Codificado</span>
-                                <br />
-                                {textoCodificado}
-                            </p>
+                            <p><span>Codificado</span><br />{textoCodificado}</p>
                             <button
                                 onClick={() => navigator.clipboard.writeText(textoCodificado)}
-                                className={styles.buttonCopy}>
-                                Copiar
-                            </button>
+                                className={styles.buttonCopy}
+                            >Copiar</button>
                         </div>
                     )}
 
@@ -205,27 +181,22 @@ export const Cod = () => {
                             {decodificando ? "Decodificando…" : "Decodificar"}
                         </button>
                     </div>
+
                     {!!textoDecodificado && (
                         <div className={styles.response}>
-                            <p>
-                                <span>Decodificado</span>
-                                <br />
-                                {textoDecodificado}
-                            </p>
+                            <p><span>Decodificado</span><br />{textoDecodificado}</p>
                             <button
                                 onClick={() => navigator.clipboard.writeText(textoDecodificado)}
-                                className={styles.buttonCopy}>
-                                Copiar
-                            </button>
+                                className={styles.buttonCopy}
+                            >Copiar</button>
                         </div>
                     )}
                 </div>
             )}
 
-            {/* --------- Contenido de la pestaña “Archivo” --------- */}
+            {/* -------- Pestaña ARCHIVO -------- */}
             {tab === "file" && (
                 <div className={`${styles.element} ${styles.codificar}`}>
-                    {/* Subir y codificar */}
                     <div className={styles.ask}>
                         <input
                             ref={fileInputRef}
@@ -245,24 +216,18 @@ export const Cod = () => {
 
                     {!!textoCodificado && (
                         <div className={styles.response}>
-                            <p className={styles.fileName}>
-                                <span>Codificado</span>
-                                <br />
-                                {textoCodificado}{/* preview */}
-                            </p>
+                            <p className={styles.fileName}><span>Codificado</span><br />{textoCodificado}</p>
                             <button
                                 onClick={() => navigator.clipboard.writeText(textoCodificado)}
-                                className={styles.buttonCopy}>
-                                Copiar
-                            </button>
+                                className={styles.buttonCopy}
+                            >Copiar</button>
                         </div>
                     )}
 
-                    {/* Decodificar y mostrar/descargar */}
                     <div className={styles.ask}>
                         <textarea
                             className={styles.textField}
-                            placeholder="Pega aquí el texto codificado"
+                            placeholder="Pega aquí la cadena Base-64 codificada…"
                             value={textoDecodificar}
                             onChange={actualizarTextoDecodificar}
                             disabled={decodificando}
@@ -279,9 +244,10 @@ export const Cod = () => {
                     {!!textoDecodificado && (
                         <div className={styles.response}>
                             {renderDecodedPreview()}
-                            <button onClick={downloadDecoded} className={styles.buttonCopy}>
-                                Descargar
-                            </button>
+                            <button
+                                onClick={downloadDecoded}
+                                className={styles.buttonCopy}
+                            >Descargar</button>
                         </div>
                     )}
                 </div>
