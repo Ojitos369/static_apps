@@ -220,6 +220,12 @@ const useF = props => {
         }
     }
 
+    const vitim = {
+        test: () => {
+            console.log('test');
+        }
+    }
+
     const app = {
         helloWorld: () => {
             const end = 'app/hello_world/';
@@ -285,7 +291,7 @@ const useF = props => {
     }
 
     return { u0, u1, u2, u3, u4, u5, u6, u7, u8, u9,
-        general, llama, cod, im2aci, app, 
+        general, llama, cod, im2aci, vitim, app, 
      };
 }
 

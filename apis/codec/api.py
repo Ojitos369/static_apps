@@ -5,7 +5,11 @@ import os
 
 # User
 from app.core.bases.apis import PostApi, GetApi, get_d, pln, prod_mode
-from app.core.utils.compress import Compresor
+try:
+    from app.core.utils.compress import Compresor
+except:
+    print("No se encontro el Compresor")
+    class Compresor: pass
 from app.settings import MEDIA_DIR
 
 

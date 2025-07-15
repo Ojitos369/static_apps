@@ -1,10 +1,9 @@
 import { useVars, useMyEffects } from "./myUse";
 
-export const Base = props => {
+export const Vitim = props => {
     // const {  } = useVars();
 
     useMyEffects();
-
     return (
         <div>
             Base Component

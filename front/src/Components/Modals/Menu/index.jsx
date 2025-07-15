@@ -27,6 +27,7 @@ const Menu = props => {
         {name: "Cod", path: "cod"},
         {name: "Chat", path: "llama"},
         {name: "Im2aci", path: "im2aci"},
+        {name: "Vitim", path: "vitim"},
         {name: "Test", path: "test"},
     ]
 
