@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react';
+import { useCallback, useMemo, useEffect } from 'react';
 import {useStates } from '../../Hooks/useStates';
 import styles from './styles/index.module.scss';
 
@@ -32,9 +32,13 @@ export const useVars = () => {
         f.vitim.checkStatus(key);
     }
 
-    const getImagesPage = (key, page) => {
+    const getImagesPageOld = (key, page) => {
         f.vitim.getImagesPage(key, page);
     }
+    const getImagesPage = useCallback(
+        (key, page) => f.vitim.getImagesPage(key, page),
+        [f.vitim]      // o simplemente [f] si f es estable
+    );
 
     const scheduleCleanup = (key) => {
         f.vitim.scheduleCleanup(key);

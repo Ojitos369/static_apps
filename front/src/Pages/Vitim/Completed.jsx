@@ -10,15 +10,17 @@ export const Completed = ({ styles, processStatus, images, getImagesPage, taskKe
 
     useEffect(() => {
         if (processStatus?.fin_proceso) {
-            const finishDate = new Date(processStatus.fin_proceso);
-            finishDate.setMinutes(finishDate.getMinutes() + 30);
-            setCleanupTime(finishDate.toLocaleString());
+            const finish = new Date(processStatus.fin_proceso);
+            finish.setMinutes(finish.getMinutes() + 30);
+            setCleanupTime(finish.toLocaleString());
         }
-        // Cargar la primera página de imágenes si no hay ninguna
+    }, [processStatus?.fin_proceso]);
+    useEffect(() => {
         if (images.length === 0) {
             getImagesPage(taskKey, 1);
         }
-    }, [processStatus, images.length, getImagesPage, taskKey]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const zipUrl = "http://localhost:8369" + processStatus?.zip_path;
     console.log("zipUrl", zipUrl);
