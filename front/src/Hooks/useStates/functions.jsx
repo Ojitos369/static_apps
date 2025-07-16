@@ -221,8 +221,36 @@ const useF = props => {
     }
 
     const vitim = {
-        test: () => {
-            console.log('test');
+        sendVideo: (video, options) => {
+            if (!video) {
+                MySwal.fire({
+                    text: 'No video to process',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+                return;
+            }
+            if (!!s.loadings?.vitim?.loading) return;
+            u2('loadings', 'vitim', 'loading', true);
+            const link = `vitim/process_video/`;
+            const data = {
+                video,
+                options
+            }
+            miAxios.post(link, data)
+            .then(res => {
+                console.log(res.data);
+            }).catch(err => {
+                console.log(err);
+                const message = err.response?.data?.message || 'Error';
+                MySwal.fire({
+                    text: message,
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+            }).finally(() => {
+                u2('loadings', 'vitim', 'loading', false);
+            });
         }
     }
 

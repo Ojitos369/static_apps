@@ -1,11 +1,10 @@
 from django.urls import path
 
 from .api import (
-    Test, 
+    ProcessVideo,
 )
 
-app_name = 'apis_base'
+app_name = 'apis_vitim'
 urlpatterns = [
-    path('test', Test.as_view(), name=f'{app_name}_test'),
+    path('process_video/', ProcessVideo.as_view(), name=f'{app_name}_process_video'),
 ]
-# https://sa.ojitos369.com/api/base/
