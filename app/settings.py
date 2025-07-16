@@ -99,12 +99,12 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -165,7 +165,7 @@ email_settings = {
 if not (email_settings['user'] and email_settings['password']):
     email_settings = None
 
-ce = CE(name_project = 'REANGO BASE', email_settings = email_settings)
+ce = CE(name_project = 'STATIC APPS', email_settings = email_settings)
 
 class MYE(Exception):
     pass

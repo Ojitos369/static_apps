@@ -1,5 +1,8 @@
 import { useVars, useMyEffects } from "./myUse";
-import { useState, useRef } from "react";
+import { useEffect } from "react";
+import { Uploader } from "./Uploader";
+import { ProcessingStatus } from "./ProcessingStatus";
+import { Completed } from "./Completed";
 
 export const Vitim = () => {
     const {
@@ -7,91 +10,96 @@ export const Vitim = () => {
         video,
         options,
         loading,
+        status,
+        taskKey,
+        processStatus,
+        images,
+        totalImages,
+        currentPage,
+        hasNextPage,
         setVideo,
         setOptions,
         sendVideo,
+        checkStatus,
+        getImagesPage,
+        scheduleCleanup,
     } = useVars();
 
-    const [preview, setPreview] = useState(null);
-    const videoRef = useRef(null);
-
-    const handleFileChange = (e) => {
-        const file = e.target.files?.[0];
-        if (!file || !file.type.startsWith("video/")) {
-            alert("Please select a video file.");
-            return;
+    useEffect(() => {
+        let interval;
+        if (status === 'PROCESSING' && taskKey) {
+            // Inicia el polling para el estado
+            interval = setInterval(() => {
+                checkStatus(taskKey);
+            }, 5000);
         }
+        
+        // Limpia el intervalo cuando el componente se desmonta o el estado cambia
+        return () => clearInterval(interval);
+    }, [status, taskKey]);
 
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-            setVideo(ev.target.result);
-            setPreview(ev.target.result);
-        };
-        reader.readAsDataURL(file);
-    };
-
-    const handleOptionChange = (e) => {
-        const { name, value } = e.target;
-        setOptions({ ...options, [name]: value });
-    };
-
-    const handlePreview = () => {
-        if (videoRef.current) {
-            const startTime = options.start || 0;
-            const endTime = options.end || videoRef.current.duration;
-
-            if (startTime >= endTime) {
-                alert("Start time must be less than end time.");
-                return;
-            }
-
-            videoRef.current.currentTime = startTime;
-            videoRef.current.play();
-
-            setTimeout(() => {
-                videoRef.current.pause();
-            }, (endTime - startTime) * 1000);
+    useEffect(() => {
+        // Carga las imágenes cuando el estado es PROCESSING
+        if (status === 'PROCESSING' && taskKey) {
+            getImagesPage(taskKey, currentPage);
         }
-    };
+    }, [status, taskKey, currentPage, processStatus]); // se añade processStatus para recargar si hay cambios
+
+    useEffect(() => {
+        // Cuando el proceso termina, programa la limpieza
+        if (status === 'COMPLETED' && taskKey) {
+            scheduleCleanup(taskKey);
+        }
+    }, [status, taskKey]);
+
 
     useMyEffects();
 
     return (
         <div className={styles.vitimPage}>
-            <div className={styles.element}>
-                <div className={styles.ask}>
-                    <input
-                        type="file"
-                        accept="video/*"
-                        className={styles.fileInput}
-                        onChange={handleFileChange}
-                        disabled={loading}
-                    />
+            {(status === 'IDLE' || status === 'UPLOADING') && (
+                <Uploader 
+                    styles={styles} 
+                    loading={loading || status === 'UPLOADING'} 
+                    video={video}
+                    setVideo={setVideo} 
+                    setOptions={setOptions} 
+                    sendVideo={sendVideo} 
+                    options={options} 
+                />
+            )}
+            {status === 'PROCESSING' && (
+                <ProcessingStatus 
+                    styles={styles} 
+                    processStatus={processStatus} 
+                    images={images} 
+                    totalImages={totalImages} 
+                    currentPage={currentPage} 
+                    hasNextPage={hasNextPage} 
+                    getImagesPage={getImagesPage} 
+                    taskKey={taskKey} 
+                />
+            )}
+            {status === 'COMPLETED' && (
+                <Completed 
+                    styles={styles} 
+                    processStatus={processStatus}
+                    images={images}
+                    getImagesPage={getImagesPage}
+                    currentPage={currentPage}
+                    hasNextPage={hasNextPage}
+                    taskKey={taskKey}
+                />
+            )}
+            {status === 'FAILED' && (
+                <div>
+                    <h2>Ha ocurrido un error</h2>
+                    <p>No se pudo completar el proceso. Por favor, inténtalo de nuevo.</p>
+                    {/* Opcional: mostrar más detalles del error si están disponibles */}
                 </div>
-
-                {preview && (
-                    <div className={styles.previewContainer}>
-                        <video ref={videoRef} src={preview} controls className={styles.media} />
-                        <button onClick={handlePreview} className={styles.button}>Preview</button>
-                    </div>
-                )}
-
-                <div className={styles.options}>
-                    <input type="text" name="base_name_for_images" placeholder="Base name for images" onChange={handleOptionChange} />
-                    <input type="number" name="fps" placeholder="FPS (30, 60)" onChange={handleOptionChange} />
-                    <input type="text" name="type" placeholder="Image type (png, jpg)" onChange={handleOptionChange} />
-                    <input type="text" name="start" placeholder="Start time (e.g., 60, 15, 03:12)" onChange={handleOptionChange} />
-                    <input type="text" name="end" placeholder="End time (e.g., 60, 15, 03:12)" onChange={handleOptionChange} />
-                </div>
-
-                <button
-                    onClick={sendVideo}
-                    className={styles.button}
-                    disabled={loading || !video}
-                >
-                    {loading ? "Processing..." : "Process Video"}
-                </button>
-            </div>
+            )}
         </div>
     );
 };
+
+export default Vitim;

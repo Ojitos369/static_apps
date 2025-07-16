@@ -1,46 +1,93 @@
 
 .vitimPage {
     padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: sans-serif;
 }
 
-.element {
+.uploaderContainer {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
 
-.ask {
-    display: flex;
-    gap: 10px;
-}
-
-.fileInput {
-    flex-grow: 1;
+.options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
 }
 
 .button {
     padding: 10px 20px;
     cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-.previewContainer {
+.button:hover {
+    background-color: #0056b3;
+}
+
+.button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.statusSummary {
+    padding: 1.5rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+
+    h3 {
+        margin-top: 0;
+    }
+
+    p {
+        margin: 0.5rem 0;
+    }
+}
+
+.downloadButton {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.downloadButton:hover {
+    background-color: #218838;
+}
+
+.cleanupMessage {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    border-radius: 5px;
+}
+.paginationControls {
+    width: 30%;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-}
-
-.media {
-    max-width: 100%;
-    max-height: 400px;
-}
-
-.options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 10px;
-
-    input {
-        padding: 10px;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    margin-top: 1rem;
+    z-index: 100;
+    button {
+        margin: 5px 15px;
     }
 }

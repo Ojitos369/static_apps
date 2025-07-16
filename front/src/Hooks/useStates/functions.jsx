@@ -232,6 +232,7 @@ const useF = props => {
             }
             if (!!s.loadings?.vitim?.loading) return;
             u2('loadings', 'vitim', 'loading', true);
+            u1('vitim', 'status', 'UPLOADING');
             const link = `vitim/process_video/`;
             const data = {
                 video,
@@ -239,7 +240,9 @@ const useF = props => {
             }
             miAxios.post(link, data)
             .then(res => {
-                console.log(res.data);
+                const { key } = res.data;
+                u1('vitim', 'taskKey', key);
+                u1('vitim', 'status', 'PROCESSING');
             }).catch(err => {
                 console.log(err);
                 const message = err.response?.data?.message || 'Error';
@@ -248,8 +251,61 @@ const useF = props => {
                     icon: 'error',
                     confirmButtonText: 'Ok'
                 });
+                u1('vitim', 'status', 'FAILED');
             }).finally(() => {
                 u2('loadings', 'vitim', 'loading', false);
+            });
+        },
+        checkStatus: (key) => {
+            if (!key) return;
+            const link = `vitim/check_status/?key=${key}`;
+            miAxios.get(link)
+            .then(res => {
+                const { status, image_count } = res.data;
+                u1('vitim', 'processStatus', status);
+                u1('vitim', 'imageCount', image_count);
+
+                if (status.estatus === 'Done' || status.estatus === 'Error') {
+                    u1('vitim', 'status', 'COMPLETED');
+                }
+            }).catch(err => {
+                console.log(err);
+                // Stop polling on error
+                u1('vitim', 'status', 'FAILED');
+            });
+        },
+        getImagesPage: (key, page = 1, limit = 20) => {
+            if (!key) return;
+            u2('loadings', 'vitim', 'images', true);
+            const link = `vitim/get_images_page/?key=${key}&page=${page}&limit=${limit}`;
+            miAxios.get(link)
+            .then(res => {
+                const { images, total_images, current_page, has_next } = res.data;
+                u1('vitim', 'images', images);
+                u1('vitim', 'totalImages', total_images);
+                u1('vitim', 'currentPage', current_page);
+                u1('vitim', 'hasNextPage', has_next);
+            }).catch(err => {
+                console.log(err);
+            }).finally(() => {
+                u2('loadings', 'vitim', 'images', false);
+            });
+        },
+        scheduleCleanup: (key) => {
+            if (!key) return;
+            const link = `vitim/schedule_cleanup/`;
+            const data = { key };
+            miAxios.post(link, data)
+            .then(res => {
+                MySwal.fire({
+                    title: 'Limpieza programada',
+                    text: 'Los archivos se eliminarán en 30 minutos.',
+                    icon: 'info',
+                    timer: 5000,
+                    showConfirmButton: false,
+                });
+            }).catch(err => {
+                console.log(err);
             });
         }
     }

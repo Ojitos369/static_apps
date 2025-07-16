@@ -1,0 +1,67 @@
+.imageGallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajusta el tamaño mínimo según necesites */
+    gap: 1rem;
+    padding: 1rem;
+
+    .imageContainer {
+        position: relative;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            transform: scale(1.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 14;
+        }
+
+        .imageLink {
+            display: block;
+            width: 100%;
+            height: 0;
+            padding-bottom: 75%; /* Proporción 4:3, puedes ajustarla */
+            position: relative;
+
+            .galleryImage {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: opacity 0.3s ease;
+            }
+        }
+
+        .downloadIcon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+            svg {
+                width: 1.2rem;
+                height: 1.2rem;
+            }
+
+            .downloadSpanIcon {
+                /* Puedes añadir estilos específicos al icono si es necesario */
+            }
+        }
+
+        &:hover .downloadIcon {
+            opacity: 1;
+        }
+    }
+}
