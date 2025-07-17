@@ -4,8 +4,6 @@ import json
 from app.core.bases.apis import PostApi, GetApi
 from app.task import vitim_celery, schedule_cleanup
 from app.settings import MEDIA_DIR, STATIC_URL
-from django.http import Http404
-from django.conf import settings
 
 class ProcessVideo(PostApi):
     def main(self):
