@@ -26,7 +26,13 @@ export const ProcessingStatus = ({ styles, processStatus, images, totalImages, c
                 </p>
             )}
 
-            <ImageGallery images={images} />
+            <ImageGallery 
+                images={images} 
+                getImagesPage={getImagesPage} 
+                currentPage={currentPage} 
+                hasNextPage={hasNextPage} 
+                taskKey={taskKey} 
+            />
             <div className={styles.paginationControls}>
                 {currentPage > 1 && (
                     <button onClick={() => getImagesPage(taskKey, currentPage - 1)} className={styles.button}>

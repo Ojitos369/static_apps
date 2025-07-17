@@ -28,25 +28,21 @@ export const Vitim = () => {
     useEffect(() => {
         let interval;
         if (status === 'PROCESSING' && taskKey) {
-            // Inicia el polling para el estado
             interval = setInterval(() => {
                 checkStatus(taskKey);
             }, 5000);
         }
         
-        // Limpia el intervalo cuando el componente se desmonta o el estado cambia
         return () => clearInterval(interval);
     }, [status, taskKey]);
 
     useEffect(() => {
-        // Carga las imágenes cuando el estado es PROCESSING
-        if (status === 'PROCESSING' && taskKey) {
+        if ((status === 'PROCESSING' || status === 'COMPLETED') && taskKey) {
             getImagesPage(taskKey, currentPage);
         }
-    }, [status, taskKey, currentPage, processStatus]); // se añade processStatus para recargar si hay cambios
+    }, [status, taskKey, currentPage, processStatus]);
 
     useEffect(() => {
-        // Cuando el proceso termina, programa la limpieza
         if (status === 'COMPLETED' && taskKey) {
             scheduleCleanup(taskKey);
         }
@@ -95,7 +91,6 @@ export const Vitim = () => {
                 <div>
                     <h2>Ha ocurrido un error</h2>
                     <p>No se pudo completar el proceso. Por favor, inténtalo de nuevo.</p>
-                    {/* Opcional: mostrar más detalles del error si están disponibles */}
                 </div>
             )}
         </div>

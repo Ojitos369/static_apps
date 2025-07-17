@@ -2,32 +2,34 @@ import styles from './styles/ImageGallery.module.scss';
 import { DownloadIcon } from '../../Components/Icons';
 import { useState } from 'react';
 
-export const ImageGallery = ({ images }) => {
+export const ImageGallery = ({ images, getImagesPage, currentPage, hasNextPage, taskKey }) => {
+    const handleImageClick = (e, img) => {
+        e.preventDefault();
+        window.open(img, '_blank');
+    };
+
     if (!images || images.length === 0) {
         return <p>No hay imágenes para mostrar.</p>;
     }
 
     return (
-        <div className={styles.imageGallery}>
-            {images.map((imgSrc, index) => {
-                imgSrc = "http://localhost:8369/"+imgSrc;
-                const [show, setShow] = useState(false);
-                // console.log(imgSrc);
-                return (
-                    <div key={index} className={styles.imageContainer}
-                        >
-                        <a href={imgSrc} target="_blank" rel="noopener noreferrer" className={styles.imageLink}>
-                            <img src={imgSrc} alt={`Frame ${index}`} className={styles.galleryImage} />
+        <div className={styles.galleryContainer}>
+            <div className={styles.imageGallery}>
+                {images.map((img, index) => {
+                    img = `http://localhost:8369${img}`;
+                    return (
+                    <div key={index} className={styles.galleryItem}>
+                        <a href={img} onClick={(e) => handleImageClick(e, img)} title="Click to open in new tab">
+                            <img src={img} alt={`Frame ${index}`} className={styles.galleryImage} />
                         </a>
-                        {show && (
-                            <a href={imgSrc} download onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} className={styles.downloadIcon}>
-                                <span className={styles.downloadSpanIcon}>
-                                    <DownloadIcon />
-                                </span>
-                            </a>
-                        )}
                     </div>
-            )})}
+                )})}
+            </div>
+            {hasNextPage && (
+                <button onClick={() => getImagesPage(taskKey, currentPage + 1)} className={styles.loadMoreButton}>
+                    Cargar más
+                </button>
+            )}
         </div>
     );
 };
