@@ -34,7 +34,7 @@ class CheckStatus(GetApi):
 
         base_vitim_path = os.path.join(MEDIA_DIR, "vitim", key)
         status_file_path = os.path.join(base_vitim_path, f"{key}.json")
-        frames_path = os.path.join(STATIC_URL, "vitim", key, "frames")
+        frames_path = os.path.join(os.path.abspath(os.path.join(MEDIA_DIR, '..', 'static')), "vitim", key, "frames")
 
         if not os.path.exists(status_file_path):
             self.status_code = 404
@@ -67,7 +67,7 @@ class GetImagesPage(GetApi):
             self.response = {"error": "El parámetro 'key' es requerido."}
             return
 
-        frames_path = os.path.join(STATIC_URL, "vitim", key, "frames")
+        frames_path = os.path.join(os.path.abspath(os.path.join(MEDIA_DIR, '..', 'static')), "vitim", key, "frames")
         if not os.path.exists(frames_path) or not os.path.isdir(frames_path):
             self.status_code = 404
             self.response = {"error": "Directorio de frames no encontrado."}
@@ -84,7 +84,7 @@ class GetImagesPage(GetApi):
         end = start + limit
         paginated_images = image_list[start:end]
 
-        image_urls = [f"{STATIC_URL}vitim/{key}/frames/{img}" for img in paginated_images]
+        image_urls = [f"/static/vitim/{key}/frames/{img}" for img in paginated_images]
 
         self.response = {
             "images": image_urls,

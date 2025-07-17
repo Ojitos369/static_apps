@@ -18,14 +18,15 @@ class Vitim:
         self.key = key if key else str(uuid.uuid4())
         
         # --- Rutas para guardar archivos ---
-        # Directorio base para los datos de esta instancia de Vitim
-        self.base_vitim_path = os.path.join(MEDIA_DIR, "vitim", self.key)
-        # Directorio para guardar los archivos estáticos (imágenes, zip)
-        self.static_path = os.path.join(STATIC_URL, "vitim", self.key)
+        # Directorio para el JSON de estado
+        self.media_path = os.path.join(MEDIA_DIR, "vitim", self.key)
+        # Directorio para archivos estáticos (imágenes, zip)
+        static_dir = os.path.abspath(os.path.join(MEDIA_DIR, '..', 'static'))
+        self.static_path = os.path.join(static_dir, "vitim", self.key)
         # Ruta para guardar los frames extraídos
         self.path_save = os.path.join(self.static_path, "frames")
         # Ruta para el archivo de estado
-        self.status_file_path = os.path.join(self.base_vitim_path, f"{self.key}.json")
+        self.status_file_path = os.path.join(self.media_path, f"{self.key}.json")
 
         # --- Variables de estado y tiempo ---
         self.status_data = {}
@@ -62,7 +63,7 @@ class Vitim:
 
     def _initialize_status_file(self, video_clip):
         """Crea y inicializa el archivo status.json."""
-        os.makedirs(self.base_vitim_path, exist_ok=True)
+        os.makedirs(self.media_path, exist_ok=True)
         os.makedirs(self.static_path, exist_ok=True)
 
         time_start_sec = self._get_time_seconds(self.start_str)

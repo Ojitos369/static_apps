@@ -15,10 +15,10 @@ export const Completed = ({ styles, processStatus, images, getImagesPage, taskKe
             setCleanupTime(finishDate.toLocaleString());
         }
         // Cargar la primera página de imágenes si no hay ninguna
-        if (images.length === 0) {
+        if (images.length === 0 && taskKey) {
             getImagesPage(taskKey, 1);
         }
-    }, [processStatus, images.length, getImagesPage, taskKey]);
+    }, [processStatus, taskKey]);
 
     const zipUrl = "http://localhost:8369" + processStatus?.zip_path;
     console.log("zipUrl", zipUrl);
@@ -50,7 +50,13 @@ export const Completed = ({ styles, processStatus, images, getImagesPage, taskKe
                     Mostrando: {startImage} - {endImage}
                 </p>
             )}
-            <ImageGallery images={images} />
+            <ImageGallery 
+                images={images} 
+                getImagesPage={getImagesPage} 
+                currentPage={currentPage} 
+                hasNextPage={hasNextPage} 
+                taskKey={taskKey} 
+            />
             <div className={styles.paginationControls}>
                 {currentPage > 1 && (
                     <button onClick={() => getImagesPage(taskKey, currentPage - 1)} className={styles.button}>

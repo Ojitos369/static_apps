@@ -65,7 +65,7 @@ def schedule_cleanup(key):
             pln(f"Limpieza programada: Directorio de media {media_directory_path} no encontrado.")
             
         # Eliminar directorio de static (imágenes, zip)
-        static_directory_path = os.path.join(STATIC_URL, "vitim", key)
+        static_directory_path = os.path.join(os.path.abspath(os.path.join(MEDIA_DIR, '..', 'static')), "vitim", key)
         if os.path.exists(static_directory_path):
             shutil.rmtree(static_directory_path)
             pln(f"Limpieza programada: Directorio estático {static_directory_path} eliminado.")
