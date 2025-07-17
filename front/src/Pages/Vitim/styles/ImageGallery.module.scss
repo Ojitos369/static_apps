@@ -4,7 +4,7 @@
 
 .imageGallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
     
     .galleryItem {
@@ -15,7 +15,7 @@
         position: relative;
 
         &:hover {
-            transform: scale(1.25);
+            transform: scale(1.05);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             z-index: 10;
         }
