@@ -5,7 +5,7 @@ from .api import (
     SaveImage, Img2Ascii
 )
 
-app_name = 'apis_base'
+app_name = 'apis_im2aci'
 urlpatterns = [
     path('test', Test.as_view(), name=f'{app_name}_test'),
     path('save_image', SaveImage.as_view(), name=f'{app_name}_save_image'),

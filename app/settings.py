@@ -20,6 +20,7 @@ setproctitle.setproctitle('static_apps')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 prod_mode = True if str(os.environ.get('RUN_PROD_MODE', True)).title() == 'True' else False
+docker_mode = False if str(os.environ.get('RUN_DOCKER_MODE', False)).title() == 'False' else True
 # prod_mode = False
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 

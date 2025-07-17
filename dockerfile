@@ -14,9 +14,7 @@ RUN apt-get install -y \
     wget cron locales tzdata git neovim curl zsh supervisor htop \
     default-libmysqlclient-dev build-essential gcc libgl1 libzbar0
 
-RUN apt-get update && apt-get install -y curl gnupg apt-transport-https
-
-# ZSH
+# ZSH 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 RUN chsh -s $(which zsh)
 
@@ -50,3 +48,4 @@ RUN pip install -r requirements.txt
 # docker rm -f sa-py && docker image rm sa-web && drcu -d
 # drc build --no-cache
 # drcu -d
+

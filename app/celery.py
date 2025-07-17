@@ -1,13 +1,13 @@
 from __future__ import absolute_import, unicode_literals
 import os
-from app.settings import prod_mode
+from app.settings import docker_mode
 
 from celery import Celery
 
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
 
-broker = 'pyamqp://guest@rabbitsa//' if (prod_mode and True) else 'pyamqp://guest@localhost//'
+broker = 'pyamqp://guest@rabbit//' if (docker_mode and True) else 'pyamqp://guest@localhost//'
 celery_app = Celery('task', include = ['app.task'], broker=broker)
 
 #   should have a `CELERY_` prefix.
