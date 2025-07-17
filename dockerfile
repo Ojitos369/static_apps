@@ -11,7 +11,7 @@ ENV DJANGO_SETTINGS_MODULE='app.settings'
 # PAQUETES
 RUN apt-get update && apt-get upgrade -y 
 RUN apt-get install -y \
-    wget cron locales tzdata git neovim curl zsh supervisor htop \
+    wget cron locales tzdata git neovim curl zsh supervisor htop zip \
     default-libmysqlclient-dev build-essential gcc libgl1 libzbar0
 
 # ZSH 
