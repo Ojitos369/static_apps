@@ -112,18 +112,8 @@ class ScheduleCleanup(PostApi):
         }
 
 
-""" 
-en base a los siguientes archivos:
-app/task.py
-apis/vitim
-front/src/Pages/Vitim
-front/src/Hooks/useStates/functions.jsx
-
-realiza los siguientes cambios:
-* en el front al mostrar las imagenes no se ven, no las encuentra
-* las imagenes, video y zip se deben de guardar en static/vitim/[key], ahorita parece que se guarda en media. El json de status es el unico que se debe guardar en media.
-* todos los campos del status se deben mostrar en el resumen del front tambien
-* una vez que termina el processamiento se debe de seguir mostrando el resumen y las imagenes en el front, con la opcion de descargar el zip y el mensaje con la hora a la que se eliminaran
-* la galeria debe mostrar las imagenes que se acomoden cada una de acuerdo a su ratio (width:height)
-* al hacer hover en la imagen que se muestre un leve preview y al hacer click que se habra en una ventana nueva
+"""
+find / -name rabbitmqctl
+rabbitmqctl status
+ 
 """

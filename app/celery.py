@@ -7,7 +7,7 @@ from celery import Celery
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
 
-broker = 'pyamqp://guest@rabbit//' if prod_mode else 'pyamqp://guest@localhost//'
+broker = 'pyamqp://guest@rabbitsa//' if (prod_mode and True) else 'pyamqp://guest@localhost//'
 celery_app = Celery('task', include = ['app.task'], broker=broker)
 
 #   should have a `CELERY_` prefix.
