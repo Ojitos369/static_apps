@@ -25,10 +25,10 @@ const Menu = props => {
         {name: "Items List", path: "items_list"},
         {name: "Automatas Celular", path: "ac"},
         {name: "Cod", path: "cod"},
-        {name: "Chat", path: "llama"},
+        {name: "Chat", path: "llama", show: false},
         {name: "Im2aci", path: "im2aci"},
         {name: "Vitim", path: "vitim"},
-        {name: "Test", path: "test"},
+        {name: "Test", path: "test", show: false},
     ]
 
     const close = () => {
@@ -60,8 +60,12 @@ const Menu = props => {
                 <div 
                     className={`${styles.menu_items}`}
                     >
-                    {apps.map((app, i) => (
-                        <Link
+                    {apps.map((app, i) => {
+                        const show = app?.show ?? true;
+                        if (!show) {
+                            return null
+                        }
+                        return (<Link
                             key={i}
                             to={app.path}
                             onClick={close}
@@ -69,7 +73,7 @@ const Menu = props => {
                             >
                             {app.name}
                         </Link>
-                    ))}
+                    )})}
                 </div>
             </div>
         </div>

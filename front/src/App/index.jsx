@@ -60,12 +60,12 @@ function AppUI() {
                 <Route path="ac" element={<AutomatasCelular />} />
                 <Route path="test" element={<Test />} />
                 <Route path="cod" element={<Cod />} />
-                <Route path="llama" element={<Llama />}>
-                    <Route path="" element={<LlamaIndex />} />
-                    <Route path="chat" element={<LlamaChat />} />
-                </Route>
                 <Route path="im2aci" element={<Im2aci />} />
                 <Route path="vitim" element={<Vitim />} />
+                {/* <Route path="llama" element={<Llama />}>
+                    <Route path="" element={<LlamaIndex />} />
+                    <Route path="chat" element={<LlamaChat />} />
+                </Route> */}
                 {/* -----------   404   ----------- */}
                 <Route path="*/" element={<div className='text-danger h1 text-center mt-5'>404 Not Found</div>} />
                 {/* -----------   /404   ----------- */}
