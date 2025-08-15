@@ -4,7 +4,7 @@ import argparse
 import uuid
 import json
 from datetime import datetime, timedelta
-from app.settings import MEDIA_DIR, STATIC_URL
+from core.conf.settings import prod_mode, MEDIA_DIR
 
 class Vitim:
     def __init__(self, file, path, name, fps, type_img, start, end, key=None):

@@ -100,7 +100,7 @@ class BaseApi:
             self.errors(e)
         try:
             self.validate_session()
-            return self.main()
+            return self.main() or self.response
         except Exception as e:
             self.errors(e)
 

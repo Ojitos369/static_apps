@@ -30,7 +30,7 @@ const Im2aci = props => {
             if (imageUrl.startsWith('http') || imageUrl.startsWith('data:')) {
                 return imageUrl;
             }
-            return `http://localhost:8369/static/image_temp/${imageUrl}`;
+            return `http://localhost:8369/media/image_temp/${imageUrl}`;
         }
         return null;
     }, [imageUrl]);

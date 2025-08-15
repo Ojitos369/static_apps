@@ -15,5 +15,6 @@ apis.include_router(base_router, prefix="/base")
 apis.include_router(codec_router, prefix="/codec")
 apis.include_router(im2aci_router, prefix="/im2aci")
 apis.include_router(vitim_router, prefix="/vitim")
+
 media.include_router(get_media_router, prefix="")
 

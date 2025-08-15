@@ -35,101 +35,6 @@ const useF = props => {
         }
     }
 
-    const llama = {
-        chat: (message, cid) => {
-            if (!message) return;
-            if (!!s.loadings?.llama?.chat) return;
-            u2('loadings', 'llama', 'chat', true);
-            let hist = general.cloneO([...s.llama?.chat?.hist || []]);
-
-            hist = [...hist, {role: "user", content: message, hora: general.getUtcm6()}];
-            u2('llama', 'chat', 'hist', hist);
-
-            let link = `llama/chat/?`;
-            if (!!cid) link += `cid=${cid}&`;
-            link += `msg=${message}`;
-
-            // timeout 10 mins
-            const timeout = 10 * 60 * 1000;
-
-            miAxios.get(link, {timeout})
-            .then(res => {
-                const { msg, cid } = res.data;
-                hist = [...hist, {role: "assistant", content: msg, hora: general.getUtcm6()}];
-                u2('llama', 'chat', 'actualMessage', '');
-                u2('llama', 'chat', 'hist', hist);
-                u2('llama', 'chat', 'cid', cid);
-                const element = document.getElementById('messageInput');
-                if (!!element) element.focus();
-            }).catch(err => {
-                console.log(err);
-                const message = err.response?.data?.message || 'Error';
-                MySwal.fire({
-                    title: 'Error',
-                    text: message,
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                });
-            }).finally(() => {
-                u2('loadings', 'llama', 'chat', false);
-            });
-        },
-        deleteChat: (cid, navigate) => {
-            if (!cid) return;
-            if (!!s.loadings?.llama?.deleteChat) return;
-            u2('loadings', 'llama', 'deleteChat', true);
-            const link = `llama/del_chat/?cid=${cid}`;
-
-            miAxios.get(link)
-            .then(res => {
-                u2('llama', 'chat', 'hist', []);
-                u2('llama', 'chat', 'cid', '');
-
-                const message = res.data.message || `Chat ${cid} eliminado`;
-
-                MySwal.fire({
-                    title: 'Success',
-                    text: message,
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                });
-
-                navigate('/llama');
-            }).catch(err => {
-                console.log(err);
-            }).finally(() => {
-                u2('loadings', 'llama', 'deleteChat', false);
-            });
-        },
-        loadChat: (cid, navigate) => {
-            if (!cid) return;
-            if (!!s.loadings?.llama?.loadChat) return;
-            u2('loadings', 'llama', 'loadChat', true);
-            const link = `llama/load_chat/?cid=${cid}`;
-
-            miAxios.get(link)
-            .then(res => {
-                const { hist } = res.data;
-                u2('llama', 'chat', 'hist', hist);
-                u2('llama', 'chat', 'cid', cid);
-                const element = document.getElementById('messageInput');
-                if (!!element) element.focus();
-            }).catch(err => {
-                console.log(err);
-                const message = err.response?.data?.message || 'Error';
-                MySwal.fire({
-                    title: 'Error',
-                    text: message,
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                });
-                navigate('/llama');
-            }).finally(() => {
-                u2('loadings', 'llama', 'loadChat', false);
-            });
-        }
-    }
-
     const cod = {
         codificar: (text, mode) => {
             if (!text) {
@@ -192,6 +97,7 @@ const useF = props => {
             const data = {img_b64};
             miAxios.post(link, data)
             .then(res => {
+                console.log(res.data);
                 const { file_name } = res.data;
                 u1('im2aci', 'image_url', file_name);
             }).catch(err => {
@@ -375,7 +281,7 @@ const useF = props => {
     }
 
     return { u0, u1, u2, u3, u4, u5, u6, u7, u8, u9,
-        general, llama, cod, im2aci, vitim, app, 
+        general, cod, im2aci, vitim, app, 
      };
 }
 

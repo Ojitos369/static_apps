@@ -16,10 +16,6 @@ import { Cod } from '../Pages/Cod';
 import { ItemsList } from '../Pages/ItemsList';
 import { AutomatasCelular } from '../Pages/AutomatasCelular';
 
-import { Llama } from '../Pages/Llama';
-import { Index as LlamaIndex } from '../Pages/Llama/Index';
-import { Chat as LlamaChat } from '../Pages/Llama/Chat';
-
 import { Vitim } from '../Pages/Vitim';
 
 import { Menu } from '../Components/Modals/Menu';
@@ -62,10 +58,6 @@ function AppUI() {
                 <Route path="cod" element={<Cod />} />
                 <Route path="im2aci" element={<Im2aci />} />
                 <Route path="vitim" element={<Vitim />} />
-                {/* <Route path="llama" element={<Llama />}>
-                    <Route path="" element={<LlamaIndex />} />
-                    <Route path="chat" element={<LlamaChat />} />
-                </Route> */}
                 {/* -----------   404   ----------- */}
                 <Route path="*/" element={<div className='text-danger h1 text-center mt-5'>404 Not Found</div>} />
                 {/* -----------   /404   ----------- */}

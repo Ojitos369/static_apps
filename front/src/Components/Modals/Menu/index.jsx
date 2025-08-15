@@ -24,6 +24,7 @@ const Menu = props => {
         {name: "Home", path: ""},
         {name: "Items List", path: "items_list"},
         {name: "Automatas Celular", path: "ac"},
+
         {name: "Cod", path: "cod"},
         {name: "Chat", path: "llama", show: false},
         {name: "Im2aci", path: "im2aci"},

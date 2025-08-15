@@ -48,3 +48,6 @@ apis/gpt_con/src/logs.txt
 /app/core/utils/compress.py
 /media/vitim/*[.-]*
 /static/vitim/*[.-]*
+
+
+back/core/media/image_temp/*.*
