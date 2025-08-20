@@ -13,7 +13,8 @@ class SaveImage(BaseApi):
     def main(self):
         self.show_me()
         img_b64 = self.data["img_b64"]
-        path_to_save = os.path.join(MEDIA_DIR, f"image_temp")
+        path_to_save = os.path.join(MEDIA_DIR, f"image.temp")
+        os.makedirs(path_to_save, exist_ok=True)
         file_name = uuid4()
         ext = self.data.get("ext", "png")
         file_path = os.path.join(path_to_save, f"{file_name}.{ext}")
@@ -29,7 +30,8 @@ class SaveImage(BaseApi):
 class Img2Ascii(BaseApi):
     def main(self):
         self.show_me()
-        path_to_save = os.path.join(MEDIA_DIR, f"image_temp")
+        path_to_save = os.path.join(MEDIA_DIR, f"image.temp")
+        os.makedirs(path_to_save, exist_ok=True)
         file_name = self.data["file_name"]
         ancho = int(self.data.get("ancho", '100'))
         save_text = self.data.get("save_text", "false")
