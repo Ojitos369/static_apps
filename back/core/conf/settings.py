@@ -5,7 +5,7 @@ from ojitos369.errors import CatchErrors as CE
 from ojitos369.utils import get_d, print_line_center, printwln as pln
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
 origins = [
